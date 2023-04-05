@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Koks_PM_V3.WPF
+namespace Koks_PM_V3.WPF.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
