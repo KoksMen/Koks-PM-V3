@@ -8,8 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\CreateCommands\" />
-    <Folder Include="Commands\UpdateCommands\" />
     <Folder Include="Commands\DeleteCommands\" />
     <Folder Include="Querires\" />
   </ItemGroup>
