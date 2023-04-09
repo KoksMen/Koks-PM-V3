@@ -12,7 +12,6 @@
     <Folder Include="Commands\UpdateCommands\" />
     <Folder Include="Commands\DeleteCommands\" />
     <Folder Include="Querires\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
