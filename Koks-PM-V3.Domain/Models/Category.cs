@@ -8,6 +8,16 @@ namespace Koks_PM_V3.Domain.Models
 {
     public class Category
     {
+        public Category(Guid categoryID, string categoryName, 
+            Guid userID, DateTime modifyDate, DateTime createDate)
+        {
+            this.categoryID = categoryID;
+            this.categoryName = categoryName;
+            this.userID = userID;
+            this.modifyDate = modifyDate;
+            this.createDate = createDate;
+        }
+
         public Guid categoryID { get; set; }
         public string categoryName { get; set; }
         public Guid userID { get; set; }
