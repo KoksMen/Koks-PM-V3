@@ -20,5 +20,7 @@ namespace Koks_PM_V3.EntityFramework.DTOs
         public DateTime modifyDate { get; set; }
         [Required]
         public DateTime createDate { get; set; }
+        public virtual UserDto User { get; set; }
+
     }
 }

@@ -27,10 +27,10 @@ namespace Koks_PM_V3.EntityFramework.DTOs
         [Required]
         public DateTime createDate { get; set; }
         [Required]
-        public List<NoteDto> userNotes { get; set; }
+        public virtual List<NoteDto> userNotes { get; set; }
         [Required]
-        public List<BankCardDto> userBankCards { get; set; }
+        public virtual List<BankCardDto> userBankCards { get; set; }
         [Required]
-        public List<CategoryDto> userCategories { get; set; }
+        public virtual List<CategoryDto> userCategories { get; set; }
     }
 }
