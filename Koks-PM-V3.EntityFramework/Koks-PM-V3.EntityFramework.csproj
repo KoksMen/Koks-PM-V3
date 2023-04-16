@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\CreateCommands\" />
     <Folder Include="Commands\UpdateCommands\" />
     <Folder Include="Commands\DeleteCommands\" />
     <Folder Include="Queries\" />
@@ -25,6 +24,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Koks-PM-V3.Domain\Koks-PM-V3.Domain.csproj" />
   </ItemGroup>
 
 </Project>
