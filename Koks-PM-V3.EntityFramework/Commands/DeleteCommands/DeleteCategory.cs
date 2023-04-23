@@ -27,7 +27,7 @@ namespace Koks_PM_V3.EntityFramework.Commands.DeleteCommands
                 };
 
                 context.CategoryDtos.Remove(categoryDto);
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
     }

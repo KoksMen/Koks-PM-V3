@@ -27,7 +27,7 @@ namespace Koks_PM_V3.EntityFramework.Commands.DeleteCommands
                 };
 
                 context.BankCards.Remove(bankCardDto);
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
     }

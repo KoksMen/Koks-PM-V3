@@ -27,7 +27,7 @@ namespace Koks_PM_V3.EntityFramework.Commands.DeleteCommands
                 };
 
                 context.Notes.Remove(noteDto);
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
         }
     }
