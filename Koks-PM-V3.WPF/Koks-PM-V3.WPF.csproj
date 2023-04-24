@@ -22,7 +22,6 @@
     <Folder Include="Commands\OpenPageCommands\OpenAccountPageCommands\" />
     <Folder Include="Commands\OpenPageCommands\OpenModalPageCommand\" />
     <Folder Include="Commands\ClosePageCommands\" />
-    <Folder Include="Services\" />
     <Folder Include="Stores\DataStores\" />
     <Folder Include="Stores\Navigators\" />
     <Folder Include="ViewModels\ModalViewModels\" />
@@ -32,6 +31,14 @@
     <Folder Include="Views\ManagerPages\" />
     <Folder Include="Views\MainPages\" />
     <Folder Include="Styles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Koks-PM-V3.EntityFramework\Koks-PM-V3.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>
