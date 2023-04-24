@@ -34,14 +34,72 @@ namespace Koks_PM_V3.EntityFramework.Commands.UpdateCommands
                     userAvatar = user.userAvatar,
                     modifyDate = user.modifyDate,
                     createDate = user.createDate,
-                    //list note
-                    //list bank card
-                    // list category
+                    userNotes = GetNotes(user.userNotes),
+                    userBankCards = GetBankCards(user.userBankCards),
+                    userCategories = GetCategories(user.userCategories),
                 };
 
                 context.Users.Update(userDto);
                 await context.SaveChangesAsync();
             }
+        }
+
+        private List<NoteDto> GetNotes(List<Note> notes)
+        {
+            var result = new List<NoteDto>();
+
+            result = notes.Select(x => new NoteDto
+            {
+                NoteDtoID = x.noteID,
+                noteName = x.noteName,
+                noteLogin = x.noteLogin,
+                notePassword = x.notePassword,
+                noteUrl = x.noteUrl,
+                noteTotp = x.noteTotp,
+                userID = x.userID,
+                categoryID = x.categoryID,
+                modifyDate = x.modifyDate,
+                createDate = x.createDate,
+            }).ToList();
+
+            return result;
+        }
+        private List<BankCardDto> GetBankCards(List<BankCard> bankCards)
+        {
+            var result = new List<BankCardDto>();
+
+            result = bankCards.Select(x => new BankCardDto
+            {
+                BankCardDtoID = x.cardID,
+                cardName = x.cardName,
+                cardNumber = x.cardNumber,
+                cardHolder = x.cardHolder,
+                cardCVC = x.cardCVC,
+                cardType = x.cardType,
+                cardExpiryDate = x.cardExpiryDate,
+                userID = x.userID,
+                categoryID = x.categoryID,
+                modifyDate = x.modifyDate,
+                createDate = x.createDate,
+            }
+            ).ToList();
+
+            return result;
+        }
+        private List<CategoryDto> GetCategories(List<Category> categories)
+        {
+            var result = new List<CategoryDto>();
+
+            result = categories.Select(x => new CategoryDto
+            {
+                CategoryDtoID = x.categoryID,
+                categoryName = x.categoryName,
+                userID = x.userID,
+                modifyDate= x.modifyDate,
+                createDate = x.createDate,
+            }).ToList();
+
+            return result;
         }
 
     }
