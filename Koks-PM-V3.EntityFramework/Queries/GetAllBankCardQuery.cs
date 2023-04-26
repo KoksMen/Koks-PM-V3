@@ -23,7 +23,7 @@ namespace Koks_PM_V3.EntityFramework.Queries
         {
             using (StorageDbContext context  = _storageContextFactory.Create())
             {
-                List<BankCardDto> bankCardDtos = await context.BankCards.ToListAsync();
+                List<BankCardDto> bankCardDtos = await context.BankCards.Where(c => c.userID == userID).ToListAsync();
 
                 List<BankCard> bankCards = bankCardDtos.Select(x => new BankCard(
                     x.BankCardDtoID,

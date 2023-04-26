@@ -23,7 +23,7 @@ namespace Koks_PM_V3.EntityFramework.Queries
         {
             using (StorageDbContext context = _storageContextFactory.Create())
             {
-                List<CategoryDto> categoryDtos = await context.CategoryDtos.ToListAsync();
+                List<CategoryDto> categoryDtos = await context.CategoryDtos.Where(c => c.userID == userID).ToListAsync();
 
                 List<Category> categories = categoryDtos.Select(x => new Category(
                     x.CategoryDtoID,

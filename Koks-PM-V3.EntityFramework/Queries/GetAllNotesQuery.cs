@@ -23,7 +23,7 @@ namespace Koks_PM_V3.EntityFramework.Queries
         {
             using (StorageDbContext context = _storageContextFactory.Create())
             {
-                List<NoteDto> notesDtos = await context.Notes.ToListAsync();
+                List<NoteDto> notesDtos = await context.Notes.Where(c => c.userID == userID).ToListAsync();
 
                 List<Note> notes = notesDtos.Select(x => new Note(
                     x.NoteDtoID,
