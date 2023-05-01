@@ -8,6 +8,7 @@ using Koks_PM_V3.Domain.Commands.DeleteCommands;
 using Koks_PM_V3.Domain.Commands.UpdateCommands;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.Domain.Querires;
+using Koks_PM_V3.EntityFramework.Commands.UpdateCommands;
 using Koks_PM_V3.EntityFramework.DTOs;
 
 namespace Koks_PM_V3.WPF.Stores.DataStores
@@ -30,8 +31,59 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         private readonly IGetAllNotes _getAllNotesQuerry;
         private readonly IGetAllBankCards _getAllBankCardsQuerry;
         private readonly IGetAllCategories _getAllCategoriesQuerry;
+
         #endregion
 
+        #region Account & Lists
+        private User _userAccount { get; set; }
+        public User UserAccount => _userAccount;
+        private List<Note> _notes { get; set; }
+        public List<Note> Notes => _notes;
+        private List<BankCard> _bankCards { get; set; }
+        public List<BankCard> BankCards => _bankCards;
+        private List<Category> _categories { get; set; }
+        public List<Category> Categories => _categories;
+        #endregion
 
+        #region Events
+        public delegate void updateNote(int noteID);
+        public delegate void updateBankCard(int bankCardID);
+        public event updateNote? noteUpdateAdd;
+        public event updateBankCard? bankCardUpdateAdd;
+        public event Action categoryUpdateAddDelete;
+        public event Action noteDelete;
+        public event Action bbnkCardDelete;
+        public event Action userUpdate;
+        #endregion
+        public DataStore(ICreateNote createNoteCommand, IDeleteNote deleteNoteCommand, IUpdateNote updateNoteCommand, 
+            ICreateBankCard createBankCardCommand, IDeleteBankCard deleteBankCardCommand, IUpdateBankCard updateBankCardCommand, 
+            ICreateCategory createCategoryCommand, IDeleteCategory deleteCategoryCommand, IUpdateCategory updateCategoryCommand, 
+            ICreateUser createUserCommand, IDeleteUser deleteUserCommand, IUpdateUser updateUserCommand, 
+            IGetAllNotes getAllNotesQuerry, IGetAllBankCards getAllBankCardsQuerry, IGetAllCategories getAllCategoriesQuerry, 
+            int userID)
+        {
+            _createNoteCommand = createNoteCommand;
+            _deleteNoteCommand = deleteNoteCommand;
+            _updateNoteCommand = updateNoteCommand;
+            _createBankCardCommand = createBankCardCommand;
+            _deleteBankCardCommand = deleteBankCardCommand;
+            _updateBankCardCommand = updateBankCardCommand;
+            _createCategoryCommand = createCategoryCommand;
+            _deleteCategoryCommand = deleteCategoryCommand;
+            _updateCategoryCommand = updateCategoryCommand;
+            _createUserCommand = createUserCommand;
+            _deleteUserCommand = deleteUserCommand;
+            _updateUserCommand = updateUserCommand;
+            _getAllNotesQuerry = getAllNotesQuerry;
+            _getAllBankCardsQuerry = getAllBankCardsQuerry;
+            _getAllCategoriesQuerry = getAllCategoriesQuerry;
+
+            LoadAll(userID);
+        }
+
+        private void LoadAll(int userID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
