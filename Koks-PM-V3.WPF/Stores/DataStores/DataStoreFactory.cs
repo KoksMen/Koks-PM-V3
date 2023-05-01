@@ -1,6 +1,7 @@
 ﻿using Koks_PM_V3.Domain.Commands.CreateCommands;
 using Koks_PM_V3.Domain.Commands.DeleteCommands;
 using Koks_PM_V3.Domain.Commands.UpdateCommands;
+using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.Domain.Querires;
 using Koks_PM_V3.EntityFramework.DTOs;
 using System;
@@ -55,9 +56,16 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             _getAllCategoriesQuerry = getAllCategoriesQuerry;
         }
 
-        public DataStore Create(UserDto userDto)
+        public DataStore Create(int userID)
         {
-            throw new NotImplementedException("DataStoreFactory.Create - is not realized");
+            DataStore dataStore = new DataStore(_createNoteCommand, _deleteNoteCommand,
+                _updateNoteCommand, _createBankCardCommand, _deleteBankCardCommand,
+                _updateBankCardCommand, _createCategoryCommand, _deleteCategoryCommand,
+                _updateCategoryCommand, _createUserCommand, _deleteUserCommand,
+                _updateUserCommand, _getAllNotesQuerry, _getAllBankCardsQuerry,
+                _getAllCategoriesQuerry, userID);
+
+            return dataStore;
         }
     }
 }
