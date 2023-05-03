@@ -10,6 +10,7 @@ using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.Domain.Querires;
 using Koks_PM_V3.EntityFramework.Commands.UpdateCommands;
 using Koks_PM_V3.EntityFramework.DTOs;
+using Koks_PM_V3.EntityFramework.Queries;
 
 namespace Koks_PM_V3.WPF.Stores.DataStores
 {
@@ -60,7 +61,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             ICreateCategory createCategoryCommand, IDeleteCategory deleteCategoryCommand, IUpdateCategory updateCategoryCommand, 
             ICreateUser createUserCommand, IDeleteUser deleteUserCommand, IUpdateUser updateUserCommand, 
             IGetAllNotes getAllNotesQuerry, IGetAllBankCards getAllBankCardsQuerry, IGetAllCategories getAllCategoriesQuerry, 
-            int userID)
+            UserDto userDto)
         {
             _createNoteCommand = createNoteCommand;
             _deleteNoteCommand = deleteNoteCommand;
@@ -78,12 +79,22 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             _getAllBankCardsQuerry = getAllBankCardsQuerry;
             _getAllCategoriesQuerry = getAllCategoriesQuerry;
 
-            LoadAll(userID);
+            LoadAll(userDto);
         }
 
-        private void LoadAll(int userID)
+        private async void LoadAll(UserDto userDto)
         {
-            throw new NotImplementedException();
+            List<Note> notes = await _getAllNotesQuerry.Execute(userDto.UserDtoID);
+            _notes = notes;
+            List<BankCard> bankcards = await _getAllBankCardsQuerry.Execute(userDto.UserDtoID);
+            _bankCards = bankcards;
+            List<Category> categories = await _getAllCategoriesQuerry.Execute(userDto.UserDtoID);
+            _categories = categories;
+
+            User user = new User(userDto.UserDtoID, userDto.userName, userDto.userLogin, userDto.userPassword, userDto.userTotpKey, userDto.userTelegramBotApi, userDto.userTelegramChatID, userDto.userAvatar,
+                userDto.modifyDate, userDto.createDate, notes, bankcards, categories);
+
+            _userAccount = user;
         }
     }
 }
