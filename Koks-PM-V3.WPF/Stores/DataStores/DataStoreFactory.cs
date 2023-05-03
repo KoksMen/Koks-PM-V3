@@ -56,14 +56,14 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             _getAllCategoriesQuerry = getAllCategoriesQuerry;
         }
 
-        public DataStore Create(int userID)
+        public DataStore Create(UserDto userDto)
         {
             DataStore dataStore = new DataStore(_createNoteCommand, _deleteNoteCommand,
                 _updateNoteCommand, _createBankCardCommand, _deleteBankCardCommand,
                 _updateBankCardCommand, _createCategoryCommand, _deleteCategoryCommand,
                 _updateCategoryCommand, _createUserCommand, _deleteUserCommand,
                 _updateUserCommand, _getAllNotesQuerry, _getAllBankCardsQuerry,
-                _getAllCategoriesQuerry, userID);
+                _getAllCategoriesQuerry, userDto);
 
             return dataStore;
         }
