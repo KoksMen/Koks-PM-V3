@@ -96,5 +96,68 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
             _userAccount = user;
         }
+
+        #region Add commands
+        public async Task AddNote(Note note)
+        {
+
+        }
+
+        public async Task AddBankCard(BankCard bankCard)
+        {
+
+        }
+
+        public async Task AddCategory(Category category)
+        {
+
+        }
+        #endregion
+
+        #region Update commands
+        public async Task UpdateNote(Note note)
+        {
+
+        }
+
+        public async Task UpdateBankCard(BankCard bankCard)
+        {
+
+        }
+
+        public async Task UpdateCategory(Category category)
+        {
+
+        }
+
+        public async Task UpdateUser(User user)
+        {
+
+        }
+        #endregion
+
+        #region Delete commands
+        public async Task DeleteNote(Guid noteID)
+        {
+
+        }
+
+        public async Task DeleteBankCard(Guid bankCardID)
+        {
+
+        }
+
+        public async Task DeleteCategory(Guid categoryID)
+        {
+
+        }
+
+        public async Task DeleteUser(Guid userID)
+        {
+            
+        }
+        #endregion
+
+        //ReEncrypt
     }
 }
