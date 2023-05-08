@@ -47,8 +47,8 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         #endregion
 
         #region Events
-        public delegate void updateNote(int noteID);
-        public delegate void updateBankCard(int bankCardID);
+        public delegate void updateNote(Guid noteID);
+        public delegate void updateBankCard(Guid bankCardID);
         public event updateNote? noteUpdateAdd;
         public event updateBankCard? bankCardUpdateAdd;
         public event Action categoryUpdateAddDelete;
@@ -56,6 +56,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         public event Action bbnkCardDelete;
         public event Action userUpdate;
         #endregion
+
         public DataStore(ICreateNote createNoteCommand, IDeleteNote deleteNoteCommand, IUpdateNote updateNoteCommand, 
             ICreateBankCard createBankCardCommand, IDeleteBankCard deleteBankCardCommand, IUpdateBankCard updateBankCardCommand, 
             ICreateCategory createCategoryCommand, IDeleteCategory deleteCategoryCommand, IUpdateCategory updateCategoryCommand, 
@@ -100,17 +101,29 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         #region Add commands
         public async Task AddNote(Note note)
         {
+            await _createNoteCommand.Execute(note);
 
+            _notes.Add(note);
+
+            noteUpdateAdd?.Invoke(note.noteID);
         }
 
         public async Task AddBankCard(BankCard bankCard)
         {
+            await _createBankCardCommand.Execute(bankCard);
 
+            _bankCards.Add(bankCard);
+
+            bankCardUpdateAdd?.Invoke(bankCard.cardID);
         }
 
         public async Task AddCategory(Category category)
         {
+            await _createCategoryCommand.Execute(category);
 
+            _categories.Add(category);
+
+            categoryUpdateAddDelete?.Invoke();
         }
         #endregion
 
