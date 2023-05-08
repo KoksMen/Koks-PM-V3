@@ -130,17 +130,56 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         #region Update commands
         public async Task UpdateNote(Note note)
         {
+            await _updateNoteCommand.Execute(note);
 
+            int currentIndex = _notes.FindIndex(n => n.noteID == note.noteID);
+
+            if (currentIndex != -1)
+            {
+                _notes[currentIndex] = note;
+            }
+            else
+            {
+                _notes.Add(note);
+            }
+
+            noteUpdateAdd?.Invoke(note.noteID);
         }
 
         public async Task UpdateBankCard(BankCard bankCard)
         {
+            await _updateBankCardCommand.Execute(bankCard);
 
+            int currentIndex = _bankCards.FindIndex(c => c.cardID == bankCard.cardID);
+
+            if (currentIndex != -1)
+            {
+                _bankCards[currentIndex] = bankCard;
+            }
+            else
+            {
+                _bankCards.Add(bankCard);
+            }
+
+            bankCardUpdateAdd?.Invoke(bankCard.cardID);
         }
 
         public async Task UpdateCategory(Category category)
         {
+            await _updateCategoryCommand.Execute(category);
 
+            int currentIndex = _categories.FindIndex(c => c.categoryID == category.categoryID);
+
+            if (currentIndex != -1)
+            {
+                _categories[currentIndex] = category;
+            }
+            else
+            {
+                _categories.Add(category);
+            }
+
+            categoryUpdateAddDelete?.Invoke();
         }
 
         public async Task UpdateUser(User user)
@@ -172,5 +211,8 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         #endregion
 
         //ReEncrypt
+        //UpdateUser
+        //Crypt
+        //Dectypt
     }
 }
