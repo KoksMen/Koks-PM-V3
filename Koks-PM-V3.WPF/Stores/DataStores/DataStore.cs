@@ -53,7 +53,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         public event updateBankCard? bankCardUpdateAdd;
         public event Action categoryUpdateAddDelete;
         public event Action noteDelete;
-        public event Action bbnkCardDelete;
+        public event Action bankCardDelete;
         public event Action userUpdate;
         #endregion
 
@@ -191,17 +191,29 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         #region Delete commands
         public async Task DeleteNote(Guid noteID)
         {
+            await _deleteNoteCommand.Execute(noteID);
 
+            _notes.RemoveAll(n => n.noteID == noteID);
+
+            noteDelete?.Invoke();
         }
 
         public async Task DeleteBankCard(Guid bankCardID)
         {
+            await _deleteBankCardCommand.Execute(bankCardID);
 
+            _bankCards.RemoveAll(c => c.cardID == bankCardID);
+
+            bankCardDelete?.Invoke();
         }
 
         public async Task DeleteCategory(Guid categoryID)
         {
+            await _deleteCategoryCommand.Execute(categoryID);
 
+            _categories.RemoveAll(c => c.categoryID == categoryID);
+
+            categoryUpdateAddDelete.Invoke();
         }
 
         public async Task DeleteUser(Guid userID)
@@ -210,9 +222,10 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         }
         #endregion
 
-        //ReEncrypt
-        //UpdateUser
         //Crypt
         //Dectypt
+        //ReEncrypt
+        //UpdateUser
+        //Deleteuser
     }
 }
