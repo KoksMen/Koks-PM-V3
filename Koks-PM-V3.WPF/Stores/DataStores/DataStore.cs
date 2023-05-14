@@ -11,6 +11,7 @@ using Koks_PM_V3.Domain.Querires;
 using Koks_PM_V3.EntityFramework.Commands.UpdateCommands;
 using Koks_PM_V3.EntityFramework.DTOs;
 using Koks_PM_V3.EntityFramework.Queries;
+using static Koks_PM_V3.WPF.Services.SymmetricEncryptorModule;
 
 namespace Koks_PM_V3.WPF.Stores.DataStores
 {
@@ -86,10 +87,15 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         private async void LoadAll(UserDto userDto)
         {
             List<Note> notes = await _getAllNotesQuerry.Execute(userDto.UserDtoID);
+            notes.ForEach(note => DecryptNote(note, userDto.userPassword));
             _notes = notes;
+
             List<BankCard> bankcards = await _getAllBankCardsQuerry.Execute(userDto.UserDtoID);
+            bankcards.ForEach(bankcard => DecryptBankCard(bankcard, userDto.userPassword));
             _bankCards = bankcards;
+
             List<Category> categories = await _getAllCategoriesQuerry.Execute(userDto.UserDtoID);
+            categories.ForEach(category => DecryptCategory(category, userDto.userPassword));
             _categories = categories;
 
             User user = new User(userDto.UserDtoID, userDto.userName, userDto.userLogin, userDto.userPassword, userDto.userTotpKey, userDto.userTelegramBotApi, userDto.userTelegramChatID, userDto.userAvatar,
@@ -101,7 +107,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         #region Add commands
         public async Task AddNote(Note note)
         {
-            await _createNoteCommand.Execute(note);
+            await _createNoteCommand.Execute(EncryptNote(note, _userAccount.userPassword));
 
             _notes.Add(note);
 
@@ -110,7 +116,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         public async Task AddBankCard(BankCard bankCard)
         {
-            await _createBankCardCommand.Execute(bankCard);
+            await _createBankCardCommand.Execute(EncryptBankCard(bankCard, _userAccount.userPassword));
 
             _bankCards.Add(bankCard);
 
@@ -119,7 +125,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         public async Task AddCategory(Category category)
         {
-            await _createCategoryCommand.Execute(category);
+            await _createCategoryCommand.Execute(EncryptCategory(category, _userAccount.userPassword));
 
             _categories.Add(category);
 
@@ -130,7 +136,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         #region Update commands
         public async Task UpdateNote(Note note)
         {
-            await _updateNoteCommand.Execute(note);
+            await _updateNoteCommand.Execute(EncryptNote(note, _userAccount.userPassword));
 
             int currentIndex = _notes.FindIndex(n => n.noteID == note.noteID);
 
@@ -148,7 +154,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         public async Task UpdateBankCard(BankCard bankCard)
         {
-            await _updateBankCardCommand.Execute(bankCard);
+            await _updateBankCardCommand.Execute(EncryptBankCard(bankCard, _userAccount.userPassword));
 
             int currentIndex = _bankCards.FindIndex(c => c.cardID == bankCard.cardID);
 
@@ -166,7 +172,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         public async Task UpdateCategory(Category category)
         {
-            await _updateCategoryCommand.Execute(category);
+            await _updateCategoryCommand.Execute(EncryptCategory(category, _userAccount.userPassword));
 
             int currentIndex = _categories.FindIndex(c => c.categoryID == category.categoryID);
 
@@ -222,8 +228,6 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         }
         #endregion
 
-        //Crypt
-        //Dectypt
         //ReEncrypt
         //UpdateUser
         //Deleteuser
