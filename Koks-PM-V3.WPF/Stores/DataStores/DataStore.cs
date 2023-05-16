@@ -228,7 +228,16 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         }
         #endregion
 
-        //ReEncrypt
+
+        private async Task ReEncryptAll(string newPassword)
+        {
+            _userAccount.userPassword = newPassword;
+
+            _notes.ForEach(async note => await UpdateNote(note));
+            _bankCards.ForEach(async bankcard => await UpdateBankCard(bankcard));
+            _categories.ForEach(async category => await UpdateCategory(category));
+        }
+        
         //UpdateUser
         //Deleteuser
     }
