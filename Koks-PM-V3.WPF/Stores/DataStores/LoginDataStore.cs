@@ -24,7 +24,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 			set { _password = value; }
 		}
 
-		//Maybe change
+		//Maybe chang
 		private DataStoreFactory _dataStoreFactory;
 
 		public DataStoreFactory DataStoreFactory
