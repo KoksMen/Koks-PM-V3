@@ -23,7 +23,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             get { return _dataStoreFactory; }
             set
             {
-                if (_dataStoreFactory != null)
+                if (_dataStoreFactory == null)
                     _dataStoreFactory = value;
             }
         }
