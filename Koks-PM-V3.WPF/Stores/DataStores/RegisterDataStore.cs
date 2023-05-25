@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace Koks_PM_V3.WPF.Stores.DataStores
 {
-    public class LoginDataStore
+    public class RegisterDataStore
     {
-		private string _login;
+		private string _name = string.Empty;
+
+		public string Name
+		{
+			get { return _name; }
+			set { _name = value; }
+		}
+
+		private string _login = string.Empty;
 
 		public string Login
 		{
@@ -16,12 +24,20 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 			set { _login = value; }
 		}
 
-		private string _password;
+		private string _password = string.Empty;
 
 		public string Password
 		{
 			get { return _password; }
 			set { _password = value; }
+		}
+
+		private string _confirmPassword = string.Empty;
+
+		public string ConfirmPassword
+		{
+			get { return _confirmPassword; }
+			set { _confirmPassword = value; }
 		}
 
 		private DataStoreFactory _dataStoreFactory;
@@ -31,10 +47,11 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 			get { return _dataStoreFactory; }
 			set 
 			{ 
-				if (_dataStoreFactory == null) 
-					_dataStoreFactory = value; 
-			}
+				if (_dataStoreFactory == null)
+                    _dataStoreFactory = value;
+            }
 		}
+
 
 	}
 }
