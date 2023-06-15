@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:Koks_PM_V3.WPF"
              >
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="./Styles/TextBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -27,13 +27,13 @@
     <Folder Include="ViewModels\MainViewModels\" />
     <Folder Include="Views\ModalPages\" />
     <Folder Include="Views\ManagerPages\" />
-    <Folder Include="Views\MainPages\" />
-    <Folder Include="Styles\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DevExpressMvvm" Version="22.1.3" />
-    <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="SimpleModal.WPF" Version="1.0.0" />
+    <PackageReference Include="Telegram.Bot" Version="19.0.0" />
   </ItemGroup>
 
   <ItemGroup>
