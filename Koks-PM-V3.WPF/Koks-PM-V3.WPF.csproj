@@ -25,7 +25,6 @@
     <Folder Include="ViewModels\ModalViewModels\" />
     <Folder Include="ViewModels\ManagerViewModels\" />
     <Folder Include="ViewModels\MainViewModels\" />
-    <Folder Include="Views\ModalPages\" />
     <Folder Include="Views\ManagerPages\" />
   </ItemGroup>
 
