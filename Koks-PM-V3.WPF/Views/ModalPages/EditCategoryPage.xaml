@@ -20,7 +20,10 @@
         </Grid.RowDefinitions>
 
 
-        <Border Grid.Column="1" Grid.Row="1" Background="White" CornerRadius="20">
+        <Border Grid.Column="1" 
+                Grid.Row="1" 
+                Background="White" 
+                CornerRadius="20">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.05*" />
@@ -35,27 +38,56 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Изменение категории" 
-                           Grid.Row="1" Grid.Column="1" FontSize="18" FontWeight="Bold" FontFamily="Century Gothic" HorizontalAlignment="Center"/>
-                <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 0 15">
+                           Grid.Row="1" 
+                           Grid.Column="1" 
+                           FontSize="18" 
+                           FontWeight="Bold" 
+                           FontFamily="Century Gothic" 
+                           HorizontalAlignment="Center"/>
+                <Grid Grid.Row="2" 
+                      Grid.Column="1" 
+                      VerticalAlignment="Center" 
+                      Margin="0 0 0 15">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Название" Grid.Row="1" Grid.Column="1" FontSize="18" FontWeight="Bold" FontFamily="Century Gothic"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                            <Button Padding="20 0" Margin="0 0 10 0" Command="{Binding SaveCommand}">
+                        <TextBlock Text="Название" 
+                                   Grid.Row="1" 
+                                   Grid.Column="1" 
+                                   FontSize="18" 
+                                   FontWeight="Bold" 
+                                   FontFamily="Century Gothic"/>
+                        <TextBox Grid.Row="2" 
+                                 Grid.Column="1" 
+                                 Text="{Binding Name, 
+                            UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0 5 0 0"/>
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center" 
+                                    Margin="0 20 0 0">
+                            <Button Padding="20 0" 
+                                    Margin="0 0 10 0" 
+                                    Command="{Binding SaveCommand}">
                                 <StackPanel Orientation="Horizontal">
-                                    <iconPacks:PackIconEvaIcons Kind="SaveOutline" />
-                                    <TextBlock Text="Сохранить" Margin="5 0 0 0"/>
+                                    <iconPacks:PackIconEvaIcons 
+                                        Kind="SaveOutline" />
+                                    <TextBlock Text="Сохранить" 
+                                               Margin="5 0 0 0"/>
                                 </StackPanel>
                             </Button>
-                            <Button Content="Отменить" Padding="25 0" Command="{Binding CancelCommand}"/>
-                            <Button Padding="25 0" Command="{Binding DeleteCommand}" Margin="45 0 0 0">
+                            <Button Content="Отменить" 
+                                    Padding="25 0" 
+                                    Command="{Binding CancelCommand}"/>
+                            <Button Padding="25 0" 
+                                    Command="{Binding DeleteCommand}" 
+                                    Margin="45 0 0 0">
                                 <StackPanel Orientation="Horizontal">
-                                    <iconPacks:PackIconModern Kind="Delete" />
-                                    <TextBlock Text="Удалить" Margin="5 0 0 0"/>
+                                    <iconPacks:PackIconModern 
+                                        Kind="Delete" />
+                                    <TextBlock Text="Удалить" 
+                                               Margin="5 0 0 0"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>

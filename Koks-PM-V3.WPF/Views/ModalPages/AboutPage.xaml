@@ -19,7 +19,10 @@
         </Grid.RowDefinitions>
 
 
-        <Border Grid.Column="1" Grid.Row="1" Background="White" CornerRadius="20">
+        <Border Grid.Column="1" 
+                Grid.Row="1" 
+                Background="White" 
+                CornerRadius="20">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.05*" />
@@ -34,27 +37,51 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="О приложении" 
-                           Grid.Row="1" Grid.Column="1" FontSize="18" FontWeight="Bold" FontFamily="Century Gothic" HorizontalAlignment="Center"/>
-                <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="0 20 0 15">
+                           Grid.Row="1" 
+                           Grid.Column="1" 
+                           FontSize="18" 
+                           FontWeight="Bold" 
+                           FontFamily="Century Gothic" 
+                           HorizontalAlignment="Center"/>
+                <Grid Grid.Row="2" 
+                      Grid.Column="1" 
+                      VerticalAlignment="Top" 
+                      Margin="0 20 0 15">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="75" Height="75">
+                            <Rectangle Width="75" 
+                                       Height="75">
                                 <Rectangle.Fill>
-                                    <ImageBrush ImageSource="\Images\KoksPM3.png"/>
+                                    <ImageBrush 
+                                        ImageSource="\Images\KoksPM3.png"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            <StackPanel Orientation="Vertical" Margin="10 0 0 0" VerticalAlignment="Center">
-                                <TextBlock Text="Название: KoksPM-V3" FontFamily="Century Gothic" FontWeight="Bold" Margin="0 5 0 0"/>
-                                <TextBlock Text="Разработчик: xXKoksMenXx" FontFamily="Century Gothic" FontWeight="Bold" Margin="0 5 0 0"/>
-                                <TextBlock Text="Авторское право: Koks Corp. © 2023" FontFamily="Century Gothic" FontWeight="Bold" Margin="0 5 0 0"/>
+                            <StackPanel Orientation="Vertical" 
+                                        Margin="10 0 0 0" 
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="Название: KoksPM-V3" 
+                                           FontFamily="Century Gothic" 
+                                           FontWeight="Bold" 
+                                           Margin="0 5 0 0"/>
+                                <TextBlock Text="Разработчик: xXKoksMenXx" 
+                                           FontFamily="Century Gothic" 
+                                           FontWeight="Bold" 
+                                           Margin="0 5 0 0"/>
+                                <TextBlock Text="Авторское право: Koks Corp. © 2023" 
+                                           FontFamily="Century Gothic" 
+                                           FontWeight="Bold" 
+                                           Margin="0 5 0 0"/>
                             </StackPanel>
                         </StackPanel>
 
-                        <Button VerticalAlignment="Bottom" Margin="0 30 0 0" Content="OK" Command="{Binding CloseCommand}"/>
+                        <Button VerticalAlignment="Bottom" 
+                                Margin="0 30 0 0" 
+                                Content="OK" 
+                                Command="{Binding CloseCommand}"/>
                     </StackPanel>
 
                 </Grid>
