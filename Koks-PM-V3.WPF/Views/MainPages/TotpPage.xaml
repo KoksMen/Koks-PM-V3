@@ -50,7 +50,7 @@
                                        Margin="0,20,0,0" 
                                        Grid.RowSpan="2"/>
                             <TextBlock Foreground="White" 
-                                       Text="   Пароль" 
+                                       Text="   Код " 
                                        FontSize="15" 
                                        FontFamily="Century Gothic" 
                                        FontWeight="Bold" 
