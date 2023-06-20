@@ -30,7 +30,6 @@
     <Folder Include="ViewModels\ModalViewModels\" />
     <Folder Include="ViewModels\ManagerViewModels\" />
     <Folder Include="ViewModels\MainViewModels\" />
-    <Folder Include="Views\ManagerPages\" />
   </ItemGroup>
 
   <ItemGroup>
