@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\KoksPM3.ico" />
+    <None Remove="Images\KoksPM3.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Commands\MainCommands\" />
     <Folder Include="Commands\ManagerCommands\NoteCommands\" />
     <Folder Include="Commands\ManagerCommands\BankCardCommands\" />
@@ -37,6 +42,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Koks-PM-V3.EntityFramework\Koks-PM-V3.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\KoksPM3.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\KoksPM3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
