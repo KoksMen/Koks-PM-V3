@@ -10,13 +10,13 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.35*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.35*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
-            <RowDefinition Height="0.65*" />
+            <RowDefinition Height="0.35*" />
             <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
 
@@ -110,6 +110,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="0.5*" />
                             </Grid.ColumnDefinitions>
                             <Button Padding="20 0" 
                                     Grid.Column="0"
@@ -126,6 +127,17 @@
                                     Grid.Column="1"
                                     Padding="25 0" 
                                     Command="{Binding CancelCommand}"/>
+                            <Button Padding="20 0" 
+                                    Grid.Column="2"
+                                    Margin="0 0 10 0" 
+                                    Command="{Binding DeleteCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconModern 
+                                        Kind="Delete" />
+                                    <TextBlock Text="Удалить" 
+                                               Margin="5 0 0 0"/>
+                                </StackPanel>
+                            </Button>
                         </Grid>
                     </StackPanel>
                 </Grid>
