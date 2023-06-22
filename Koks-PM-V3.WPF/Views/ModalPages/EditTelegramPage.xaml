@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="Koks_PM_V3.WPF.Views.ModalPages.EditTotpPage"
+﻿<UserControl x:Class="Koks_PM_V3.WPF.Views.ModalPages.EditTelegramModalPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Koks_PM_V3.WPF.Views.ModalPages"
-             mc:Ignorable="d" 
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:iconPacks1="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
-            <RowDefinition Height="0.35*" />
+            <RowDefinition Height="0.20*" />
             <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
 
@@ -38,7 +37,7 @@
                     <RowDefinition Height="0.05*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Изменение 2FA" 
+                <TextBlock Text="Изменени Telegram оповещений" 
                            Grid.Row="1" 
                            Grid.Column="1" 
                            FontSize="18" 
@@ -54,47 +53,20 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Пароль" Grid.Row="1" 
+                        <TextBlock Text="Новый TelegramBot API" 
+                                   Grid.Row="1" 
                                    Grid.Column="1" 
                                    FontSize="18" 
                                    FontWeight="Bold" 
                                    FontFamily="Century Gothic"/>
                         <TextBox Grid.Row="2" 
                                  Grid.Column="1" 
-                                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" 
+                                 Text="{Binding TgBotAPI, 
+                            UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0 5 0 0"/>
-
-                        <TextBlock Text="Новый 2FA Ключ" 
-                                   Grid.Row="1" 
-                                   Grid.Column="1" 
-                                   FontSize="18" 
-                                   FontWeight="Bold" 
-                                   FontFamily="Century Gothic"/>
-                        <Grid Grid.Row="2" 
-                              Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="0.15*" />
-                            </Grid.ColumnDefinitions>
-
-                            <TextBox  
-                                 Grid.Column="0" 
-                                 Text="{Binding TotpKey, UpdateSourceTrigger=PropertyChanged}" 
-                                 IsReadOnly="True"
-                                 Margin="0 5 0 0"/>
-                            <Button Grid.Row="8" 
-                                Grid.Column="1" 
-                                Command="{Binding CopyTotpKey}" 
-                                Margin="5 -5 0 -5" 
-                                Width="40" 
-                                HorizontalAlignment="Left">
-                                <iconPacks1:PackIconMaterialDesign 
-                                Kind="ContentCopy" />
-                            </Button>
-                        </Grid>
 
                         <TextBlock 
-                            Text="TOTP код для подтверждения" 
+                            Text="Новый TelegramChat ID" 
                             Grid.Row="1" 
                             Grid.Column="1" 
                             FontSize="18" 
@@ -102,7 +74,8 @@
                             FontFamily="Century Gothic"/>
                         <TextBox Grid.Row="2" 
                                  Grid.Column="1" 
-                                 Text="{Binding TotpNumbers, UpdateSourceTrigger=PropertyChanged}" 
+                                 Text="{Binding TgChatID, 
+                            UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0 5 0 0"/>
 
                         <Grid
