@@ -27,7 +27,6 @@
     <Folder Include="Commands\OpenPageCommands\OpenAccountPageCommands\" />
     <Folder Include="Commands\OpenPageCommands\OpenModalPageCommand\" />
     <Folder Include="Commands\ClosePageCommands\" />
-    <Folder Include="ViewModels\ModalViewModels\" />
     <Folder Include="ViewModels\ManagerViewModels\" />
     <Folder Include="ViewModels\MainViewModels\" />
   </ItemGroup>
