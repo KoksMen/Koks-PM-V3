@@ -27,6 +27,10 @@ namespace Koks_PM_V3.Domain.Models
             this.createDate = createDate;
         }
 
+        public Guid ID => cardID;
+        public string Title => cardName;
+        public string Desctiption => cardNumber;
+
         public Guid cardID { get; set; }
         public string cardName { get; set; }
         public string cardNumber { get; set; }

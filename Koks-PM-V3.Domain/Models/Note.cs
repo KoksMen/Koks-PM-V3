@@ -26,6 +26,10 @@ namespace Koks_PM_V3.Domain.Models
             this.createDate = createDate;
         }
 
+        public Guid ID => noteID;
+        public string Title => noteName;
+        public string Desctiption => noteLogin;
+
         public Guid noteID { get; set; }
         public string noteName { get; set; }
         public string noteLogin { get; set; }
