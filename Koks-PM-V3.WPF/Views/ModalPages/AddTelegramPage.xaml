@@ -61,7 +61,7 @@
                                    FontFamily="Century Gothic"/>
                         <TextBox Grid.Row="2" 
                                  Grid.Column="1" 
-                                 Text="{Binding TgBotAPI, 
+                                 Text="{Binding TelegramBotAPI, 
                             UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0 5 0 0"/>
 
@@ -74,7 +74,7 @@
                             FontFamily="Century Gothic"/>
                         <TextBox Grid.Row="2" 
                                  Grid.Column="1" 
-                                 Text="{Binding TgChatID, 
+                                 Text="{Binding TelegramChatID, 
                             UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0 5 0 0"/>
 
