@@ -61,7 +61,9 @@
                                    FontFamily="Century Gothic"/>
                         <TextBox Grid.Row="2" 
                                  Grid.Column="1" 
-                                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" 
+                                 Text="{Binding Password, 
+                            UpdateSourceTrigger=PropertyChanged,
+                            Mode=TwoWay}" 
                                  Margin="0 5 0 0"/>
                         
                         <TextBlock Text="2FA Ключ" 
@@ -79,7 +81,9 @@
 
                             <TextBox  
                                  Grid.Column="0" 
-                                 Text="{Binding TotpKey, UpdateSourceTrigger=PropertyChanged}" 
+                                 Text="{Binding TotpKey, 
+                                UpdateSourceTrigger=PropertyChanged,
+                                Mode=TwoWay}" 
                                  IsReadOnly="True"
                                  Margin="0 5 0 0"/>
                             <Button Grid.Row="8" 
@@ -102,7 +106,9 @@
                             FontFamily="Century Gothic"/>
                         <TextBox Grid.Row="2" 
                                  Grid.Column="1" 
-                                 Text="{Binding TotpNumbers, UpdateSourceTrigger=PropertyChanged}" 
+                                 Text="{Binding TotpNumbers, 
+                            UpdateSourceTrigger=PropertyChanged,
+                            Mode=TwoWay}" 
                                  Margin="0 5 0 0"/>
 
                         <Grid
