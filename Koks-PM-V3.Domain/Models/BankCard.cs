@@ -28,6 +28,8 @@ namespace Koks_PM_V3.Domain.Models
         }
 
         public Guid ID => cardID;
+        public Guid CategoryID => categoryID;
+        public Guid UserID => userID;
         public string Title => cardName;
         public string Desctiption => cardNumber;
 
