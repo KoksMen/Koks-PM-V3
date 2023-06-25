@@ -49,12 +49,11 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         #region Events
         public delegate void updateNote(Guid noteID);
-        public delegate void updateBankCard(Guid bankCardID);
-        public event updateNote? noteUpdateAdd;
-        public event updateBankCard? bankCardUpdateAdd;
+        public delegate void updateBankCard(Guid cardID);
+        public event updateNote? noteUpdatedAdded;
+        public event updateBankCard? bankcardUpdatedAdded;
         public event Action categoryUpdateAddDelete;
-        public event Action noteDelete;
-        public event Action bankCardDelete;
+        public event Action recordDelete;
         public event Action userUpdate;
         #endregion
 
@@ -111,7 +110,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
             _notes.Add(note);
 
-            noteUpdateAdd?.Invoke(note.noteID);
+            noteUpdatedAdded?.Invoke(note.noteID);
         }
 
         public async Task AddBankCard(BankCard bankCard)
@@ -120,7 +119,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
             _bankCards.Add(bankCard);
 
-            bankCardUpdateAdd?.Invoke(bankCard.cardID);
+            bankcardUpdatedAdded?.Invoke(bankCard.cardID);
         }
 
         public async Task AddCategory(Category category)
@@ -149,7 +148,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
                 _notes.Add(note);
             }
 
-            noteUpdateAdd?.Invoke(note.noteID);
+            noteUpdatedAdded?.Invoke(note.noteID);
         }
 
         public async Task UpdateBankCard(BankCard bankCard)
@@ -167,7 +166,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
                 _bankCards.Add(bankCard);
             }
 
-            bankCardUpdateAdd?.Invoke(bankCard.cardID);
+            bankcardUpdatedAdded?.Invoke(bankCard.cardID);
         }
 
         public async Task UpdateCategory(Category category)
@@ -201,7 +200,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
             _notes.RemoveAll(n => n.noteID == noteID);
 
-            noteDelete?.Invoke();
+            recordDelete?.Invoke();
         }
 
         public async Task DeleteBankCard(Guid bankCardID)
@@ -210,7 +209,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
             _bankCards.RemoveAll(c => c.cardID == bankCardID);
 
-            bankCardDelete?.Invoke();
+            recordDelete?.Invoke();
         }
 
         public async Task DeleteCategory(Guid categoryID)
@@ -240,5 +239,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         
         //UpdateUser
         //Deleteuser
+        //Change events
+        //Create user command in DataStore
     }
 }
