@@ -27,6 +27,8 @@ namespace Koks_PM_V3.Domain.Models
         }
 
         public Guid ID => noteID;
+        public Guid CategoryID => categoryID;
+        public Guid UserID => userID;
         public string Title => noteName;
         public string Desctiption => noteLogin;
 
