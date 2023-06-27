@@ -4,9 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Koks_PM_V3.WPF.Views"
+        xmlns:viewmodels="clr-namespace:Koks_PM_V3.WPF.ViewModels.MainViewModels"
+        xmlns:mainpages="clr-namespace:Koks_PM_V3.WPF.Views.MainPages"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="KoksPM-V3" 
+        Height="630" 
+        Width="1150" 
+        MinHeight="600" 
+        MinWidth="1150" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+        <!--Icon="213-1.ico"-->
 
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:LoginVM}">
+            <mainpages:LoginPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:RegisterVM}">
+            <mainpages:RegisterPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TotpVM}">
+            <mainpages:TotpPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ManagerVM}">
+            <mainpages:ManagerPage/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Border CornerRadius="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Height="30" Background="#2d2d2d" MouseDown="MouseDown">
+                    <Grid>
+                        <TextBlock Text="KoksPM-V3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <Button Margin="0 0 5 0" Click="Minimize">
+                                <iconPacks:PackIconUnicons Kind="Minus" />
+                            </Button>
+                            <Button Margin="0 0 5 0" Click="Maximize">
+                                <iconPacks:PackIconFontAwesome Kind="WindowMaximizeRegular" />
+                            </Button>
+                            <Button Click="Close">
+                                <iconPacks:PackIconJamIcons Kind="Close" />
+                            </Button>
+                        </StackPanel>
+                        <Image  HorizontalAlignment="Left" Margin="5 2 0 2" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+                <ContentPresenter Content="{Binding Selectedpage}" Grid.Row="1"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
