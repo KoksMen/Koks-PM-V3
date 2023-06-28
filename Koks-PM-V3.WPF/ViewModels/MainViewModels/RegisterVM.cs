@@ -1,5 +1,7 @@
 ﻿using DevExpress.Mvvm;
+using Koks_PM_V3.EntityFramework;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.MainCommands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenMainPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
@@ -18,14 +20,15 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         private readonly MainPageNavigator _pageNavigator;
         private readonly RegisterDataStore _registerPageDataStore;
         private readonly DataStoreFactory _dataStoreFactory;
+        private readonly StorageDbContextFactory _storageDbContextFactory;
 
-
-        public RegisterVM(MainPageNavigator pageNavigator, DataStoreFactory dataStoreFactory)
+        public RegisterVM(MainPageNavigator pageNavigator, DataStoreFactory dataStoreFactory, StorageDbContextFactory storageDbContextFactory)
         {
             _pageNavigator = pageNavigator;
             _registerPageDataStore = new RegisterDataStore();
             _dataStoreFactory = dataStoreFactory;
             _registerPageDataStore.DataStoreFactory = _dataStoreFactory;
+            _storageDbContextFactory = storageDbContextFactory;
         }
 
         private string _Name;
@@ -58,13 +61,13 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             set { _ConfirmPassword = value; _registerPageDataStore.ConfirmPassword = value; RaisePropertiesChanged(nameof(RegisterCommand)); }
         }
 
-        private ICommand _registerCommand => new RelayCommand(parameter => { MessageBox.Show("RegisterVM => RegisterCommand => NotImplementedException"); });
+        private ICommand _registerCommand => new RegisterCommand(_pageNavigator, _dataStoreFactory, _storageDbContextFactory, _registerPageDataStore);
         public ICommand RegisterCommand
         {
             get { return _registerCommand; }
         }
 
-        private ICommand backLoginCommand => new OpenLoginCommand(_pageNavigator, _dataStoreFactory);
+        private ICommand backLoginCommand => new OpenLoginCommand(_pageNavigator, _dataStoreFactory, _storageDbContextFactory);
 
 
         public ICommand BackLoginCommand
