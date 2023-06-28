@@ -1,4 +1,6 @@
 ﻿using DevExpress.Mvvm;
+using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenMainPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
@@ -23,7 +26,6 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             _registerPageDataStore = new RegisterDataStore();
             _dataStoreFactory = dataStoreFactory;
             _registerPageDataStore.DataStoreFactory = _dataStoreFactory;
-
         }
 
         private string _Name;
@@ -56,13 +58,13 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             set { _ConfirmPassword = value; _registerPageDataStore.ConfirmPassword = value; RaisePropertiesChanged(nameof(RegisterCommand)); }
         }
 
-        private ICommand _registerCommand => throw new NotImplementedException("RegisterVM => RegisterCommand => NotImplementedException");
+        private ICommand _registerCommand => new RelayCommand(parameter => { MessageBox.Show("RegisterVM => RegisterCommand => NotImplementedException"); });
         public ICommand RegisterCommand
         {
             get { return _registerCommand; }
         }
 
-        private ICommand backLoginCommand => throw new NotImplementedException("RegisterVM => BackLoginCommand => NotImplementedException");
+        private ICommand backLoginCommand => new OpenLoginCommand(_pageNavigator, _dataStoreFactory);
 
 
         public ICommand BackLoginCommand
