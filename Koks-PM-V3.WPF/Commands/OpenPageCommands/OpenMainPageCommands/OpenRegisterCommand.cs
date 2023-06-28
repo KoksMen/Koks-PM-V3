@@ -1,4 +1,5 @@
-﻿using Koks_PM_V3.WPF.Stores.DataStores;
+﻿using Koks_PM_V3.EntityFramework;
+using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using Koks_PM_V3.WPF.ViewModels.MainViewModels;
 using System;
@@ -15,11 +16,13 @@ namespace Koks_PM_V3.WPF.Commands.OpenPageCommands
     {
         private readonly MainPageNavigator _mainPageNavigator;
         private readonly DataStoreFactory _dataStoreFactory;
+        private readonly StorageDbContextFactory _storageDbContextFactory;
 
-        public OpenRegisterCommand(MainPageNavigator mainPageNavigator, DataStoreFactory dataStoreFactory)
+        public OpenRegisterCommand(MainPageNavigator mainPageNavigator, DataStoreFactory dataStoreFactory, StorageDbContextFactory storageDbContextFactory)
         {
             _mainPageNavigator = mainPageNavigator;
             _dataStoreFactory = dataStoreFactory;
+            _storageDbContextFactory = storageDbContextFactory;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -33,7 +36,7 @@ namespace Koks_PM_V3.WPF.Commands.OpenPageCommands
         {
             try
             {
-                _mainPageNavigator.SelectedMainPage = new RegisterVM(_mainPageNavigator, _dataStoreFactory);
+                _mainPageNavigator.SelectedMainPage = new RegisterVM(_mainPageNavigator, _dataStoreFactory, _storageDbContextFactory);
             }
             catch (Exception ex)
             {

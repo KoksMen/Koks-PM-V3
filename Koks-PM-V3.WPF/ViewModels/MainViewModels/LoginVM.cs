@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm;
+using Koks_PM_V3.EntityFramework;
 using Koks_PM_V3.WPF.Commands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
@@ -18,14 +19,15 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         private readonly MainPageNavigator _pageNavigator;
         private readonly LoginDataStore _loginPageDataStore;
         private readonly DataStoreFactory _dataStoreFactory;
+        private readonly StorageDbContextFactory _storageDbContextFactory;
 
-
-        public LoginVM(MainPageNavigator pageNavigator, DataStoreFactory dataStoreFactory)
+        public LoginVM(MainPageNavigator pageNavigator, DataStoreFactory dataStoreFactory, StorageDbContextFactory storageDbContextFactory)
         {
             _pageNavigator = pageNavigator;
             _loginPageDataStore = new LoginDataStore();
             _dataStoreFactory = dataStoreFactory;
             _loginPageDataStore.DataStoreFactory = _dataStoreFactory;
+            _storageDbContextFactory = storageDbContextFactory;
         }
 
         private string _Login;
@@ -46,7 +48,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
 
         public ICommand LoginCommand => new RelayCommand(parameter => { MessageBox.Show("LoginVM => LoginCommand => NotImplementedException"); } );
 
-        public ICommand OpenRegisterCommand => new OpenRegisterCommand(_pageNavigator, _dataStoreFactory);
+        public ICommand OpenRegisterCommand => new OpenRegisterCommand(_pageNavigator, _dataStoreFactory, _storageDbContextFactory);
 
     }
 }
