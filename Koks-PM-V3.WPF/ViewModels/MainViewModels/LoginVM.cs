@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -45,7 +46,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
 
         public ICommand LoginCommand => new RelayCommand(parameter => { MessageBox.Show("LoginVM => LoginCommand => NotImplementedException"); } );
 
-        public ICommand OpenRegisterCommand => new RelayCommand(parameter => { MessageBox.Show("LoginVM => OpenRegisterCommand => NotImplementedException"); });
+        public ICommand OpenRegisterCommand => new OpenRegisterCommand(_pageNavigator, _dataStoreFactory);
 
     }
 }
