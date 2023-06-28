@@ -63,15 +63,15 @@ namespace Koks_PM_V3.WPF
         {
             try
             {
-               /* using (StorageDbContext context = _storageDbContextFactory.Create())
+                using (StorageDbContext context = _storageDbContextFactory.Create())
                 {
                     context.Users.Load();
                     context.Notes.Load();
                     context.BankCards.Load();
                     context.CategoryDtos.Load();
-                }*/
+                }
 
-                MainVM _mainVM = new MainVM(_pageNavigator, _dataStoreFactory);
+                MainVM _mainVM = new MainVM(_pageNavigator, _dataStoreFactory, _storageDbContextFactory);
                 MainWindow _MainWindow = new MainWindow() { DataContext = _mainVM };
                 _MainWindow.Show();
 
