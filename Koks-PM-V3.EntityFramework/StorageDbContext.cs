@@ -1,5 +1,6 @@
 ﻿using Koks_PM_V3.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Koks_PM_V3.EntityFramework
 {
     public class StorageDbContext : DbContext
     {
-        public StorageDbContext(DbContextOptions options) : base(options) { }
+        public StorageDbContext(DbContextOptions options): base(options) { }
 
         public DbSet<UserDto> Users { get; set; }
         public DbSet<NoteDto> Notes { get; set; }
