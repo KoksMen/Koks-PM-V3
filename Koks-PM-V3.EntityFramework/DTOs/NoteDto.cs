@@ -18,8 +18,8 @@ namespace Koks_PM_V3.EntityFramework.DTOs
         public string noteLogin { get; set; }
         [Required]
         public string notePassword { get; set; }
-        public string noteUrl { get; set; }
-        public string noteTotp { get; set; }
+        public string? noteUrl { get; set; }
+        public string? noteTotp { get; set; }
         [Required]
         public Guid categoryID { get; set; }
         [Required]

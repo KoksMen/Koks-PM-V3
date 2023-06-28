@@ -18,10 +18,10 @@ namespace Koks_PM_V3.EntityFramework.DTOs
         public string userLogin { get; set; }
         [Required]
         public string userPassword { get; set; }
-        public string userTotpKey { get; set; }
-        public string userTelegramBotApi { get; set; }
-        public string userTelegramChatID { get; set; }
-        public byte[] userAvatar { get; set; }
+        public string? userTotpKey { get; set; }
+        public string? userTelegramBotApi { get; set; }
+        public string? userTelegramChatID { get; set; }
+        public byte[]? userAvatar { get; set; }
         [Required]
         public DateTime modifyDate { get; set; }
         [Required]

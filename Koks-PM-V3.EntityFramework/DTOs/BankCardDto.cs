@@ -17,11 +17,11 @@ namespace Koks_PM_V3.EntityFramework.DTOs
         [Required]
         public string cardNumber { get; set; }
         [Required]
-        public string cardHolder { get; set; }
+        public string? cardHolder { get; set; }
         [Required]
         public string cardCVC { get; set; }
         [Required]
-        public string cardType { get; set; }
+        public string? cardType { get; set; }
         [Required]
         public DateTime cardExpiryDate { get; set; }
         [Required]
