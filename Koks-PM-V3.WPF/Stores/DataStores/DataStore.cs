@@ -83,19 +83,28 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             LoadAll(userDto);
         }
 
-        private async void LoadAll(UserDto userDto)
+        private void LoadAll(UserDto userDto)
         {
-            List<Note> notes = await _getAllNotesQuerry.Execute(userDto.UserDtoID);
+            List<Note> notes = _getAllNotesQuerry.Execute(userDto.UserDtoID);
             notes.ForEach(note => DecryptNote(note, userDto.userPassword));
-            _notes = notes;
+            if (notes != null)
+                _notes = notes;
+            else
+                _notes = new List<Note>();
 
-            List<BankCard> bankcards = await _getAllBankCardsQuerry.Execute(userDto.UserDtoID);
+            List<BankCard> bankcards = _getAllBankCardsQuerry.Execute(userDto.UserDtoID);
             bankcards.ForEach(bankcard => DecryptBankCard(bankcard, userDto.userPassword));
-            _bankCards = bankcards;
+            if (bankcards != null)
+                _bankCards = bankcards;
+            else
+                _bankCards = new List<BankCard>();
 
-            List<Category> categories = await _getAllCategoriesQuerry.Execute(userDto.UserDtoID);
+            List<Category> categories = _getAllCategoriesQuerry.Execute(userDto.UserDtoID);
             categories.ForEach(category => DecryptCategory(category, userDto.userPassword));
-            _categories = categories;
+            if (categories != null)
+                _categories = categories;
+            else
+                _categories = new List<Category>();
 
             User user = new User(userDto.UserDtoID, userDto.userName, userDto.userLogin, userDto.userPassword, userDto.userTotpKey, userDto.userTelegramBotApi, userDto.userTelegramChatID, userDto.userAvatar,
                 userDto.modifyDate, userDto.createDate, notes, bankcards, categories);

@@ -9,6 +9,6 @@ namespace Koks_PM_V3.Domain.Querires
 {
     public interface IGetAllNotes
     {
-        Task<List<Note>> Execute(Guid userID);
+        List<Note> Execute(Guid userID);
     }
 }

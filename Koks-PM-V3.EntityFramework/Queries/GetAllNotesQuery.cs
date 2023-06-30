@@ -19,11 +19,11 @@ namespace Koks_PM_V3.EntityFramework.Queries
             _storageContextFactory = storageContextFactory;
         }
 
-        public async Task<List<Note>> Execute(Guid userID)
+        public List<Note> Execute(Guid userID)
         {
             using (StorageDbContext context = _storageContextFactory.Create())
             {
-                List<NoteDto> notesDtos = await context.Notes.Where(c => c.userID == userID).ToListAsync();
+                List<NoteDto> notesDtos =  context.Notes.Where(c => c.userID == userID).ToList();
 
                 List<Note> notes = notesDtos.Select(x => new Note(
                     x.NoteDtoID,

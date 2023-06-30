@@ -19,11 +19,11 @@ namespace Koks_PM_V3.EntityFramework.Queries
             _storageContextFactory = storageContextFactory;
         }
 
-        public async Task<List<BankCard>> Execute(Guid userID)
+        public List<BankCard> Execute(Guid userID)
         {
             using (StorageDbContext context  = _storageContextFactory.Create())
             {
-                List<BankCardDto> bankCardDtos = await context.BankCards.Where(c => c.userID == userID).ToListAsync();
+                List<BankCardDto> bankCardDtos = context.BankCards.Where(c => c.userID == userID).ToList();
 
                 List<BankCard> bankCards = bankCardDtos.Select(x => new BankCard(
                     x.BankCardDtoID,

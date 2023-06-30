@@ -9,6 +9,6 @@ namespace Koks_PM_V3.Domain.Querires
 {
     public interface IGetAllBankCards
     {
-        Task<List<BankCard>> Execute(Guid userID);
+        List<BankCard> Execute(Guid userID);
     }
 }
