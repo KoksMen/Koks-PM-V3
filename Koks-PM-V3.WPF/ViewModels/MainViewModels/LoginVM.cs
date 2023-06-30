@@ -1,6 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.EntityFramework;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.MainCommands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
@@ -46,7 +47,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             set { _Password = value; _loginPageDataStore.Password = value; RaisePropertiesChanged(nameof(LoginCommand)); }
         }
 
-        public ICommand LoginCommand => new RelayCommand(parameter => { MessageBox.Show("LoginVM => LoginCommand => NotImplementedException"); } );
+        public ICommand LoginCommand => new LoginCommand(_pageNavigator, _loginPageDataStore, _dataStoreFactory, _storageDbContextFactory);
 
         public ICommand OpenRegisterCommand => new OpenRegisterCommand(_pageNavigator, _dataStoreFactory, _storageDbContextFactory);
 

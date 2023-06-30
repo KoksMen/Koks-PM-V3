@@ -8,7 +8,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 {
     public class LoginDataStore
     {
-		private string _login;
+		private string _login = string.Empty;
 
 		public string Login
 		{
@@ -16,7 +16,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 			set { _login = value; }
 		}
 
-		private string _password;
+		private string _password = string.Empty;
 
 		public string Password
 		{
