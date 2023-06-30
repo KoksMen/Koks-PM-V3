@@ -55,14 +55,194 @@
         <DataTemplate DataType="{x:Type viewModelsModal:EditTotpVM}">
             <viewsModal:EditTotpPage/>
         </DataTemplate>
-        <!--<DataTemplate DataType="{x:Type viewModelsModal:EditUserVM}">
-            <viewsModal:EditUserPage/>
+        <DataTemplate DataType="{x:Type viewModelsModal:EditUserVM}">
+            <!--<viewsModal:EditUserPage/>-->
         </DataTemplate>
 
-        <services:LenghtTruncateConverter x:Key="LenghtConverter" />-->
+        <services:LenghtTruncateConverter x:Key="LenghtConverter" />
     </UserControl.Resources>
 
     <Grid>
-            
+        <Border Background="#444444">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.15*" 
+                                      MaxWidth="250"/>
+                    <ColumnDefinition Width="1.7*" 
+                                      MaxWidth="400"/>
+                    <ColumnDefinition Width="0.9*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*" 
+                                   MaxHeight="40"/>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="0.2*" 
+                                   MaxHeight="55"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Column="0" 
+                        Grid.Row="0" 
+                        Grid.ColumnSpan="4" 
+                        Background="#000000"/>
+
+                <Grid Grid.ColumnSpan="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.6*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="1"  
+                             Margin="0 8 0 8" 
+                             Text="{Binding FilterText, 
+                        UpdateSourceTrigger=PropertyChanged}" 
+                             Style="{StaticResource FilterTB}"/>
+                    <StackPanel Orientation="Horizontal" 
+                                Grid.Column="3" 
+                                HorizontalAlignment="Right">
+                        <Grid Margin="10 0 10 0">
+                            <Ellipse Width="30" 
+                                     Height="30" 
+                                     Fill="#ffffff"/>
+                            <Ellipse Width="28" 
+                                     Height="28" 
+                                     Fill="#000000"/>
+                            <Ellipse Width="30" 
+                                     Height="30">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding AccountAvatar, 
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                        <TextBlock Text="{Binding AccountName, 
+                            UpdateSourceTrigger=PropertyChanged, 
+                            FallbackValue=NullAccountName, 
+                            Converter={StaticResource LenghtConverter}, 
+                            ConverterParameter=14}" 
+                                   VerticalAlignment="Center" 
+                                   Foreground="#ffffff"/>
+                        <Button Margin="5 0 0 0" 
+                                Padding="4 0" 
+                                Command="{Binding OpenAccountEditPage}" 
+                                Style="{StaticResource accbutton}">
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks1:PackIconCodicons Kind="Account" />
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding OpenAboutModalPage}" 
+                                Style="{StaticResource accbutton}">
+                            <iconPacks1:PackIconUnicons Kind="InfoCircle" />
+                        </Button>
+                        <Button Command="{Binding ExitCommand}" 
+                                Style="{StaticResource accbutton}">
+                            <iconPacks1:PackIconRadixIcons Kind="Exit" Foreground="Red"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <ContentPresenter Content="{Binding NoteManagerSelectedPage}" 
+                                  Grid.Column="2" 
+                                  Grid.ColumnSpan="3" 
+                                  Grid.Row="1" 
+                                  Grid.RowSpan="2" 
+                                  Margin="-200 -200"/>
+
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ListView
+                            Grid.Row="0"
+                            BorderThickness="0"
+                            ItemsSource="{Binding StandartCategories}"
+                            SelectedItem="{Binding Path= StandartCategory, 
+                        UpdateSourceTrigger=PropertyChanged}"
+                            ItemContainerStyle="{StaticResource ResourceKey=CategoryItemStyle}"
+                            IsSynchronizedWithCurrentItem="True"
+                            SelectionMode="Single"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            Background="#323232"
+                            Padding="0 5"
+                        />
+                    <TextBlock Text="Категории"
+                               FontSize="24" 
+                               FontWeight="DemiBold" 
+                               Grid.Row="1" 
+                               Background="#323232" 
+                               Foreground="#ffffff" 
+                               Padding="5 0 0 0"/>
+                    <ListView
+                            Grid.Row="2"
+                            BorderThickness="0"
+                            ItemsSource="{Binding Categories}"
+                            SelectedItem="{Binding Path=FilterCategory, 
+                        UpdateSourceTrigger=PropertyChanged}"
+                            ItemContainerStyle="{StaticResource ResourceKey=CategoryItemStyle}"
+                            IsSynchronizedWithCurrentItem="True"
+                            SelectionMode="Single"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            Background="#323232"
+                            Padding="0 5"
+                        />
+                </Grid>
+                <ListView
+                    BorderThickness="0"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    ItemsSource="{Binding Notes}"
+                    SelectedItem="{Binding Path=SelectedNote, 
+                    UpdateSourceTrigger=PropertyChanged}"
+                    ItemContainerStyle="{StaticResource ResourceKey=RecordItemStyle}"
+                    IsSynchronizedWithCurrentItem="True"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    Background="#535353"
+                    />
+
+                <StackPanel Orientation="Horizontal" 
+                            Grid.Row="2" 
+                            HorizontalAlignment="Center">
+                    <Button  Margin="1 0" 
+                             Padding="5 0" 
+                             Command="{Binding OpenAddCategoryCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks1:PackIconIonicons Kind="AddiOS"/>
+                            <TextBlock Text="Добавить" 
+                                       Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="1 0" 
+                            Padding="5 0" 
+                            Command="{Binding OpenEditCategoryCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks1:PackIconCoolicons Kind="Edit" />
+                            <TextBlock Text="Изменить" 
+                                       Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <Button Grid.Row="2" 
+                        Grid.Column="1" 
+                        Command="{Binding OpenAddNoteCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks1:PackIconIonicons Kind="AddiOS"/>
+                        <TextBlock Text="Добавить заметку" 
+                                   Margin="10 0 0 0"/>
+                    </StackPanel>
+                </Button>
+
+            </Grid>
+
+        </Border>
+
+
+        <modalcontrol:Modal IsOpen="{Binding IsModalOpen}">
+            <ContentPresenter Content="{Binding SelectedModalPage}" Margin="50 40"/>
+        </modalcontrol:Modal>
+
     </Grid>
 </UserControl>

@@ -9,6 +9,9 @@
                 <ResourceDictionary Source="./Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="./Styles/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="./Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="./Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="./Styles/ItemCategoryStyle.xaml"/>
+                <ResourceDictionary Source="./Styles/RecordItemStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
