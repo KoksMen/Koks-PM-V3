@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:Koks_PM_V3.WPF.Services">
+
+    <Style TargetType="ListViewItem" x:Key="RecordItemStyle">
+
+        <Style.Resources>
+            <converter:LenghtTruncateConverter x:Key="LenghtConverter" />
+        </Style.Resources>
+
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#2A2A2A"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#313131"/>
+            </Trigger>
+        </Style.Triggers>
+
+        <Setter Property="Background" Value="#000000"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+
+                    <Border Background="{TemplateBinding Background}" 
+                            Height="50"
+                            Margin="2,2,2,8"
+                            CornerRadius="15">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10,0,0,0"
+                                    >
+
+
+                            <StackPanel Orientation="Vertical" Margin="10,5,0,0">
+                                <TextBlock Text="{Binding Title, Converter={StaticResource LenghtConverter}, ConverterParameter=35}"
+                                           Foreground="#ffffff"
+                                           FontSize="15"
+                                           />
+                                <TextBlock Text="{Binding Desctiption, Converter={StaticResource LenghtConverter}, ConverterParameter=35}"
+                                           Foreground="#808080"
+                                           FontSize="13"
+                                           />
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
