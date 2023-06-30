@@ -9,6 +9,6 @@ namespace Koks_PM_V3.Domain.Querires
 {
     public interface IGetAllCategories
     {
-        List<Category> Execute(Guid userID);
+        Task<List<Category>> Execute(Guid userID);
     }
 }

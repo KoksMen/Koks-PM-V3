@@ -80,26 +80,27 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             _getAllBankCardsQuerry = getAllBankCardsQuerry;
             _getAllCategoriesQuerry = getAllCategoriesQuerry;
 
-            LoadAll(userDto);
+            var taskWaiter = LoadAll(userDto);
+            taskWaiter.Wait();
         }
 
-        private void LoadAll(UserDto userDto)
+        private async Task LoadAll(UserDto userDto)
         {
-            List<Note> notes = _getAllNotesQuerry.Execute(userDto.UserDtoID);
+            List<Note> notes = await _getAllNotesQuerry.Execute(userDto.UserDtoID);
             notes.ForEach(note => DecryptNote(note, userDto.userPassword));
             if (notes != null)
                 _notes = notes;
             else
                 _notes = new List<Note>();
 
-            List<BankCard> bankcards = _getAllBankCardsQuerry.Execute(userDto.UserDtoID);
+            List<BankCard> bankcards = await _getAllBankCardsQuerry.Execute(userDto.UserDtoID);
             bankcards.ForEach(bankcard => DecryptBankCard(bankcard, userDto.userPassword));
             if (bankcards != null)
                 _bankCards = bankcards;
             else
                 _bankCards = new List<BankCard>();
 
-            List<Category> categories = _getAllCategoriesQuerry.Execute(userDto.UserDtoID);
+            List<Category> categories = await _getAllCategoriesQuerry.Execute(userDto.UserDtoID);
             categories.ForEach(category => DecryptCategory(category, userDto.userPassword));
             if (categories != null)
                 _categories = categories;
