@@ -53,6 +53,23 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             set { _Category = value; RaisePropertiesChanged(nameof(SelectedCategory)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
         }
 
+        private string _SelectedType = string.Empty;
+
+        public string SelectedType
+        {
+            get { return _SelectedType; }
+            set
+            {
+                if (value == "Банковская карта")
+                    throw new NotImplementedException("AddNoteVM => SelectedType => NotImplementException");
+                else
+                {
+                    _SelectedType = value;
+                    RaisePropertiesChanged(nameof(SelectedType));
+                }
+            }
+        }
+
         private string _URL = string.Empty;
 
         public string URL
