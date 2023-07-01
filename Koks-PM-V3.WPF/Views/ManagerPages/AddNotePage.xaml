@@ -32,6 +32,27 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    VerticalAlignment="Bottom">
+            <TextBlock Foreground="White" 
+                   Text="Категория" 
+                   Grid.Row="9" 
+                   Grid.Column="1" 
+                   FontSize="18" 
+                   FontWeight="Bold" 
+                   FontFamily="Century Gothic"/>
+            <ComboBox Grid.Row="10" 
+                  Grid.Column="1"
+                  SelectedItem="{Binding SelectedType, 
+            UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="Заметка"/>
+                <ComboBoxItem Content="Банковская карта"/>
+            </ComboBox>
+        </StackPanel>
+        
         <TextBlock Foreground="White" 
                    Text="Название" 
                    Grid.Row="1" 
