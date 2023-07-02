@@ -61,9 +61,11 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _SelectedType; }
             set 
             { 
-                if (value == "Заметка")
-                    throw new NotImplementedException("AddBankCardVM => SelectedType => NotImplementException");
-                else
+                if (value.Contains("Заметка"))
+                {
+                    _viewerNavigator.selectedShowerPage = new AddNoteVM(_viewerNavigator, _dataStore, _categories);
+                }
+                else if (value.Contains("Банковская карта"))
                 {
                     _SelectedType = value;
                     RaisePropertiesChanged(nameof(SelectedType));  }

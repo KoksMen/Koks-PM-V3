@@ -37,7 +37,7 @@
                     Grid.Column="1" 
                     VerticalAlignment="Bottom">
             <TextBlock Foreground="White" 
-                   Text="Категория" 
+                   Text="Тип" 
                    Grid.Row="9" 
                    Grid.Column="1" 
                    FontSize="18" 
@@ -45,8 +45,9 @@
                    FontFamily="Century Gothic"/>
             <ComboBox Grid.Row="10" 
                   Grid.Column="1"
-                  SelectedItem="{Binding SelectedType, 
+                  SelectedItem="{Binding Path=SelectedType, 
             UpdateSourceTrigger=PropertyChanged}"
+                       IsSynchronizedWithCurrentItem="True"
                       SelectedIndex="0">
                 <ComboBoxItem Content="Заметка"/>
                 <ComboBoxItem Content="Банковская карта"/>

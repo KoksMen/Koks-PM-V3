@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenBankCardPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -60,9 +61,11 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _SelectedType; }
             set
             {
-                if (value == "Банковская карта")
-                    throw new NotImplementedException("AddNoteVM => SelectedType => NotImplementException");
-                else
+                if (value.Contains("Банковская карта"))
+                {
+                    _viewerNavigator.selectedShowerPage = new AddBankCardVM(_viewerNavigator, _dataStore, _categories);
+                }
+                else if (value.Contains("Заметка"))
                 {
                     _SelectedType = value;
                     RaisePropertiesChanged(nameof(SelectedType));
