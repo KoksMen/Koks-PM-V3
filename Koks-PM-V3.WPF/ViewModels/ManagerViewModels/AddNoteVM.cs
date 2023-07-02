@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenBankCardPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -51,6 +52,25 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         {
             get { return _Category; }
             set { _Category = value; RaisePropertiesChanged(nameof(SelectedCategory)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+        }
+
+        private string _SelectedType = string.Empty;
+
+        public string SelectedType
+        {
+            get { return _SelectedType; }
+            set
+            {
+                if (value.Contains("Банковская карта"))
+                {
+                    _viewerNavigator.selectedShowerPage = new AddBankCardVM(_viewerNavigator, _dataStore, _categories);
+                }
+                else if (value.Contains("Заметка"))
+                {
+                    _SelectedType = value;
+                    RaisePropertiesChanged(nameof(SelectedType));
+                }
+            }
         }
 
         private string _URL = string.Empty;

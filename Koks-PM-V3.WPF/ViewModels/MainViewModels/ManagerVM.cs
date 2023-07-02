@@ -2,6 +2,7 @@
 using DevExpress.Mvvm.Native;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenNotePageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -100,7 +101,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             }
         }
 
-        public ICommand OpenAddNoteCommand => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
+        public ICommand OpenAddNoteCommand => new OpenAddNoteCommand(_viewerNavigator, _dataStore, _StandartCategories, x => { if (SelectedRecord != null) SelectedRecord = null; });
         public ICommand OpenAddBankCardCommand => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
         public ICommand OpenAddCategoryCommand => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
         public ICommand OpenEditCategoryCommand => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
@@ -119,7 +120,11 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             _dataStore.categoryUpdateAddDelete += categoryUpdAddDelEvent;
             _dataStore.userUpdate += userAccountUpdEvent;
 
-            Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()));
+            List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
+                .Concat(_dataStore.BankCards.Cast<IRecord>())
+                .ToList();
+            Records = CollectionViewSource.GetDefaultView(allRecords);
+
             Records.Filter = RecordFilter;
 
             _pageNavigator = pageNavigator;
@@ -127,7 +132,9 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             _viewerNavigator.ShowerPageChanged += ShowerPageChangedEvent; ;
             _modalPageNavigator = new ModalPageNavigator();
             _modalPageNavigator.ModalPageChanged += modalPageChanged;
+            _StandartCategory = _StandartCategories[0];
         }
+
 
         private void userAccountUpdEvent()
         {
@@ -176,7 +183,10 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
-                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()));
+                List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
+                .Concat(_dataStore.BankCards.Cast<IRecord>())
+                .ToList();
+                Records = CollectionViewSource.GetDefaultView(allRecords);
                 Records.Filter = RecordFilter;
                 RaisePropertiesChanged(nameof(_Records));
 
@@ -195,7 +205,10 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
-                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()));
+                List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
+                .Concat(_dataStore.BankCards.Cast<IRecord>())
+                .ToList();
+                Records = CollectionViewSource.GetDefaultView(allRecords);
                 Records.Filter = RecordFilter;
                 RaisePropertiesChanged(nameof(_Records));
 

@@ -4,6 +4,7 @@ using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,24 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         {
             get { return _Category; }
             set { _Category = value; RaisePropertiesChanged(nameof(SelectedCategory)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+        }
+
+        private string _SelectedType = string.Empty;
+
+        public string SelectedType
+        {
+            get { return _SelectedType; }
+            set 
+            { 
+                if (value.Contains("Заметка"))
+                {
+                    _viewerNavigator.selectedShowerPage = new AddNoteVM(_viewerNavigator, _dataStore, _categories);
+                }
+                else if (value.Contains("Банковская карта"))
+                {
+                    _SelectedType = value;
+                    RaisePropertiesChanged(nameof(SelectedType));  }
+                }
         }
 
         private string _Type = string.Empty;
