@@ -30,6 +30,10 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
 
         private void _pageNavigator_MainPageChanged()
         {
+            if (Selectedpage == null)
+            {
+                _pageNavigator.SelectedMainPage = new LoginVM(_pageNavigator, _dataStoreFactory, _storageDbContextFactory);
+            }
             RaisePropertiesChanged(nameof(Selectedpage));
         }
     }
