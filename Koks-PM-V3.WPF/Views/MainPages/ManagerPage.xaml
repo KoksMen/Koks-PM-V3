@@ -140,7 +140,7 @@
                     </StackPanel>
                 </Grid>
 
-                <ContentPresenter Content="{Binding NoteManagerSelectedPage}" 
+                <ContentPresenter Content="{Binding ShowerManagerSelectedPage}" 
                                   Grid.Column="2" 
                                   Grid.ColumnSpan="3" 
                                   Grid.Row="1" 
@@ -230,7 +230,7 @@
                         Command="{Binding OpenAddNoteCommand}">
                     <StackPanel Orientation="Horizontal">
                         <iconPacks1:PackIconIonicons Kind="AddiOS"/>
-                        <TextBlock Text="Добавить заметку" 
+                        <TextBlock Text="Добавить запись" 
                                    Margin="10 0 0 0"/>
                     </StackPanel>
                 </Button>
