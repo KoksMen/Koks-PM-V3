@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenBankCardPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
@@ -92,6 +93,6 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         public ICollection<Category> Categories => _categories;
 
         public ICommand SaveAddCommand => throw new NotImplementedException("AddNoteVM - SaveAddCommand - NotImplementException");
-        public ICommand CancelCommand => throw new NotImplementedException("AddNoteVM - CancelCommand - NotImplementException");
+        public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator);
     }
 }
