@@ -27,7 +27,6 @@
     <Folder Include="Commands\ManagerCommands\BankCardCommands\" />
     <Folder Include="Commands\ManagerCommands\CategoryCommands\" />
     <Folder Include="Commands\ManagerCommands\AccountCommands\" />
-    <Folder Include="Commands\OpenPageCommands\OpenCategoryPageCommands\" />
     <Folder Include="Commands\OpenPageCommands\OpenAccountPageCommands\" />
     <Folder Include="Commands\OpenPageCommands\OpenModalPageCommand\" />
     <Folder Include="Commands\ClosePageCommands\" />
