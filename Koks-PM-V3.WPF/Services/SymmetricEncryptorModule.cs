@@ -56,8 +56,8 @@ namespace Koks_PM_V3.WPF.Services
                 EncryptString(note.notePassword, password),
                 EncryptString(note.noteUrl, password),
                 EncryptString(note.noteTotp, password),
-                note.userID,
                 note.categoryID,
+                note.userID,
                 note.createDate,
                 note.modifyDate
                 );
@@ -72,8 +72,8 @@ namespace Koks_PM_V3.WPF.Services
                 DecryptToString(note.notePassword, password),
                 DecryptToString(note.noteUrl, password),
                 DecryptToString(note.noteTotp, password),
-                note.userID,
                 note.categoryID,
+                note.userID,
                 note.createDate,
                 note.modifyDate
                 );
