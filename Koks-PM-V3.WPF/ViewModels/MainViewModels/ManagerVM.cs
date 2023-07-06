@@ -134,6 +134,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             _modalPageNavigator = new ModalPageNavigator();
             _modalPageNavigator.ModalPageChanged += modalPageChanged;
             _StandartCategory = _StandartCategories[0];
+            Records.Refresh();
         }
 
 
@@ -254,7 +255,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             try
             {
                 throw new NotImplementedException("ManagerVM => ShowRecord => NotImplementException");
-                if (SelectedRecord != null)
+                if (SelectedRecord != null && SelectedRecord is IRecord)
                 {
                     List<Category> senderCategoryModels = new List<Category>();
                     senderCategoryModels.AddRange(_StandartCategories);

@@ -23,5 +23,10 @@ namespace Koks_PM_V3.Domain.Models
         public Guid userID { get; set; }
         public DateTime modifyDate { get; set; }
         public DateTime createDate { get; set; }
+
+        public override string ToString()
+        {
+            return $"{categoryName}";
+        }
     }
 }

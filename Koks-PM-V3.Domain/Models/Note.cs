@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Koks_PM_V3.Domain.Models
 {
-    public class Note
+    public class Note : IRecord
     {
         public Note(Guid noteID, string noteName, 
             string noteLogin, string notePassword, 
