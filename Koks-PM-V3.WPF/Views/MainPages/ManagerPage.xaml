@@ -192,8 +192,8 @@
                     BorderThickness="0"
                     Grid.Column="1"
                     Grid.Row="1"
-                    ItemsSource="{Binding Notes}"
-                    SelectedItem="{Binding Path=SelectedNote, 
+                    ItemsSource="{Binding Records}"
+                    SelectedItem="{Binding Path=SelectedRecord, 
                     UpdateSourceTrigger=PropertyChanged}"
                     ItemContainerStyle="{StaticResource ResourceKey=RecordItemStyle}"
                     IsSynchronizedWithCurrentItem="True"
