@@ -87,23 +87,38 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
         private async Task LoadAll(UserDto userDto)
         {
             List<Note> notes = await _getAllNotesQuerry.Execute(userDto.UserDtoID);
-            notes.ForEach(note => DecryptNote(note, userDto.userPassword));
-            if (notes != null)
-                _notes = notes;
+            List<Note> decryptedNotes = new List<Note>();
+            foreach (Note noteItem in notes)
+            {
+                Note decryptedNote = DecryptNote(noteItem, userDto.userPassword);
+                decryptedNotes.Add(decryptedNote);
+            }
+            if (decryptedNotes != null)
+                _notes = decryptedNotes;
             else
                 _notes = new List<Note>();
 
             List<BankCard> bankcards = await _getAllBankCardsQuerry.Execute(userDto.UserDtoID);
-            bankcards.ForEach(bankcard => DecryptBankCard(bankcard, userDto.userPassword));
-            if (bankcards != null)
-                _bankCards = bankcards;
+            List<BankCard> decryptedBankCards = new List<BankCard>();
+            foreach (BankCard bankCardItem in bankcards)
+            {
+                BankCard decryptedBankCard = DecryptBankCard(bankCardItem, userDto.userPassword);
+                decryptedBankCards.Add(decryptedBankCard);
+            }
+            if (decryptedBankCards != null)
+                _bankCards = decryptedBankCards;
             else
                 _bankCards = new List<BankCard>();
 
             List<Category> categories = await _getAllCategoriesQuerry.Execute(userDto.UserDtoID);
-            categories.ForEach(category => DecryptCategory(category, userDto.userPassword));
-            if (categories != null)
-                _categories = categories;
+            List<Category> decryptedCategories = new List<Category>();
+            foreach (Category categoryItem in categories)
+            {
+                Category decryptedCategory = DecryptCategory(categoryItem, userDto.userPassword);
+                decryptedCategories.Add(decryptedCategory);
+            }
+            if (decryptedCategories != null)
+                _categories = decryptedCategories;
             else
                 _categories = new List<Category>();
 
