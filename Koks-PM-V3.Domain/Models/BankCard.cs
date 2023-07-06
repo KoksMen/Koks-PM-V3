@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Koks_PM_V3.Domain.Models
 {
-    public class BankCard
+    public class BankCard : IRecord
     {
         public BankCard(Guid cardID, string cardName, 
             string cardNumber, string cardHolder, 
