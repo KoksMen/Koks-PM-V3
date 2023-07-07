@@ -1,6 +1,8 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.WPF.Commands.ClosePageCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.BankCardCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.NoteCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -93,13 +95,21 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 
         public string ExpiryDate
         {
-            get { return _ExpiryDate; }
-            set { _ExpiryDate = value; RaisePropertiesChanged(nameof(ExpiryDate)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+            get { return _ExpiryDate.ToString(); }
+            set 
+            {
+                _ExpiryDate = value;
+                DateTime.TryParseExact(_ExpiryDate, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out _dateTime);
+                RaisePropertiesChanged(nameof(ExpiryDate)); 
+                RaisePropertiesChanged(nameof(SaveAddCommand)); 
+            }
         }
+
+        private DateTime _dateTime = new DateTime();
 
         public ICollection<Category> Categories => _categories;
 
-        public ICommand SaveAddCommand => throw new NotImplementedException("AddBankCardVM - SaveAddCommand - NotImplementException");
+        public ICommand SaveAddCommand => new SaveAddBankCardCommand(_viewerNavigator, _dataStore, _Category.categoryID, _Name, _Number, _CVV, _Holder, _Type, _dateTime);
         public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator);
     }
 }
