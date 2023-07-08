@@ -227,7 +227,7 @@
 
                 <Button Grid.Row="2" 
                         Grid.Column="1" 
-                        Command="{Binding OpenAddNoteCommand}">
+                        Command="{Binding OpenAddRecordCommand}">
                     <StackPanel Orientation="Horizontal">
                         <iconPacks1:PackIconIonicons Kind="AddiOS"/>
                         <TextBlock Text="Добавить запись" 
