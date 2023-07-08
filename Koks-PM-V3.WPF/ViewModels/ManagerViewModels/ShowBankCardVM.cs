@@ -27,7 +27,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
                 _viewerNavigator = viewerNavigator;
                 _dataStore = dataStore;
                 _bankCard = bankCard;
-                _Category = new List<Category>
+                _SelectedCategory = new List<Category>
                 {
                     senderCategories.First(x => x.categoryID == _bankCard.CategoryID)
                 };
@@ -72,18 +72,17 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _Holder; }
         }
 
-        private string _ExpiryDate => _bankCard.cardExpiryDate.ToString();
+        private string _ExpiryDate => _bankCard.cardExpiryDate.ToString("dd.MM.yyyy");
 
         public string ExpiryDate
         {
             get { return _ExpiryDate; }
         }
 
-        private List<Category> _Category;
-
+        private List<Category> _SelectedCategory;
         public List<Category> SelectedCategory
         {
-            get { return _Category; }
+            get { return _SelectedCategory; }
         }
 
         public ICommand EditCommand => throw new NotImplementedException("ShowNoteVM - EditCommand - NotImplementException");
