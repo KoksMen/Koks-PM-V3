@@ -28,7 +28,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
                 _viewerNavigator = viewerNavigator;
                 _dataStore = dataStore;
                 _note = note;
-                _Category = new List<Category>
+                _SelectedCategory = _SelectedCategory = new List<Category>
                 {
                     senderCategories.First(x => x.categoryID == _note.CategoryID)
                 };
@@ -77,11 +77,10 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _Totp; throw new NotImplementedException("ShowNoteVM - _Totp - NotImplementException"); }
         }
 
-        private List<Category> _Category;
-
+        private List<Category> _SelectedCategory;
         public List<Category> SelectedCategory
         {
-            get { return _Category; }
+            get { return _SelectedCategory; }
         }
 
         public ICommand EditCommand => throw new NotImplementedException("ShowNoteVM - EditCommand - NotImplementException");
