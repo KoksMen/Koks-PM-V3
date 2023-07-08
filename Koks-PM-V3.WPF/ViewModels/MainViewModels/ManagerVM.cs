@@ -47,7 +47,13 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             set { _SelectedRecord = value; ShowRecord(); RaisePropertyChanged(nameof(SelectedRecord)); }
         }
 
-        public ICollectionView Categories => CollectionViewSource.GetDefaultView(_dataStore.Categories);
+        //public ICollectionView Categories => CollectionViewSource.GetDefaultView(_dataStore.Categories);
+        private ICollectionView _Categories;
+        public ICollectionView Categories
+        {
+            get { return _Categories; }
+            set { _Categories = value; RaisePropertiesChanged(nameof(Categories)); }
+        }
 
         public ICollectionView StandartCategories => CollectionViewSource.GetDefaultView(_StandartCategories);
         public List<Category> _StandartCategories = new List<Category>
@@ -121,6 +127,9 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             _dataStore.categoryUpdateAddDelete += categoryUpdAddDelEvent;
             _dataStore.userUpdate += userAccountUpdEvent;
 
+            //List<Category> allCategories = _dataStore.Categories;
+            Categories = CollectionViewSource.GetDefaultView(_dataStore.Categories);
+
             List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
                 .Concat(_dataStore.BankCards.Cast<IRecord>())
                 .ToList();
@@ -154,6 +163,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
+                Categories = CollectionViewSource.GetDefaultView(_dataStore.Categories);
                 RaisePropertiesChanged(nameof(Categories));
                 StandartCategory = _StandartCategories[0];
                 FilterCategory = null;
@@ -168,7 +178,10 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
-                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()));
+                List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
+                .Concat(_dataStore.BankCards.Cast<IRecord>())
+                .ToList();
+                Records = CollectionViewSource.GetDefaultView(allRecords);
                 Records.Filter = RecordFilter;
                 RaisePropertiesChanged(nameof(Records));
                 FilterCategory = null;
