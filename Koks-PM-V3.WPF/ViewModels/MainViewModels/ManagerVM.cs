@@ -6,6 +6,7 @@ using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenCategoryPageCommands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenNotePageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
+using Koks_PM_V3.WPF.ViewModels.ManagerViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -130,10 +131,11 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             //List<Category> allCategories = _dataStore.Categories;
             Categories = CollectionViewSource.GetDefaultView(_dataStore.Categories);
 
-            List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
+            /*List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
                 .Concat(_dataStore.BankCards.Cast<IRecord>())
-                .ToList();
-            Records = CollectionViewSource.GetDefaultView(allRecords);
+                .ToList();*/
+            //Records = CollectionViewSource.GetDefaultView(allRecords);
+            Records = CollectionViewSource.GetDefaultView(dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
 
             Records.Filter = RecordFilter;
 
@@ -178,10 +180,11 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
-                List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
+                /*List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
                 .Concat(_dataStore.BankCards.Cast<IRecord>())
                 .ToList();
-                Records = CollectionViewSource.GetDefaultView(allRecords);
+                Records = CollectionViewSource.GetDefaultView(allRecords);*/
+                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
                 Records.Filter = RecordFilter;
                 RaisePropertiesChanged(nameof(Records));
                 FilterCategory = null;
@@ -198,10 +201,11 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
-                List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
+                /*List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
                 .Concat(_dataStore.BankCards.Cast<IRecord>())
                 .ToList();
-                Records = CollectionViewSource.GetDefaultView(allRecords);
+                Records = CollectionViewSource.GetDefaultView(allRecords);*/
+                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
                 Records.Filter = RecordFilter;
                 RaisePropertiesChanged(nameof(_Records));
 
@@ -220,10 +224,11 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
-                List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
+                /*List<IRecord> allRecords = _dataStore.Notes.Cast<IRecord>()
                 .Concat(_dataStore.BankCards.Cast<IRecord>())
                 .ToList();
-                Records = CollectionViewSource.GetDefaultView(allRecords);
+                Records = CollectionViewSource.GetDefaultView(allRecords);*/
+                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
                 Records.Filter = RecordFilter;
                 RaisePropertiesChanged(nameof(_Records));
 
@@ -267,7 +272,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
-                throw new NotImplementedException("ManagerVM => ShowRecord => NotImplementException");
+                //throw new NotImplementedException("ManagerVM => ShowRecord => NotImplementException");
                 if (SelectedRecord != null && SelectedRecord is IRecord)
                 {
                     List<Category> senderCategoryModels = new List<Category>();
@@ -276,15 +281,15 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
                     senderCategoryModels.AddRange(_dataStore.Categories);
                     if (SelectedRecord is Note)
                     {
-                        Note item = SelectedRecord as Note;
+                        Note? item = SelectedRecord as Note;
                         ////NotImplemented
-                        //_viewerNavigator.selectedShowerPage = new ShowNoteVM(_viewerNavigator, _dataStore, item, senderCategoryModels); 
+                        _viewerNavigator.selectedShowerPage = new ShowNoteVM(_viewerNavigator, _dataStore, item, senderCategoryModels); 
                     }
                     else if (SelectedRecord is BankCard) 
                     {
-                        BankCard item = SelectedRecord as BankCard;
+                        BankCard? item = SelectedRecord as BankCard;
                         ////NotImplemented
-                        //_viewerNavigator.selectedShowerPage = new ShowBankCardVM(_viewerNavigator, _dataStore, item, senderCategoryModels);
+                        _viewerNavigator.selectedShowerPage = new ShowBankCardVM(_viewerNavigator, _dataStore, item, senderCategoryModels);
                     }
                 }
                 else if (SelectedRecord == null)
