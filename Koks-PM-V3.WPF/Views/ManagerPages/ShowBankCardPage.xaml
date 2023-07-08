@@ -44,7 +44,7 @@
                    FontFamily="Century Gothic"/>
         <TextBox Grid.Row="2" 
                  Grid.Column="1" 
-                 Text="{Binding Name, 
+                 Text="{Binding Name, Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="2" 
                 Grid.Column="2" 
@@ -65,7 +65,7 @@
                    FontFamily="Century Gothic"/>
         <TextBox Grid.Row="4" 
                  Grid.Column="1" 
-                 Text="{Binding Number, 
+                 Text="{Binding Number, Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="4" 
                 Grid.Column="2" 
@@ -86,7 +86,7 @@
                    FontFamily="Century Gothic"/>
         <TextBox Grid.Row="6" 
                  Grid.Column="1" 
-                 Text="{Binding CVV, 
+                 Text="{Binding CVV, Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="6" 
                 Grid.Column="2" 
@@ -107,7 +107,7 @@
                    FontFamily="Century Gothic"/>
         <TextBox Grid.Row="8" 
                  Grid.Column="1" 
-                 Text="{Binding Date, 
+                 Text="{Binding ExpiryDate, Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="8" 
                 Grid.Column="2" 
@@ -128,7 +128,7 @@
                    FontFamily="Century Gothic"/>
         <TextBox Grid.Row="10" 
                  Grid.Column="1" 
-                 Text="{Binding Holder, 
+                 Text="{Binding Holder, Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="10" 
                 Grid.Column="2" 
@@ -149,7 +149,7 @@
                    FontFamily="Century Gothic"/>
         <TextBox Grid.Row="12" 
                  Grid.Column="1" 
-                 Text="{Binding Type, 
+                 Text="{Binding Type, Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="12" 
                 Grid.Column="2" 
@@ -170,9 +170,9 @@
                    FontFamily="Century Gothic"/>
         <ComboBox Grid.Row="14" 
                   Grid.Column="1"
-                  ItemsSource="{Binding Categories}"
-                  SelectedItem="{Binding SelectedCategory, 
-            UpdateSourceTrigger=PropertyChanged}"
+                  IsSynchronizedWithCurrentItem="True"
+                  ItemsSource="{Binding SelectedCategory, Mode=OneWay}"
+                  IsEnabled="False"
                   />
         <StackPanel Orientation="Horizontal" 
                     Grid.Row="16" 
