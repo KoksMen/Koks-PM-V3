@@ -158,7 +158,7 @@
                             Grid.Row="0"
                             BorderThickness="0"
                             ItemsSource="{Binding StandartCategories}"
-                            SelectedItem="{Binding Path= StandartCategory, 
+                            SelectedItem="{Binding Path=StandartCategory, 
                         UpdateSourceTrigger=PropertyChanged}"
                             ItemContainerStyle="{StaticResource ResourceKey=CategoryItemStyle}"
                             IsSynchronizedWithCurrentItem="True"

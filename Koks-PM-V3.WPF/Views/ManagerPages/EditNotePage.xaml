@@ -97,7 +97,7 @@
                     FontSize="13" 
                     FontWeight="Bold" 
                     FontFamily="Century Gothic"
-                    Command="{Binding SaveAddCommand}"
+                    Command="{Binding SaveEditCommand}"
                     >
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconEvaIcons

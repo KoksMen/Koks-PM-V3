@@ -99,7 +99,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             set 
             {
                 _ExpiryDate = value;
-                DateTime.TryParseExact(_ExpiryDate, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out _dateTime);
+                DateTime.TryParseExact(_ExpiryDate, "MM/yy", null, System.Globalization.DateTimeStyles.None, out _dateTime);
                 RaisePropertiesChanged(nameof(ExpiryDate)); 
                 RaisePropertiesChanged(nameof(SaveAddCommand)); 
             }

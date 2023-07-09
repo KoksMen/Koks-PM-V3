@@ -6,6 +6,7 @@ using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,7 +74,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _Holder; }
         }
 
-        private string _ExpiryDate => _bankCard.cardExpiryDate.ToString("dd.MM.yyyy");
+        private string _ExpiryDate => _bankCard.cardExpiryDate.ToString("MM/yy", new CultureInfo("en-US"));
 
         public string ExpiryDate
         {

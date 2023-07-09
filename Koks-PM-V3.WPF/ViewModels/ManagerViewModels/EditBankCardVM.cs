@@ -6,6 +6,7 @@ using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             CVV = _bankCard.cardCVC;
             Type = _bankCard.cardType;
             Holder = _bankCard.cardHolder;
-            ExpiryDate = _bankCard.cardExpiryDate.ToString("dd.MM.yyyy");
+            ExpiryDate = _bankCard.cardExpiryDate.ToString("MM/yy", new CultureInfo("en-US"));
             SelectedCategory = _categories.First(x => x.categoryID == _bankCard.CategoryID);
         }
 
