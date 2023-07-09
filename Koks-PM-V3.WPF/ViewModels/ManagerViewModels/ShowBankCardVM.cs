@@ -1,6 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenBankCardPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -85,7 +86,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _SelectedCategory; }
         }
 
-        public ICommand EditCommand => throw new NotImplementedException("ShowNoteVM - EditCommand - NotImplementException");
+        public ICommand EditCommand => new OpenEditBankCardPageCommand(_viewerNavigator, _dataStore, _categories, _bankCard);
         public ICommand CopyName => new RelayCommand(parameter =>
         {
             Clipboard.SetText(Name);

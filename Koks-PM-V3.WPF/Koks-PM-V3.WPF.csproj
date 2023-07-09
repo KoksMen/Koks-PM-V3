@@ -23,8 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\MainCommands\" />
-    <Folder Include="Commands\ManagerCommands\NoteCommands\" />
-    <Folder Include="Commands\ManagerCommands\BankCardCommands\" />
     <Folder Include="Commands\ManagerCommands\CategoryCommands\" />
     <Folder Include="Commands\ManagerCommands\AccountCommands\" />
     <Folder Include="Commands\OpenPageCommands\OpenAccountPageCommands\" />
