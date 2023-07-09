@@ -42,7 +42,6 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.BankCardCommands
 
         public bool CanExecute(object? parameter)
         {
-            MessageBox.Show("SaveBankCardCommand => CanExecure => no check param/function");
             return true;
         }
 
@@ -50,6 +49,8 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.BankCardCommands
         {
             try
             {
+                MessageBox.Show("SaveBankCardCommand => CanExecure => no check param/function");
+
                 BankCard addBankCard = new BankCard(
                     Guid.NewGuid(),
                     _nameBankCard,
