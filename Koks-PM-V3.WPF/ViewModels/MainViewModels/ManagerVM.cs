@@ -35,11 +35,16 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
 
         #region AccountData
         public string AccountName => _dataStore.UserAccount.userName;
-        public byte[] AccountAvatar => _dataStore.UserAccount.userAvatar; 
+        public byte[] AccountAvatar => _dataStore.UserAccount.userAvatar;
         #endregion
 
         #region Lists_IRecord/Category
-        public ICollectionView Records => CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+        private ICollectionView _Records;
+        public ICollectionView Records
+        {
+            get { return _Records; }
+            set { _Records = value; RaisePropertiesChanged(nameof(Records)); }
+        }
         public ICollectionView Categories => CollectionViewSource.GetDefaultView(_dataStore.Categories);
         public ICollectionView StandartCategories => CollectionViewSource.GetDefaultView(_StandartCategories);
         public List<Category> _StandartCategories = new List<Category>
@@ -59,14 +64,16 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             _dataStore.categoryUpdateAddDelete += categoryUpdAddDelEvent;
             _dataStore.userUpdate += userAccountUpdEvent;
 
+            Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+
             _mainPageNavigator = mainPageNavigator;
             _recordPageNavigator = new ShowerPageNavigator();
             _recordPageNavigator.ShowerPageChanged += ShowerPageChangedEvent; ;
             _modalPageNavigator = new ModalPageNavigator();
             _modalPageNavigator.ModalPageChanged += modalPageChanged;
 
-            Records.Filter = RecordFilter;
             _StandartCategory = _StandartCategories[0];
+            Records.Filter = RecordFilter;
             Records.Refresh();
         }
 
@@ -104,6 +111,8 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
+                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+                Records.Filter = RecordFilter;
                 Records.Refresh();
                 RaisePropertiesChanged(nameof(Records));
 
@@ -122,6 +131,8 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
+                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+                Records.Filter = RecordFilter;
                 Records.Refresh();
                 RaisePropertiesChanged(nameof(Records));
 
@@ -140,6 +151,8 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         {
             try
             {
+                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+                Records.Filter = RecordFilter;
                 Records.Refresh();
                 RaisePropertiesChanged(nameof(Records));
 
@@ -159,7 +172,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         #region ManagerListFilter
         private bool RecordFilter(object item)
         {
-            IRecord record = item as IRecord;
+            var record = item as IRecord;
             if (_FilterCategory != null)
             {
                 if (record.CategoryID == _FilterCategory.categoryID)
