@@ -94,6 +94,6 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         public ICollection<Category> Categories => _categories;
 
         public ICommand SaveAddCommand => new SaveAddNoteCommand(_viewerNavigator, _dataStore, _Category.categoryID, _Name, _Login, _Password, _URL, _Totp);
-        public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator);
+        public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator, null, null, null);
     }
 }

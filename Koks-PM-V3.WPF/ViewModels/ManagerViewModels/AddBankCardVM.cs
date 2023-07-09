@@ -110,6 +110,6 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         public ICollection<Category> Categories => _categories;
 
         public ICommand SaveAddCommand => new SaveAddBankCardCommand(_viewerNavigator, _dataStore, _Category.categoryID, _Name, _Number, _CVV, _Holder, _Type, _dateTime);
-        public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator);
+        public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator, null, null, null);
     }
 }
