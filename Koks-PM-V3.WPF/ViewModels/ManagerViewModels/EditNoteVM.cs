@@ -83,7 +83,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 
         public ICollection<Category> Categories => _categories;
 
-        public ICommand SaveEditCommand => throw new NotImplementedException("EditNoteVM - SaveAddCommand - NotImplementException");
+        public ICommand SaveEditCommand => new SaveEditNoteCommand(_showerPageNavigator, _dataStore, _Name, _Login, _Password, _Category.categoryID, _URL, _Totp, _note);
         public ICommand CancelCommand => new CloseShowerPageCommand(_showerPageNavigator, _note, _dataStore, _categories);
         public ICommand DeleteCommand => new DeleteNoteCommand(_showerPageNavigator, _dataStore, _note);
     }
