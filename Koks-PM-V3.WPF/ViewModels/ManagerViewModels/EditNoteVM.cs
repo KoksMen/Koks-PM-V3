@@ -1,5 +1,8 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.EntityFramework.Commands.DeleteCommands;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.NoteCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -13,14 +16,14 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class EditNoteVM : BindableBase
     {
-        private readonly ShowerPageNavigator _viewerNavigator;
+        private readonly ShowerPageNavigator _showerPageNavigator;
         private readonly DataStore _dataStore;
         private readonly List<Category> _categories;
         private readonly Note _note;
 
         public EditNoteVM(ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories, Note note)
         {
-            _viewerNavigator = viewerNavigator;
+            _showerPageNavigator = viewerNavigator;
             _dataStore = dataStore;
             _categories = senderCategories;
             _note = note;
@@ -39,35 +42,35 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         public string Name
         {
             get { return _Name; }
-            set { _Name = value; RaisePropertiesChanged(nameof(Name)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+            set { _Name = value; RaisePropertiesChanged(nameof(Name)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
         private string _Login;
 
         public string Login
         {
             get { return _Login; }
-            set { _Login = value; RaisePropertiesChanged(nameof(Login)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+            set { _Login = value; RaisePropertiesChanged(nameof(Login)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
         private string _Password;
 
         public string Password
         {
             get { return _Password; }
-            set { _Password = value; RaisePropertiesChanged(nameof(Password)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+            set { _Password = value; RaisePropertiesChanged(nameof(Password)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
         private Category _Category;
 
         public Category SelectedCategory
         {
             get { return _Category; }
-            set { _Category = value; RaisePropertiesChanged(nameof(SelectedCategory)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+            set { _Category = value; RaisePropertiesChanged(nameof(SelectedCategory)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
         private string _URL;
 
         public string URL
         {
             get { return _URL; }
-            set { _URL = value; RaisePropertiesChanged(nameof(URL)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+            set { _URL = value; RaisePropertiesChanged(nameof(URL)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
 
         private string _Totp = string.Empty;
@@ -75,13 +78,13 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         public string Totp
         {
             get { return _Totp; }
-            set { _Totp = value; RaisePropertiesChanged(nameof(Totp)); RaisePropertiesChanged(nameof(SaveAddCommand)); }
+            set { _Totp = value; RaisePropertiesChanged(nameof(Totp)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
 
         public ICollection<Category> Categories => _categories;
 
-        public ICommand SaveAddCommand => throw new NotImplementedException("EditNoteVM - SaveAddCommand - NotImplementException");
-        public ICommand CancelCommand => throw new NotImplementedException("EditNoteVM - CancelCommand - NotImplementException");
-        public ICommand DeleteCommand => throw new NotImplementedException("EditNoteVM - DeleteCommand - NotImplementException");
+        public ICommand SaveEditCommand => throw new NotImplementedException("EditNoteVM - SaveAddCommand - NotImplementException");
+        public ICommand CancelCommand => new CloseShowerPageCommand(_showerPageNavigator, _note, _dataStore, _categories);
+        public ICommand DeleteCommand => new DeleteNoteCommand(_showerPageNavigator, _dataStore, _note);
     }
 }
