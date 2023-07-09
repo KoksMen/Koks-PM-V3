@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Koks_PM_V3.WPF.Commands.MainCommands
@@ -34,6 +35,8 @@ namespace Koks_PM_V3.WPF.Commands.MainCommands
 
         public async void Authorize()
         {
+            try
+            {
                 using (var Context = _storageDbContextFactory.Create())
                 {
                     string HashedPassword = HashingModule.HashPassword(password);
@@ -46,6 +49,11 @@ namespace Koks_PM_V3.WPF.Commands.MainCommands
 
                     _pageNavigator.SelectedMainPage = managerVM;
                 };
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Wrong login or password, change it and try again.","LoginError");
+            }
         }
 
         public event EventHandler? CanExecuteChanged;
