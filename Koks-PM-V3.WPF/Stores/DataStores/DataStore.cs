@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DevExpress.Mvvm.Native;
 using Koks_PM_V3.Domain.Commands.CreateCommands;
 using Koks_PM_V3.Domain.Commands.DeleteCommands;
 using Koks_PM_V3.Domain.Commands.UpdateCommands;
@@ -242,6 +243,17 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             await _deleteCategoryCommand.Execute(categoryID);
 
             _categories.RemoveAll(c => c.categoryID == categoryID);
+
+            _notes.Where(n => n.categoryID == categoryID).ForEach(async note =>
+            {
+                note.categoryID = new Guid("22222222-2222-2222-2222-222222222222");
+                await UpdateNote(note);
+            });
+            _bankCards.Where(b => b.categoryID == categoryID).ForEach(async bankCard =>
+            {
+                bankCard.categoryID = new Guid("22222222-2222-2222-2222-222222222222");
+                await UpdateBankCard(bankCard);
+            });
 
             categoryUpdateAddDelete.Invoke();
         }
