@@ -96,6 +96,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             {
                 Categories.Refresh();
                 RaisePropertiesChanged(nameof(Categories));
+                _recordPageNavigator.selectedShowerPage = null;
 
                 StandartCategory = _StandartCategories[0];
                 FilterCategory = null;
@@ -251,8 +252,8 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         public ICommand ExitCommand => new RelayCommand(parameter => { _mainPageNavigator.SelectedMainPage = null; });
         public ICommand OpenAddRecordCommand => new OpenAddNoteCommand(_recordPageNavigator, _dataStore, _StandartCategories, x => { if (SelectedRecord != null) SelectedRecord = null; });
         public ICommand OpenAddCategoryCommand => new OpenAddCategoryPageCommand(_modalPageNavigator, _dataStore);
+        public ICommand OpenEditCategoryCommand => new OpenEditCategoryPageCommand(_modalPageNavigator, _dataStore, _FilterCategory);
         public ICommand OpenAboutModalPage => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
-        public ICommand OpenEditCategoryCommand => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
         public ICommand OpenAccountEditPage => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
         public ICommand OpenAccountTelegramPage => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
         public ICommand OpenAccountTotpPage => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
