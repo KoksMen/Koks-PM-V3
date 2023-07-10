@@ -26,6 +26,7 @@ namespace Koks_PM_V3.EntityFramework.Commands.UpdateCommands
                 {
                     BankCardDtoID = bankCard.cardID,
                     cardName = bankCard.cardName,
+                    cardNumber = bankCard.cardNumber,
                     cardHolder = bankCard.cardHolder,
                     cardCVC = bankCard.cardCVC,
                     cardType = bankCard.cardType,

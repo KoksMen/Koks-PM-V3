@@ -28,7 +28,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             _categories = senderCategories;
             _bankCard = bankCard;
             Name = _bankCard.cardName;
-            Number = _bankCard.cardName;
+            Number = _bankCard.cardNumber;
             CVV = _bankCard.cardCVC;
             Type = _bankCard.cardType;
             Holder = _bankCard.cardHolder;
@@ -92,7 +92,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 
         public ICollection<Category> Categories => _categories;
 
-        public ICommand SaveEditCommand => throw new NotImplementedException("EditBankCardVM - SaveAddCommand - NotImplementException");
+        public ICommand SaveEditCommand => new SaveEditBankCardCommand(_showerPageNavigator, _dataStore, _Name, _Number, _Holder, _CVV, _Type, _ExpiryDate, _Category.categoryID, _bankCard);
         public ICommand CancelCommand => new CloseShowerPageCommand(_showerPageNavigator, _bankCard, _dataStore, _categories);
         public ICommand DeleteCommand => new DeleteBankCardCommand(_showerPageNavigator, _dataStore, _bankCard);
     }
