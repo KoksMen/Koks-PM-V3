@@ -1,5 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.CategoryCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -23,19 +25,19 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             _dataStore = dataStore;
             _modalPageNavigator = modalPageNavigator;
             _category = category;
-            _name = category.categoryName;
+            _Name = category.categoryName;
         }
 
-        private string _name;
+        private string _Name;
 
         public string Name
         {
-            get { return _name; }
-            set { _name = value; RaisePropertiesChanged(nameof(Name)); RaisePropertiesChanged(nameof(SaveCommand)); }
+            get { return _Name; }
+            set { _Name = value; RaisePropertiesChanged(nameof(Name)); RaisePropertiesChanged(nameof(SaveCommand)); }
         }
 
-        public ICommand SaveCommand => throw new NotImplementedException("EditCategoryVM - SaveCommand - NotImplementException");
-        public ICommand CancelCommand => throw new NotImplementedException("EditCategoryVM - CancelCommand - NotImplementException");
-        public ICommand DeleteCommand => throw new NotImplementedException("EditCategoryVM - DeleteCommand - NotImplementException");
+        public ICommand SaveCommand => new SaveEditCategoryCommand(_modalPageNavigator, _dataStore, _category, _Name);
+        public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
+        public ICommand DeleteCommand => new DeleteCategoryCommand(_modalPageNavigator, _dataStore, _category);
     }
 }
