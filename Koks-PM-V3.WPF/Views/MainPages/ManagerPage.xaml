@@ -56,7 +56,7 @@
             <viewsModal:EditTotpPage/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModelsModal:EditUserVM}">
-            <!--<viewsModal:EditUserPage/>-->
+            <viewsModal:EditUserPage/>
         </DataTemplate>
 
         <services:LenghtTruncateConverter x:Key="LenghtConverter" />
@@ -116,12 +116,27 @@
                         </Grid>
                         <TextBlock Text="{Binding AccountName, 
                             UpdateSourceTrigger=PropertyChanged, 
-                            FallbackValue=NullAccountName, 
+                            FallbackValue=NullName, 
                             Converter={StaticResource LenghtConverter}, 
                             ConverterParameter=14}" 
                                    VerticalAlignment="Center" 
                                    Foreground="#ffffff"/>
                         <Button Margin="5 0 0 0" 
+                                Padding="4 0" 
+                                Command="{Binding OpenAccountTelegramPage}" 
+                                Style="{StaticResource accbutton}">
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks1:PackIconUnicons Kind="CloudShield" />
+                            </StackPanel>
+                        </Button><Button Margin="5 0 0 0" 
+                                Padding="4 0" 
+                                Command="{Binding OpenAccountTotpPage}" 
+                                Style="{StaticResource accbutton}">
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks1:PackIconMaterial 
+                                    Kind="ShieldAccountVariantOutline" />
+                            </StackPanel>
+                        </Button><Button Margin="5 0 0 0" 
                                 Padding="4 0" 
                                 Command="{Binding OpenAccountEditPage}" 
                                 Style="{StaticResource accbutton}">

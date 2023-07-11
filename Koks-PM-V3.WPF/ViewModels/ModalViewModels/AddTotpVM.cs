@@ -22,10 +22,10 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             _dataStore = dataStore;
             _modalPageNavigator = modalPageNavigator;
 
-            throw new NotImplementedException("AddTotpVM => CTOR => NotImplementException => Creating totpkey with 2fa libruary");
+            MessageBox.Show("AddTotpVM => CTOR => NotImplementException => Creating totpkey with 2fa libruary");
         }
 
-        private string _userPassword;
+        private string _userPassword = string.Empty;
 
         public string Password
         {
@@ -33,7 +33,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             set { _userPassword = value; RaisePropertiesChanged(nameof(Password)); }
         }
 
-        private string _totpKey;
+        private string _totpKey = string.Empty;
 
         public string TotpKey
         {
@@ -41,7 +41,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             set { _totpKey = value; RaisePropertiesChanged(nameof(TotpKey)); }
         }
         
-        private string _totpNumbers;
+        private string _totpNumbers = string.Empty;
 
         public string TotpNumbers
         {
