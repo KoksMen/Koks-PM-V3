@@ -2,7 +2,9 @@
 using DevExpress.Mvvm.Native;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenAccountPageCommands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenCategoryPageCommands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenModalPageCommand;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenNotePageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
@@ -253,10 +255,10 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         public ICommand OpenAddRecordCommand => new OpenAddNoteCommand(_recordPageNavigator, _dataStore, _StandartCategories, x => { if (SelectedRecord != null) SelectedRecord = null; });
         public ICommand OpenAddCategoryCommand => new OpenAddCategoryPageCommand(_modalPageNavigator, _dataStore);
         public ICommand OpenEditCategoryCommand => new OpenEditCategoryPageCommand(_modalPageNavigator, _dataStore, _FilterCategory);
-        public ICommand OpenAboutModalPage => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
-        public ICommand OpenAccountEditPage => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
-        public ICommand OpenAccountTelegramPage => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
-        public ICommand OpenAccountTotpPage => throw new NotImplementedException("ManagerVM => OpenAboutModalPage => NotImplementException");
+        public ICommand OpenAboutModalPage => new OpenAboutPageCommand(_modalPageNavigator);
+        public ICommand OpenAccountEditPage => new OpenEditAccountPageCommand(_dataStore, _modalPageNavigator);
+        public ICommand OpenAccountTelegramPage => new OpenTelegramPageCommand(_dataStore, _modalPageNavigator);
+        public ICommand OpenAccountTotpPage => new OpenTotpPageCommand(_dataStore, _modalPageNavigator);
         #endregion
 
         private void ShowRecord()
