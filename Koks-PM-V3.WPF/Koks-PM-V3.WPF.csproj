@@ -24,8 +24,6 @@
   <ItemGroup>
     <Folder Include="Commands\MainCommands\" />
     <Folder Include="Commands\ManagerCommands\AccountCommands\" />
-    <Folder Include="Commands\OpenPageCommands\OpenAccountPageCommands\" />
-    <Folder Include="Commands\OpenPageCommands\OpenModalPageCommand\" />
   </ItemGroup>
 
   <ItemGroup>
