@@ -13,8 +13,9 @@ namespace Koks_PM_V3.WPF.Services
     {
         changePasswordInfo = 1,
         loginInfo = 2,
-        telegramAddUpdateInfo = 3,
-        totpAddUpdateInfo = 4,
+        telegramAddInfo = 3,
+        telegramEditInfo = 4,
+        totpAddUpdateInfo = 5,
     }
 
     public class TelegramNotificatorService
@@ -39,7 +40,7 @@ namespace Koks_PM_V3.WPF.Services
                         this.messageText = "Оповещение безопасности, в ваш аккаунт был произведён вход.";
                         break;
                     }
-                case messageType.telegramAddUpdateInfo:
+                case messageType.telegramAddInfo:
                     {
                         this.messageText = "Информационное оповещение, телеграмм бот успешно связан с аккаунтом.";
                         break;
@@ -49,11 +50,15 @@ namespace Koks_PM_V3.WPF.Services
                         this.messageText = "Оповещение безопасности, на вашем аккаунте была добавлена/изменена двухфакторная авторизация.";
                         break;
                     }
+                case messageType.telegramEditInfo:
+                    {
+                        this.messageText = "Оповещение безопасности, на вашем аккаунте была изменена привязка Telegram";
+                        break;
+                    }
             }
-            sendTelegramNotification();
         }
 
-        private async Task sendTelegramNotification()
+        public async Task sendTelegramNotification()
         {
             CancellationToken cancellationToken = new CancellationToken();
 
@@ -63,7 +68,13 @@ namespace Koks_PM_V3.WPF.Services
                     chatId: chatID,
                     text: messageText,
                     cancellationToken: cancellationToken);
+
+            if (message == null)
+            {
+                throw new ArgumentException("ChatID or BotApi is wrong");
+            }
         }
+
     }
 
     
