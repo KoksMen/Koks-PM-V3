@@ -1,6 +1,8 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using Microsoft.Win32;
@@ -79,7 +81,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             }
         });
 
-        public ICommand SaveCommand => throw new NotImplementedException("EditUserVM - SaveCommand - NotImplementException");
-        public ICommand CancelCommand => throw new NotImplementedException("EditUserVM - CancelCommand - NotImplementException");
+        public ICommand SaveCommand => new SaveEditAccountCommand(_dataStore, _modalPageNavigator, _user, _userAvatar, _userName, _userPassword, _userConfirmPassword);
+        public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
     }
 }

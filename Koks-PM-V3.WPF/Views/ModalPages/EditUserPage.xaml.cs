@@ -31,11 +31,11 @@ namespace Koks_PM_V3.WPF.Views.ModalPages
             {
                 if (((PasswordBox)sender).Name == "AMPass")
                 {
-                    ((dynamic)this.DataContext).AccountPassword = ((PasswordBox)sender).Password;
+                    ((dynamic)this.DataContext).UserPassword = ((PasswordBox)sender).Password;
                 }
                 else if (((PasswordBox)sender).Name == "ACPass")
                 {
-                    ((dynamic)this.DataContext).AccountSecondPassword = ((PasswordBox)sender).Password;
+                    ((dynamic)this.DataContext).UserConfirmPassword = ((PasswordBox)sender).Password;
                 }
             }
         }

@@ -1,7 +1,10 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
+using KoksOtpNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +25,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             _dataStore = dataStore;
             _modalPageNavigator = modalPageNavigator;
 
-            MessageBox.Show("AddTotpVM => CTOR => NotImplementException => Creating totpkey with 2fa libruary");
+            _totpKey = totp2FA.getStringTotpKey(totp2FA.generateNewTotpSecretKey());
         }
 
         private string _userPassword = string.Empty;
@@ -30,7 +33,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
         public string Password
         {
             get { return _userPassword; }
-            set { _userPassword = value; RaisePropertiesChanged(nameof(Password)); }
+            set { _userPassword = value; RaisePropertiesChanged(nameof(Password)); RaisePropertiesChanged(nameof(SaveCommand)); }
         }
 
         private string _totpKey = string.Empty;
@@ -38,7 +41,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
         public string TotpKey
         {
             get { return _totpKey; }
-            set { _totpKey = value; RaisePropertiesChanged(nameof(TotpKey)); }
+            set { _totpKey = value; RaisePropertiesChanged(nameof(TotpKey)); RaisePropertiesChanged(nameof(SaveCommand)); }
         }
         
         private string _totpNumbers = string.Empty;
@@ -46,7 +49,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
         public string TotpNumbers
         {
             get { return _totpNumbers; }
-            set { _totpNumbers = value; RaisePropertiesChanged(nameof(TotpNumbers)); }
+            set { _totpNumbers = value; RaisePropertiesChanged(nameof(TotpNumbers)); RaisePropertiesChanged(nameof(SaveCommand)); }
         }
 
         public ICommand CopyTotpKey => new RelayCommand(parameter =>
@@ -54,7 +57,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             Clipboard.SetText(TotpKey);
         });
 
-        public ICommand SaveCommand => throw new NotImplementedException("AddTotpVM => SaveCommand => NotImplementException");
-        public ICommand CancelCommand => throw new NotImplementedException("AddTotpVM => CancelCommand => NotImplementException");
+        public ICommand SaveCommand => new SaveAddTotpCommand(_dataStore, _modalPageNavigator, _totpKey, _totpNumbers, _userPassword);
+        public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
     }
 }

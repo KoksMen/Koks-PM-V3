@@ -1,5 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -45,8 +47,8 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             set { _telegramChatID = value; RaisePropertiesChanged(nameof(TelegramChatID)); RaisePropertiesChanged(nameof(SaveCommand)); }
         }
 
-        public ICommand SaveCommand => throw new NotImplementedException("EditTelegramVM => SaveCommand => NotImplementedException");
-        public ICommand CancelCommand => throw new NotImplementedException("EditTelegramVM => CancelCommand => NotImplementedException");
+        public ICommand SaveCommand => new SaveEditTelegramCommand(_dataStore, _modalPageNavigator, _telegramBotAPI, _telegramChatID);
+        public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
         public ICommand DeleteCommand => throw new NotImplementedException("EditTelegramVM => DeleteCommand => NotImplementedException");
     }
 }

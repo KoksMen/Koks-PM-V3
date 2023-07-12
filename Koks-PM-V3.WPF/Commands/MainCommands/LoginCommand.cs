@@ -42,6 +42,7 @@ namespace Koks_PM_V3.WPF.Commands.MainCommands
                     string HashedPassword = HashingModule.HashPassword(password);
 
                     UserDto user = Context.Users.Single(x => x.userLogin == login && x.userPassword == HashedPassword);
+                    user.userPassword = password;
 
                     DataStore dataStore = _dataStoreFactory.Create(user);
 

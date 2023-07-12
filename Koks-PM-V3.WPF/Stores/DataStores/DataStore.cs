@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using DevExpress.Mvvm.Native;
 using Koks_PM_V3.Domain.Commands.CreateCommands;
 using Koks_PM_V3.Domain.Commands.DeleteCommands;
@@ -12,6 +13,8 @@ using Koks_PM_V3.Domain.Querires;
 using Koks_PM_V3.EntityFramework.Commands.UpdateCommands;
 using Koks_PM_V3.EntityFramework.DTOs;
 using Koks_PM_V3.EntityFramework.Queries;
+using Koks_PM_V3.WPF.Services;
+using Microsoft.IdentityModel.Tokens;
 using static Koks_PM_V3.WPF.Services.SymmetricEncryptorModule;
 
 namespace Koks_PM_V3.WPF.Stores.DataStores
@@ -215,7 +218,67 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         public async Task UpdateUser(User user)
         {
+            if (!_userAccount.userTelegramBotApi.IsNullOrEmpty() && !_userAccount.userTelegramChatID.IsNullOrEmpty())
+            {
+                TelegramNotificatorService telegramNotificator = new TelegramNotificatorService
+                (
+                    _userAccount.userTelegramChatID,
+                    _userAccount.userTelegramBotApi,
+                    messageType.changePasswordInfo
+                );
 
+                await telegramNotificator.sendTelegramNotification();
+            }
+
+            if (user.userPassword != UserAccount.userPassword)
+            {
+                _userAccount.userPassword = user.userPassword;
+                await ReEncryptAll(user.userPassword);
+            }
+            if (user.userName != UserAccount.userName)
+            {
+                _userAccount.userName = user.userName;
+            }
+            if (user.userAvatar != UserAccount.userAvatar)
+            {
+                _userAccount.userAvatar = user.userAvatar;
+            }
+
+            user.userPassword = HashingModule.HashPassword(user.userPassword);
+
+            await _updateUserCommand.Execute(user);
+
+            userUpdate?.Invoke();
+        }
+
+        public async Task UpdateTotp(User user)
+        {
+            if (!_userAccount.userTelegramBotApi.IsNullOrEmpty() && !_userAccount.userTelegramChatID.IsNullOrEmpty())
+            {
+                TelegramNotificatorService telegramNotificator = new TelegramNotificatorService
+                (
+                    _userAccount.userTelegramChatID,
+                    _userAccount.userTelegramBotApi,
+                    messageType.totpAddUpdateInfo
+                );
+                await telegramNotificator.sendTelegramNotification();
+            }
+
+            _userAccount.userTotpKey = user.userTotpKey;
+
+            user.userPassword = HashingModule.HashPassword(user.userPassword);
+
+            await _updateUserCommand.Execute(user);
+        }
+
+        public async Task UpdateTelegram(User user)
+        {
+                _userAccount.userTelegramBotApi = user.userTelegramBotApi;
+            _userAccount.userTelegramChatID = user.userTelegramChatID;
+
+            user.userPassword = HashingModule.HashPassword(user.userPassword);
+
+            await _updateUserCommand.Execute(user);
         }
         #endregion
 
@@ -274,9 +337,6 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
             _categories.ForEach(async category => await UpdateCategory(category));
         }
         
-        //UpdateUser
         //Deleteuser
-        //Change events
-        //Create user command in DataStore
     }
 }
