@@ -1,4 +1,6 @@
 ﻿using DevExpress.Mvvm;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -41,8 +43,8 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
                 RaisePropertiesChanged(nameof(SaveCommand)); }
         }
 
-        public ICommand SaveCommand => throw new NotImplementedException("AddTelegramVM => SaveCommand => NotImplementedException");
-        public ICommand CancelCommand => throw new NotImplementedException("AddTelegramVM => CancelCommand => NotImplementedException");
+        public ICommand SaveCommand => new SaveAddTelegramCommand(_dataStore, _modalPageNavigator, _telegramBotAPI, _telegramChatID);
+        public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
 
     }
 }
