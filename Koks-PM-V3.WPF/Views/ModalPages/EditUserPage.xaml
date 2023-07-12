@@ -50,12 +50,12 @@
                             <Ellipse Width="100" Height="100" Fill="Black"/>
                             <Ellipse Width="100" Height="100" >
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding AccountAvatar, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ImageBrush ImageSource="{Binding UserAvatar, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Grid>
                         <TextBlock Text="Новое имя аккаунта" Grid.Row="1" Grid.Column="1" FontSize="18" FontWeight="Bold" FontFamily="Century Gothic"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding AccountName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding UserName , UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0"/>
                         <TextBlock Text="Новый пароль аккаунта" Grid.Row="1" Grid.Column="1" FontSize="18" FontWeight="Bold" FontFamily="Century Gothic"/>
 
                         <PasswordBox Grid.Row="2" Grid.Column="1" Margin="0 5 0 0" PasswordChanged="AccountPassword_Changed"  x:Name="AMPass"/>
