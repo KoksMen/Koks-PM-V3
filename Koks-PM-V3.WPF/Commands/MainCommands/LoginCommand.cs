@@ -4,6 +4,7 @@ using Koks_PM_V3.WPF.Services;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using Koks_PM_V3.WPF.ViewModels.MainViewModels;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,12 +44,19 @@ namespace Koks_PM_V3.WPF.Commands.MainCommands
 
                     UserDto user = Context.Users.Single(x => x.userLogin == login && x.userPassword == HashedPassword);
                     user.userPassword = password;
+                    if (user.userTotpKey.IsNullOrEmpty())
+                    {
 
-                    DataStore dataStore = _dataStoreFactory.Create(user);
+                        DataStore dataStore = _dataStoreFactory.Create(user);
 
-                    ManagerVM managerVM = new ManagerVM(dataStore, _pageNavigator);
+                        ManagerVM managerVM = new ManagerVM(dataStore, _pageNavigator);
 
-                    _pageNavigator.SelectedMainPage = managerVM;
+                        _pageNavigator.SelectedMainPage = managerVM;
+                    }
+                    else
+                    {
+                        _pageNavigator.SelectedMainPage = new TotpVM(_pageNavigator, _dataStoreFactory, _storageDbContextFactory, user);
+                    }
                 };
             }
             catch (Exception)
