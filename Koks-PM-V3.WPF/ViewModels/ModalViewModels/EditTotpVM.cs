@@ -1,8 +1,11 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
+using Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
+using KoksOtpNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +26,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             _dataStore = dataStore;
             _modalPageNavigator = modalPageNavigator;
 
-            throw new NotImplementedException("EditTotpVM => CTOR => NotImplementException => Creating totpkey with 2fa libruary");
+            _totpKey = totp2FA.getStringTotpKey(totp2FA.generateNewTotpSecretKey());
         }
 
         private string _userPassword;
@@ -63,9 +66,10 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             Clipboard.SetText(TotpKey);
         });
 
-        public ICommand SaveCommand => throw new NotImplementedException("EditTotpVM => SaveCommand => NotImplementException");
-        public ICommand CancelCommand => throw new NotImplementedException("EditTotpVM => CancelCommand => NotImplementException");
-        public ICommand DeleteCommand => throw new NotImplementedException("EditTotpVM => DeleteCommand => NotImplementedException");
+
+        public ICommand SaveCommand => new SaveEditTotpCommand(_dataStore, _modalPageNavigator, _totpKey, _totpNumbers, _userPassword);
+        public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
+        public ICommand DeleteCommand => new DeleteTotpCommand(_dataStore, _modalPageNavigator);
 
     }
 }
