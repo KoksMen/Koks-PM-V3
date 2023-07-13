@@ -49,6 +49,6 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
 
         public ICommand SaveCommand => new SaveEditTelegramCommand(_dataStore, _modalPageNavigator, _telegramBotAPI, _telegramChatID);
         public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
-        public ICommand DeleteCommand => throw new NotImplementedException("EditTelegramVM => DeleteCommand => NotImplementedException");
+        public ICommand DeleteCommand => new DeleteTelegramCommand(_dataStore, _modalPageNavigator);
     }
 }

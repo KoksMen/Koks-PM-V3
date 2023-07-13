@@ -4,19 +4,26 @@ using Koks_PM_V3.WPF.Commands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenNotePageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
+using KoksOtpNet;
+using Microsoft.IdentityModel.Tokens;
+using OtpNet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class ShowNoteVM : BindableBase
     {
+        DispatcherTimer timer;
         private readonly ShowerPageNavigator _viewerNavigator;
         private readonly DataStore _dataStore;
         private readonly Note _note;
@@ -24,25 +31,34 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 
         public ShowNoteVM(ShowerPageNavigator viewerNavigator, DataStore dataStore, Note note, List<Category> senderCategories)
         {
-            try
+            _viewerNavigator = viewerNavigator;
+            _dataStore = dataStore;
+            _note = note;
+            _SelectedCategory = _SelectedCategory = new List<Category>
             {
-                _viewerNavigator = viewerNavigator;
-                _dataStore = dataStore;
-                _note = note;
-                _SelectedCategory = _SelectedCategory = new List<Category>
-                {
-                    senderCategories.First(x => x.categoryID == _note.CategoryID)
-                };
-                _categories = senderCategories;
-                if (note.noteUrl != null) _URL = note.noteUrl;
-                else if (note.noteUrl == null) _URL = string.Empty;
-                if (note.noteTotp != null) _Totp = note.noteTotp;
-                else if (note.noteTotp == null) _Totp = string.Empty;
+                senderCategories.First(x => x.categoryID == _note.CategoryID)
+            };
+            _categories = senderCategories;
+            if (note.noteUrl != null) {
+                _URL = note.noteUrl;
             }
-            catch (Exception)
+            else if (note.noteUrl == null) {
+                _URL = string.Empty;
+            }
+
+            if (note.noteTotp != null)
             {
-                throw new NotImplementedException();
+                _Totp = note.noteTotp;
+                _isHaveTotp = true;
+                RaisePropertiesChanged(nameof(isHaveTotp));
+                StartTimer();
             }
+            else if (note.noteTotp == null) {
+                _Totp = string.Empty;
+                _isHaveTotp = false;
+                RaisePropertiesChanged(nameof(isHaveTotp));
+            }
+
         }
 
         private string _Name => _note.noteName;
@@ -75,8 +91,22 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 
         public string Totp
         {
-            get { return _Totp; throw new NotImplementedException("ShowNoteVM - _Totp - NotImplementException"); }
+            get { return _Totp; }
         }
+
+        private string _TotpCode = string.Empty;
+        public string TotpCode 
+        { 
+            get { return _TotpCode; } 
+            private set 
+            { 
+                _TotpCode = value; 
+                RaisePropertiesChanged(nameof(TotpCode)); 
+            } 
+        }
+
+        private string _remainSeconds = string.Empty;
+        public string RemainSeconds { get { return _remainSeconds; } private set { _remainSeconds = value; RaisePropertiesChanged(nameof(RemainSeconds)); } }
 
         private List<Category> _SelectedCategory;
         public List<Category> SelectedCategory
@@ -84,7 +114,54 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _SelectedCategory; }
         }
 
-        public ICommand EditCommand => new OpenEditNotePageCommand(_viewerNavigator, _dataStore, _categories, _note);
+        private void StartTimer()
+        {
+            timer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 1)
+            };
+            timer.Tick += new EventHandler(Tick);
+            timer.Start();
+        }
+
+        private void StopTimer()
+        {
+            timer.Stop();
+            timer.Tick -= new EventHandler(Tick);
+            timer = null;
+        }
+
+        private void Tick(object sender, EventArgs e)
+        {
+            if (!Totp.IsNullOrEmpty())
+            {
+                try
+                {
+                    RemainSeconds = (totp2FA.getTotpSeconds(Totp)).ToString();
+                    TotpCode = totp2FA.getTotpNumbers(Totp);
+                }
+                catch (Exception)
+                {
+                    _isHaveTotp = false;
+                    RaisePropertiesChanged(nameof(isHaveTotp));
+                    TotpCode = string.Empty;
+                    StopTimer();
+                }
+            }
+        }
+
+        private bool _isHaveTotp = false;
+        public bool isHaveTotp
+        {
+            get { return _isHaveTotp; }
+        }
+
+        public ICommand EditCommand => new RelayCommand(parameter => 
+        {
+            StopTimer();
+            new OpenEditNotePageCommand(_viewerNavigator, _dataStore, _categories, _note).Execute(parameter);
+        }, 
+        parameter => true);
         public ICommand CopyName => new RelayCommand(parameter =>
         {
             Clipboard.SetText(Name);
@@ -103,7 +180,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         });
         public ICommand CopyTotp => new RelayCommand(parameter =>
         {
-            throw new NotImplementedException("ShowNoteVM - CopyTotp - NotImplementException");
+            Clipboard.SetText(TotpCode);
         });
     }
 }

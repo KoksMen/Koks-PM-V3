@@ -1,5 +1,9 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.EntityFramework;
+using Koks_PM_V3.EntityFramework.DTOs;
+using Koks_PM_V3.WPF.Commands.MainCommands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenMainPageCommands;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -14,34 +18,34 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
     public class TotpVM : BindableBase
     {
         private readonly MainPageNavigator _pageNavigator;
-        private readonly TotpDataStore _totpPageDataStore;
         private readonly DataStoreFactory _dataStoreFactory;
-        private readonly User authorizedUser;
+        private readonly StorageDbContextFactory _storageDbContextFactory;
+        private readonly UserDto authorizedUser;
 
-        public TotpVM(MainPageNavigator pageNavigator, DataStoreFactory dataStoreFactory, User user)
+        public TotpVM(MainPageNavigator pageNavigator, DataStoreFactory dataStoreFactory, StorageDbContextFactory storageDbContextFactory, UserDto user)
         {
             _pageNavigator = pageNavigator;
-            _totpPageDataStore = new TotpDataStore();
             _dataStoreFactory = dataStoreFactory;
-            _totpPageDataStore.DataStoreFactory = _dataStoreFactory;
+            _storageDbContextFactory = storageDbContextFactory;
             authorizedUser = user;
         }
 
-        private string _Numbers;
+        private string _Numbers = string.Empty;
 
         public string Numbers
         {
             get { return _Numbers; }
-            set { _Numbers = value; _totpPageDataStore.UserTotpNumbers = value; RaisePropertiesChanged(nameof(AuthorizeCommand)); }
+            set
+            {
+                _Numbers = value;
+                RaisePropertiesChanged(nameof(Numbers));
+                RaisePropertiesChanged(nameof(ConfirmTotpCommand));
+            }
         }
 
-        private ICommand _authorizeCommand => throw new NotImplementedException("RegisterVM => AuthorizeCommand => NotImplementedException");
-        public ICommand AuthorizeCommand
-        {
-            get { return _authorizeCommand; }
-        }
+        public ICommand ConfirmTotpCommand => new TotpCommand(_pageNavigator, _Numbers, _dataStoreFactory, authorizedUser);
 
-        private ICommand backLoginCommand => throw new NotImplementedException("RegisterVM => BackLoginCommand => NotImplementedException");
+        private ICommand backLoginCommand => new OpenLoginCommand(_pageNavigator, _dataStoreFactory, _storageDbContextFactory);
 
 
         public ICommand BackLoginCommand
