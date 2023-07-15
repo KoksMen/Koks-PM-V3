@@ -57,7 +57,13 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             Clipboard.SetText(TotpKey);
         });
 
-        public ICommand SaveCommand => new SaveAddTotpCommand(_dataStore, _modalPageNavigator, _totpKey, _totpNumbers, _userPassword);
+        private ICommand _saveCommand => new SaveAddTotpCommand(_dataStore, _modalPageNavigator, _totpKey, _totpNumbers, _userPassword);
+        public ICommand SaveCommand => new RelayCommand(parameter => 
+        {
+            _saveCommand.Execute(parameter);
+        },
+        parameter => _saveCommand.CanExecute(parameter));
+
         public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
     }
 }
