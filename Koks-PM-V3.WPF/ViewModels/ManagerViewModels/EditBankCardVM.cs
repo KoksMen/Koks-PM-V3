@@ -37,36 +37,42 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         }
 
         private string _Name = string.Empty;
-
         public string Name
         {
             get { return _Name; }
             set { _Name = value; RaisePropertiesChanged(nameof(Name)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
+        
         private string _Number = string.Empty;
-
         public string Number
         {
             get { return _Number; }
             set { _Number = value; RaisePropertiesChanged(nameof(Number)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
+        
         private string _CVV = string.Empty;
-
         public string CVV
         {
             get { return _CVV; }
             set { _CVV = value; RaisePropertiesChanged(nameof(CVV)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
-        private Category _Category = new Category(Guid.Empty, "Null", Guid.Empty, DateTime.Now, DateTime.Now);
 
+        public ICollection<Category> Categories => _categories;
+        private Category _Category = new Category(Guid.Empty, "Null", Guid.Empty, DateTime.Now, DateTime.Now);
         public Category SelectedCategory
         {
             get { return _Category; }
             set { _Category = value; RaisePropertiesChanged(nameof(SelectedCategory)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
 
-        private string _Type = string.Empty;
+        private string[] cardTypes = { "Visa", "MasterCard", "MIR", "UnionPay", "Maestro", "Belkart", "American Express", "Other" };
+        public string[] CardTypes
+        {
+            get { return cardTypes; }
+            set { cardTypes = value; }
+        }
 
+        private string _Type = string.Empty;
         public string Type
         {
             get { return _Type; }
@@ -74,7 +80,6 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         }
 
         private string _Holder = string.Empty;
-
         public string Holder
         {
             get { return _Holder; }
@@ -82,18 +87,26 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         }
 
         private string _ExpiryDate = string.Empty;
-
         public string ExpiryDate
         {
             get { return _ExpiryDate; }
             set { _ExpiryDate = value; RaisePropertiesChanged(nameof(ExpiryDate)); RaisePropertiesChanged(nameof(SaveEditCommand)); }
         }
 
-
-        public ICollection<Category> Categories => _categories;
-
-        public ICommand SaveEditCommand => new SaveEditBankCardCommand(_showerPageNavigator, _dataStore, _Name, _Number, _Holder, _CVV, _Type, _ExpiryDate, _Category.categoryID, _bankCard);
+        public ICommand SaveEditCommand => new SaveEditBankCardCommand(
+            _showerPageNavigator, 
+            _dataStore, 
+            _Name, 
+            _Number, 
+            _Holder, 
+            _CVV, 
+            _Type, 
+            _ExpiryDate, 
+            _Category.categoryID, 
+            _bankCard);
+        
         public ICommand CancelCommand => new CloseShowerPageCommand(_showerPageNavigator, _bankCard, _dataStore, _categories);
+        
         public ICommand DeleteCommand => new DeleteBankCardCommand(_showerPageNavigator, _dataStore, _bankCard);
     }
 }
