@@ -31,10 +31,18 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             Login = _note.noteLogin;
             Password = _note.notePassword;
             SelectedCategory = _categories.First(x => x.categoryID == _note.CategoryID);
-            if (note.noteUrl != null) URL = _note.noteUrl;
-            else if (note.noteUrl == null) URL = string.Empty;
-            if (note.noteTotp != null) Totp = _note.noteTotp;
-            else if (note.noteTotp == null) Totp = string.Empty;
+            if (!string.IsNullOrEmpty(note.noteUrl)) {
+                URL = _note.noteUrl;
+            }
+            else {
+                URL = string.Empty;
+            }
+            if (!string.IsNullOrEmpty(note.noteTotp)) {
+                Totp = _note.noteTotp;
+            }
+            else {
+                Totp = string.Empty;
+            }
         }
 
         private string _Name;
