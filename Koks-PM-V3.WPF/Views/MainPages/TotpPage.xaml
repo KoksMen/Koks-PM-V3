@@ -70,7 +70,7 @@
                                     Background="Transparent" 
                                     FontWeight="Bold" Margin="0,0,0,0" 
                                     BorderThickness="0"
-                                    Command="{Binding OpenLoginCommand}"
+                                    Command="{Binding BackLoginCommand}"
                                     Style="{StaticResource ResourceKey=lrbutton}"
                                 />
                         </StackPanel>
