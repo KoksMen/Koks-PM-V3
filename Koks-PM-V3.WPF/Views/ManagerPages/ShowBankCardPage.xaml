@@ -30,8 +30,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="0.11*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="0.11*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
@@ -41,11 +41,17 @@
                    Grid.Column="1" 
                    FontSize="18" 
                    FontWeight="Bold" 
-                   FontFamily="Century Gothic"/>
+                   FontFamily="Century Gothic"
+        />
+        
         <TextBox Grid.Row="2" 
-                 Grid.Column="1" 
-                 Text="{Binding Name, Mode=OneWay, 
-            UpdateSourceTrigger=PropertyChanged}"/>
+                 Grid.Column="1"
+                 IsEnabled="False"
+                 Text="{Binding Name, 
+                    Mode=OneWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+        />
+        
         <Button Grid.Row="2" 
                 Grid.Column="2" 
                 Command="{Binding CopyName}" 
@@ -53,7 +59,8 @@
                 Width="40" 
                 HorizontalAlignment="Left">
             <iconPacks1:PackIconMaterialDesign 
-                Kind="ContentCopy" />
+                Kind="ContentCopy" 
+            />
         </Button>
         
         <TextBlock Foreground="White" 
@@ -62,11 +69,17 @@
                    Grid.Column="1" 
                    FontSize="18" 
                    FontWeight="Bold" 
-                   FontFamily="Century Gothic"/>
+                   FontFamily="Century Gothic"
+        />
+        
         <TextBox Grid.Row="4" 
                  Grid.Column="1" 
-                 Text="{Binding Number, Mode=OneWay, 
-            UpdateSourceTrigger=PropertyChanged}"/>
+                 IsEnabled="False"
+                 Text="{Binding Number, 
+                    Mode=OneWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+        />
+        
         <Button Grid.Row="4" 
                 Grid.Column="2" 
                 Command="{Binding CopyNumber}" 
@@ -74,7 +87,8 @@
                 Width="40" 
                 HorizontalAlignment="Left">
             <iconPacks1:PackIconMaterialDesign 
-                Kind="ContentCopy" />
+                Kind="ContentCopy" 
+            />
         </Button>
         
         <TextBlock Foreground="White" 
@@ -83,11 +97,17 @@
                    Grid.Column="1" 
                    FontSize="18" 
                    FontWeight="Bold" 
-                   FontFamily="Century Gothic"/>
+                   FontFamily="Century Gothic"
+        />
+        
         <TextBox Grid.Row="6" 
-                 Grid.Column="1" 
-                 Text="{Binding CVV, Mode=OneWay, 
-            UpdateSourceTrigger=PropertyChanged}"/>
+                 Grid.Column="1"
+                 IsEnabled="False"
+                 Text="{Binding CVV, 
+                    Mode=OneWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+        />
+        
         <Button Grid.Row="6" 
                 Grid.Column="2" 
                 Command="{Binding CopyCVV}" 
@@ -95,7 +115,8 @@
                 Width="40" 
                 HorizontalAlignment="Left">
             <iconPacks1:PackIconMaterialDesign 
-                Kind="ContentCopy" />
+                Kind="ContentCopy" 
+            />
         </Button>
         
         <TextBlock Foreground="White" 
@@ -105,10 +126,15 @@
                    FontSize="18" 
                    FontWeight="Bold" 
                    FontFamily="Century Gothic"/>
+        
         <TextBox Grid.Row="8" 
-                 Grid.Column="1" 
-                 Text="{Binding ExpiryDate, Mode=OneWay, 
-            UpdateSourceTrigger=PropertyChanged}"/>
+                 Grid.Column="1"
+                 IsEnabled="False"
+                 Text="{Binding ExpiryDate, 
+                    Mode=OneWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+        />
+        
         <Button Grid.Row="8" 
                 Grid.Column="2" 
                 Command="{Binding CopyDate}" 
@@ -116,7 +142,8 @@
                 Width="40" 
                 HorizontalAlignment="Left">
             <iconPacks1:PackIconMaterialDesign 
-                Kind="ContentCopy" />
+                Kind="ContentCopy" 
+            />
         </Button>
         
         <TextBlock Foreground="White" 
@@ -125,11 +152,17 @@
                    Grid.Column="1" 
                    FontSize="18" 
                    FontWeight="Bold" 
-                   FontFamily="Century Gothic"/>
+                   FontFamily="Century Gothic"
+        />
+        
         <TextBox Grid.Row="10" 
                  Grid.Column="1" 
-                 Text="{Binding Holder, Mode=OneWay, 
-            UpdateSourceTrigger=PropertyChanged}"/>
+                 IsEnabled="False"
+                 Text="{Binding Holder, 
+                    Mode=OneWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+        />
+        
         <Button Grid.Row="10" 
                 Grid.Column="2" 
                 Command="{Binding CopyHolder}" 
@@ -137,7 +170,8 @@
                 Width="40" 
                 HorizontalAlignment="Left">
             <iconPacks1:PackIconMaterialDesign 
-                Kind="ContentCopy" />
+                Kind="ContentCopy" 
+            />
         </Button>
         
         <TextBlock Foreground="White" 
@@ -146,11 +180,24 @@
                    Grid.Column="1" 
                    FontSize="18" 
                    FontWeight="Bold" 
-                   FontFamily="Century Gothic"/>
-        <TextBox Grid.Row="12" 
+                   FontFamily="Century Gothic"
+        />
+
+        <ComboBox Grid.Row="12" 
+                  Grid.Column="1"
+                  IsEnabled="False"
+                  ItemsSource="{Binding CardTypes}"
+                  SelectedItem="{Binding Type,
+            Mode=OneWay,
+            UpdateSourceTrigger=PropertyChanged}"
+                  />
+        <!--<TextBox Grid.Row="12" 
                  Grid.Column="1" 
-                 Text="{Binding Type, Mode=OneWay, 
-            UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Type, 
+                    Mode=OneWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+        />-->
+        
         <Button Grid.Row="12" 
                 Grid.Column="2" 
                 Command="{Binding CopyType}" 
@@ -158,7 +205,8 @@
                 Width="40" 
                 HorizontalAlignment="Left">
             <iconPacks1:PackIconMaterialDesign 
-                Kind="ContentCopy" />
+                Kind="ContentCopy" 
+            />
         </Button>
         
         <TextBlock Foreground="White" 
@@ -167,16 +215,21 @@
                    Grid.Column="1" 
                    FontSize="18" 
                    FontWeight="Bold" 
-                   FontFamily="Century Gothic"/>
+                   FontFamily="Century Gothic"
+        />
+        
         <ComboBox Grid.Row="14" 
                   Grid.Column="1"
-                  IsSynchronizedWithCurrentItem="True"
-                  ItemsSource="{Binding SelectedCategory, Mode=OneWay}"
                   IsEnabled="False"
+                  IsSynchronizedWithCurrentItem="True"
+                  ItemsSource="{Binding SelectedCategory, 
+                    Mode=OneWay}"
                   />
+        
         <StackPanel Orientation="Horizontal" 
-                    Grid.Row="16" 
+                    Grid.Row="15" 
                     Grid.Column="1" 
+                    Margin="0 10 0 10"
                     HorizontalAlignment="Center">
             <Button Padding="45 5" 
                     Margin="0 0 10 0" 
@@ -187,11 +240,58 @@
                     >
                 <StackPanel Orientation="Horizontal">
                     <iconPacks1:PackIconCoolicons 
-                        Kind="Edit" />
+                        Kind="Edit" 
+                    />
+                    
                     <TextBlock Text="Изменить" 
-                               Margin="5 0 0 0"/>
+                               Margin="5 0 0 0"
+                    />
                 </StackPanel>
             </Button>
         </StackPanel>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="17"
+                    Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                Foreground="White"
+                FontSize="13" 
+                FontWeight="Bold" 
+                FontFamily="Century Gothic"
+                Text="Обновлено: "
+                />
+                <TextBlock
+                Foreground="White"
+                FontSize="13" 
+                FontWeight="Bold" 
+                FontFamily="Century Gothic"
+                Text="{Binding modifyDate, 
+                    Mode=OneWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+                />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                Foreground="White"
+                FontSize="13" 
+                FontWeight="Bold" 
+                FontFamily="Century Gothic"
+                Text="Создано: "
+                />
+                <TextBlock
+                Foreground="White"
+                FontSize="13" 
+                FontWeight="Bold" 
+                FontFamily="Century Gothic"
+                Text="{Binding createDate, 
+                    Mode=OneWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+                />
+            </StackPanel>
+            
+
+        </StackPanel>
+
     </Grid>
 </UserControl>
