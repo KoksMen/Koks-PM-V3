@@ -1,7 +1,9 @@
 ﻿using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.WPF.Services;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using KoksOtpNet;
+using Microsoft.IdentityModel.Tokens;
 using OtpNet;
 using System;
 using System.Collections.Generic;
@@ -48,12 +50,26 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands
             return false;
         }
 
-        public void Execute(object? parameter)
+        public async void Execute(object? parameter)
         {
             try
             {
-                User userToUpdate = new User
-                (
+                if (!totp2FA.verifyTotp(totpKey, totpNumbers))
+                {
+                    throw new ArgumentException();
+                }
+
+                if (!dataStore.UserAccount.userTelegramChatID.IsNullOrEmpty() && !dataStore.UserAccount.userTelegramBotApi.IsNullOrEmpty())
+                {
+                    TelegramNotificatorService telegramNotificator = new TelegramNotificatorService(
+                    dataStore.UserAccount.userTelegramChatID,
+                    dataStore.UserAccount.userTelegramBotApi,
+                    messageType.totpEditDeleteInfo);
+                    await telegramNotificator.sendTelegramNotification();
+                }
+                
+
+                User userToUpdate = new User (
                     userID: dataStore.UserAccount.userID,
                     userName: dataStore.UserAccount.userName,
                     userLogin: dataStore.UserAccount.userLogin,
@@ -66,16 +82,17 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands
                     createDate: dataStore.UserAccount.createDate,
                     userNotes: dataStore.UserAccount.userNotes,
                     userBankCards: dataStore.UserAccount.userBankCards,
-                    userCategories: dataStore.UserAccount.userCategories
-                );
+                    userCategories: dataStore.UserAccount.userCategories);
 
                 dataStore?.UpdateTotp(userToUpdate);
                 modalPageNavigator.SelectedModalPage = null;
 
                 MessageBox.Show("Totp успешно изменен");
             }
-            catch (Exception)
-            {
+            catch (ArgumentException) {
+                MessageBox.Show("Время действия totp кода истекло");
+            }
+            catch (Exception) {
                 throw;
             }
         }
