@@ -104,7 +104,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
             List<BankCard> bankcards = await _getAllBankCardsQuerry.Execute(userDto.UserDtoID);
             List<BankCard> decryptedBankCards = new List<BankCard>();
-            foreach (BankCard bankCardItem in bankcards)
+            foreach (BankCard bankCardItem in bankcards) 
             {
                 BankCard decryptedBankCard = DecryptBankCard(bankCardItem, userDto.userPassword);
                 decryptedBankCards.Add(decryptedBankCard);
@@ -218,18 +218,6 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         public async Task UpdateUser(User user)
         {
-            if (!_userAccount.userTelegramBotApi.IsNullOrEmpty() && !_userAccount.userTelegramChatID.IsNullOrEmpty())
-            {
-                TelegramNotificatorService telegramNotificator = new TelegramNotificatorService
-                (
-                    _userAccount.userTelegramChatID,
-                    _userAccount.userTelegramBotApi,
-                    messageType.changePasswordInfo
-                );
-
-                await telegramNotificator.sendTelegramNotification();
-            }
-
             if (user.userPassword != UserAccount.userPassword)
             {
                 _userAccount.userPassword = user.userPassword;
@@ -253,17 +241,6 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         public async Task UpdateTotp(User user)
         {
-            if (!_userAccount.userTelegramBotApi.IsNullOrEmpty() && !_userAccount.userTelegramChatID.IsNullOrEmpty())
-            {
-                TelegramNotificatorService telegramNotificator = new TelegramNotificatorService
-                (
-                    _userAccount.userTelegramChatID,
-                    _userAccount.userTelegramBotApi,
-                    messageType.totpAddUpdateInfo
-                );
-                await telegramNotificator.sendTelegramNotification();
-            }
-
             _userAccount.userTotpKey = user.userTotpKey;
 
             user.userPassword = HashingModule.HashPassword(user.userPassword);
@@ -273,7 +250,7 @@ namespace Koks_PM_V3.WPF.Stores.DataStores
 
         public async Task UpdateTelegram(User user)
         {
-                _userAccount.userTelegramBotApi = user.userTelegramBotApi;
+            _userAccount.userTelegramBotApi = user.userTelegramBotApi;
             _userAccount.userTelegramChatID = user.userTelegramChatID;
 
             user.userPassword = HashingModule.HashPassword(user.userPassword);
