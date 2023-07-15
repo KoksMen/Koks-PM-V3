@@ -75,6 +75,14 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
                 }
         }
 
+        private string[] cardTypes = { "Visa", "MasterCard", "MIR", "UnionPay", "Maestro", "Belkart", "American Express", "Other" };
+        public string[] CardTypes
+        {
+            get { return cardTypes; }
+            set { cardTypes = value; }
+        }
+
+
         private string _Type = string.Empty;
 
         public string Type
@@ -99,17 +107,14 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             set 
             {
                 _ExpiryDate = value;
-                DateTime.TryParseExact(_ExpiryDate, "MM/yy", null, System.Globalization.DateTimeStyles.None, out _dateTime);
                 RaisePropertiesChanged(nameof(ExpiryDate)); 
                 RaisePropertiesChanged(nameof(SaveAddCommand)); 
             }
         }
 
-        private DateTime _dateTime = new DateTime();
-
         public ICollection<Category> Categories => _categories;
 
-        public ICommand SaveAddCommand => new SaveAddBankCardCommand(_viewerNavigator, _dataStore, _Category.categoryID, _Name, _Number, _CVV, _Holder, _Type, _dateTime);
+        public ICommand SaveAddCommand => new SaveAddBankCardCommand(_viewerNavigator, _dataStore, _Category.categoryID, _Name, _Number, _CVV, _Holder, _Type, ExpiryDate);
         public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator, null, null, null);
     }
 }

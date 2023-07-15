@@ -31,8 +31,14 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands
             return true;
         }
 
-        public void Execute(object? parameter)
+        public async void Execute(object? parameter)
         {
+            TelegramNotificatorService telegramNotificator = new TelegramNotificatorService(
+                dataStore.UserAccount.userTelegramChatID,
+                dataStore.UserAccount.userTelegramBotApi, 
+                messageType.telegramEditDeleteInfo);
+            await telegramNotificator.sendTelegramNotification();
+
             User userToUpdate = new User
             (
                 userID: userModel.userID,

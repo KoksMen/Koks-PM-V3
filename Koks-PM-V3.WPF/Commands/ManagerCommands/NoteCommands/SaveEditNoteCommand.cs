@@ -1,6 +1,8 @@
 ﻿using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
+using KoksOtpNet;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,59 +44,80 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.NoteCommands
 
         public bool CanExecute(object? parameter)
         {
-            if (_categoryID == new Guid("11111111-1111-1111-1111-111111111111") || _categoryID == Guid.Empty)
+            if (_categoryID == new Guid("11111111-1111-1111-1111-111111111111") || _categoryID == Guid.Empty) {
                 return false;
-
-            if (_nameNote.Length < 5 || _nameNote == string.Empty || _nameNote == null)
+            }
+            if (dataStringWrongValidation(_nameNote)) {
                 return false;
-
-            if (_loginNote.Length < 5 || _loginNote == string.Empty || _loginNote == null)
+            }
+            if (dataStringWrongValidation(_loginNote)) {
                 return false;
-
-            if (_passwordNote.Length < 5 || _passwordNote == string.Empty || _passwordNote == null)
+            }
+            if (dataStringWrongValidation(_passwordNote)) {
                 return false;
+            }
 
 
-            if (_categoryID != _noteModel.CategoryID)
-                return true;
-            if (_nameNote != _noteModel.noteName)
-                return true;
-            if (_loginNote != _noteModel.noteLogin)
-                return true;
-            if (_passwordNote != _noteModel.notePassword)
-                return true;
-            if (_urlNote != _noteModel.noteUrl)
-                return true;
             if (_totpNote != _noteModel.noteTotp)
+            {
+                if (!string.IsNullOrEmpty(_totpNote))
+                {
+                    try
+                    {
+                        totp2FA.getTotpNumbers(_totpNote);
+                    }
+                    catch (ArgumentException)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+
+            }   
+            if (_categoryID != _noteModel.CategoryID) {
                 return true;
+            }
+            if (_nameNote != _noteModel.noteName) {
+                return true;
+            }
+            if (_loginNote != _noteModel.noteLogin) {
+                return true;
+            }
+            if (_passwordNote != _noteModel.notePassword) {
+                return true;
+            }
+            if (_urlNote != _noteModel.noteUrl) {
+                return true;
+            }
 
             return false;
+        }
+
+        private bool dataStringWrongValidation(string checkData)
+        {
+            return string.IsNullOrEmpty(checkData) || checkData.Length < 5;
         }
 
         public void Execute(object? parameter)
         {
             try
             {
-                MessageBox.Show("SaveEditNoteCommand => CanExecute => totp data check");
-
                 Note updateNote = new Note(
-                    _noteModel.noteID,
-                    _nameNote,
-                    _loginNote,
-                    _passwordNote,
-                    _urlNote,
-                    _totpNote,
-                    _categoryID,
-                    _noteModel.userID,
-                    DateTime.Now,
-                    _noteModel.createDate
-                    );
+                    noteID: _noteModel.noteID,
+                    noteName: _nameNote,
+                    noteLogin: _loginNote,
+                    notePassword: _passwordNote,
+                    noteUrl: _urlNote,
+                    noteTotp: _totpNote,
+                    categoryID: _categoryID,
+                    userID: _noteModel.userID,
+                    modifyDate: DateTime.Now,
+                    createDate: _noteModel.createDate);
 
                 _dataStore?.UpdateNote(updateNote);
             }
-            catch (Exception)
-            {
-                throw;
+            catch (Exception ) {
+                MessageBox.Show("Произошла ошибка при изменении заметки.");
             }
         }
     }

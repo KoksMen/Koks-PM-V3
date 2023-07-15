@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
 using Koks_PM_V3.WPF.Stores.Navigators;
 
 using System;
@@ -19,6 +20,6 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
             _modalPageNavigator = modalPageNavigator;
         }
 
-        public ICommand CloseCommand => throw new NotImplementedException("AboutPageVM - CloseCommand - NotImplementException");
+        public ICommand CloseCommand => new CloseModalPageCommand(_modalPageNavigator);
     }
 }

@@ -2,6 +2,7 @@
 using Koks_PM_V3.WPF.Services;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,10 +49,20 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands
         {
             try
             {
-                TelegramNotificatorService oldTelegramNotificator = new TelegramNotificatorService(_dataStore.UserAccount.userTelegramChatID, _dataStore.UserAccount.userTelegramBotApi, messageType.telegramEditInfo);
+                TelegramNotificatorService oldTelegramNotificator = new TelegramNotificatorService(
+                    _dataStore.UserAccount.userTelegramChatID, 
+                    _dataStore.UserAccount.userTelegramBotApi, 
+                    messageType.telegramEditDeleteInfo);
+
                 await oldTelegramNotificator.sendTelegramNotification();
-                TelegramNotificatorService newTelegramNotificator = new TelegramNotificatorService(telegramChatID, telegramBotApi, messageType.telegramEditInfo);
-                await newTelegramNotificator.sendTelegramNotification();
+                if (!telegramChatID.IsNullOrEmpty() && !telegramBotApi.IsNullOrEmpty())
+                {
+                    TelegramNotificatorService newTelegramNotificator = new TelegramNotificatorService(
+                        telegramChatID, 
+                        telegramBotApi, 
+                        messageType.telegramAddInfo);
+                    await newTelegramNotificator.sendTelegramNotification();
+                }
 
                 User userToUpdate = new User
                 (

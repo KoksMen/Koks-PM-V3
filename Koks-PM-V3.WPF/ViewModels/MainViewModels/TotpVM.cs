@@ -46,8 +46,6 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         public ICommand ConfirmTotpCommand => new TotpCommand(_pageNavigator, _Numbers, _dataStoreFactory, authorizedUser);
 
         private ICommand backLoginCommand => new OpenLoginCommand(_pageNavigator, _dataStoreFactory, _storageDbContextFactory);
-
-
         public ICommand BackLoginCommand
         {
             get { return backLoginCommand; }

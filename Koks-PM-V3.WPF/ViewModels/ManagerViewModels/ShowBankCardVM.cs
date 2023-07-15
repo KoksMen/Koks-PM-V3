@@ -60,6 +60,13 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _CVV; }
         }
 
+        private string[] cardTypes = { "Visa", "MasterCard", "MIR", "UnionPay", "Maestro", "Belkart", "American Express", "Other" };
+        public string[] CardTypes
+        {
+            get { return cardTypes; }
+            set { cardTypes = value; }
+        }
+
         private string _Type => _bankCard.cardType;
 
         public string Type
@@ -80,6 +87,9 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         {
             get { return _ExpiryDate; }
         }
+
+        public string modifyDate => _bankCard.modifyDate.ToString("G");
+        public string createDate => _bankCard.createDate.ToString("G");
 
         private List<Category> _SelectedCategory;
         public List<Category> SelectedCategory

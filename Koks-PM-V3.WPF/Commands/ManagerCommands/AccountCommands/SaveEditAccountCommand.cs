@@ -1,4 +1,5 @@
 ﻿using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.WPF.Services;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using Microsoft.IdentityModel.Tokens;
@@ -37,6 +38,7 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands
 
         public bool CanExecute(object? parameter)
         {
+            //Без изменения пароля
             if (userPassword == string.Empty && userSecondPassword == string.Empty)
             {
                 if (userAvatar != userModel.userAvatar)
@@ -44,6 +46,7 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands
                 else if (userName != userModel.userName)
                     return true;
             }
+            //С изменением пароля
             else if (userPassword != string.Empty)
             {
                 if (userPassword.Length >= 5 && userPassword == userSecondPassword) 
@@ -65,10 +68,25 @@ namespace Koks_PM_V3.WPF.Commands.ManagerCommands.AccountCommands
             return false;
         }
 
-        public void Execute(object? parameter)
+        public async void Execute(object? parameter)
         {
             try
             {
+                if (userPassword != string.Empty)
+                {
+                    if (!userModel.userTelegramBotApi.IsNullOrEmpty() && !userModel.userTelegramChatID.IsNullOrEmpty())
+                    {
+                        TelegramNotificatorService telegramNotificator = new TelegramNotificatorService
+                        (
+                            userModel.userTelegramChatID,
+                            userModel.userTelegramBotApi,
+                            messageType.editPasswordInfo
+                        );
+
+                        await telegramNotificator.sendTelegramNotification();
+                    } 
+                }
+
                 User userToUpdate = new User
                 (
                     userID: userModel.userID,

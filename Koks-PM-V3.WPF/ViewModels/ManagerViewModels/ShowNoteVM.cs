@@ -18,12 +18,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Windows.ApplicationModel.Background;
 
 namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class ShowNoteVM : BindableBase
     {
-        DispatcherTimer timer;
+        private DispatcherTimer timer;
         private readonly ShowerPageNavigator _viewerNavigator;
         private readonly DataStore _dataStore;
         private readonly Note _note;
@@ -39,21 +40,21 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
                 senderCategories.First(x => x.categoryID == _note.CategoryID)
             };
             _categories = senderCategories;
-            if (note.noteUrl != null) {
+            if (!string.IsNullOrEmpty(note.noteUrl)) {
                 _URL = note.noteUrl;
             }
-            else if (note.noteUrl == null) {
+            else {
                 _URL = string.Empty;
             }
 
-            if (note.noteTotp != null)
+            if (!string.IsNullOrEmpty(note.noteTotp))
             {
                 _Totp = note.noteTotp;
-                _isHaveTotp = true;
-                RaisePropertiesChanged(nameof(isHaveTotp));
                 StartTimer();
+                Tick(null,null);
+                RaisePropertiesChanged(nameof(isHaveTotp));
             }
-            else if (note.noteTotp == null) {
+            else {
                 _Totp = string.Empty;
                 _isHaveTotp = false;
                 RaisePropertiesChanged(nameof(isHaveTotp));
@@ -106,7 +107,19 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         }
 
         private string _remainSeconds = string.Empty;
-        public string RemainSeconds { get { return _remainSeconds; } private set { _remainSeconds = value; RaisePropertiesChanged(nameof(RemainSeconds)); } }
+        public string RemainSeconds 
+        { 
+            get { return _remainSeconds; } 
+            private set 
+            { 
+                _remainSeconds = value; 
+                RaisePropertiesChanged(nameof(RemainSeconds));
+                RaisePropertiesChanged(nameof(isHaveTotp));
+            } 
+        }
+
+        public string modifyDate => _note.modifyDate.ToString("G");
+        public string createDate => _note.createDate.ToString("G");
 
         private List<Category> _SelectedCategory;
         public List<Category> SelectedCategory
@@ -114,11 +127,18 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _SelectedCategory; }
         }
 
-        private void StartTimer()
+
+        private bool _isHaveTotp = false;
+        public bool isHaveTotp
         {
-            timer = new DispatcherTimer
+            get { return _isHaveTotp; }
+        }
+
+        private void StartTimer() 
+        {
+            timer = new DispatcherTimer 
             {
-                Interval = new TimeSpan(0, 0, 1)
+                Interval = new TimeSpan(0, 0, 0, 1, 0)
             };
             timer.Tick += new EventHandler(Tick);
             timer.Start();
@@ -126,19 +146,22 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 
         private void StopTimer()
         {
-            timer.Stop();
-            timer.Tick -= new EventHandler(Tick);
-            timer = null;
+            if (timer != null) {
+                timer.Stop();
+                timer.Tick -= new EventHandler(Tick);
+                timer = null;
+            }
         }
 
         private void Tick(object sender, EventArgs e)
         {
-            if (!Totp.IsNullOrEmpty())
+            if (!Totp.IsNullOrEmpty()) 
             {
-                try
+                try 
                 {
                     RemainSeconds = (totp2FA.getTotpSeconds(Totp)).ToString();
                     TotpCode = totp2FA.getTotpNumbers(Totp);
+                    _isHaveTotp = true;
                 }
                 catch (Exception)
                 {
@@ -150,16 +173,12 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             }
         }
 
-        private bool _isHaveTotp = false;
-        public bool isHaveTotp
-        {
-            get { return _isHaveTotp; }
-        }
-
+        #region Commands
+        private ICommand _editCommand => new OpenEditNotePageCommand(_viewerNavigator, _dataStore, _categories, _note);
         public ICommand EditCommand => new RelayCommand(parameter => 
         {
             StopTimer();
-            new OpenEditNotePageCommand(_viewerNavigator, _dataStore, _categories, _note).Execute(parameter);
+            _editCommand.Execute(this);
         }, 
         parameter => true);
         public ICommand CopyName => new RelayCommand(parameter =>
@@ -182,5 +201,6 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         {
             Clipboard.SetText(TotpCode);
         });
+        #endregion
     }
 }

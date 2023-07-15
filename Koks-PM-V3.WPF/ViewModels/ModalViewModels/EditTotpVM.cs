@@ -67,7 +67,12 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
         });
 
 
-        public ICommand SaveCommand => new SaveEditTotpCommand(_dataStore, _modalPageNavigator, _totpKey, _totpNumbers, _userPassword);
+        private ICommand _saveCommand => new SaveEditTotpCommand(_dataStore, _modalPageNavigator, _totpKey, _totpNumbers, _userPassword);
+        public ICommand SaveCommand => new RelayCommand(parameter =>
+        {
+            _saveCommand.Execute(parameter);
+        },
+        parameter => _saveCommand.CanExecute(parameter));
         public ICommand CancelCommand => new CloseModalPageCommand(_modalPageNavigator);
         public ICommand DeleteCommand => new DeleteTotpCommand(_dataStore, _modalPageNavigator);
 
