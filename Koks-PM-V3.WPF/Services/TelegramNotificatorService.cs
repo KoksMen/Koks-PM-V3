@@ -11,11 +11,12 @@ namespace Koks_PM_V3.WPF.Services
 {
     public enum messageType
     {
-        changePasswordInfo = 1,
+        editPasswordInfo = 1,
         loginInfo = 2,
         telegramAddInfo = 3,
-        telegramEditInfo = 4,
-        totpAddUpdateInfo = 5,
+        telegramEditDeleteInfo = 4,
+        totpAddInfo = 5,
+        totpEditDeleteInfo = 6,
     }
 
     public class TelegramNotificatorService
@@ -30,7 +31,7 @@ namespace Koks_PM_V3.WPF.Services
             this.telegramBotToken = telegramBotToken;
             switch (messageType)
             {
-                case messageType.changePasswordInfo:
+                case messageType.editPasswordInfo:
                     {
                         this.messageText = "Оповещение безопасности, в вашем аккаунте был изменён пароль.";
                         break;
@@ -42,19 +43,25 @@ namespace Koks_PM_V3.WPF.Services
                     }
                 case messageType.telegramAddInfo:
                     {
-                        this.messageText = "Информационное оповещение, телеграмм бот успешно связан с аккаунтом.";
+                        this.messageText = "Оповещение безопасности, на вашем аккаунте была добавлена привязка Telegram.";
                         break;
                     }
-                case messageType.totpAddUpdateInfo:
+                case messageType.telegramEditDeleteInfo:
                     {
-                        this.messageText = "Оповещение безопасности, на вашем аккаунте была добавлена/изменена двухфакторная авторизация.";
+                        this.messageText = "Оповещение безопасности, на вашем аккаунте была изменена/удалена привязка Telegram.";
                         break;
                     }
-                case messageType.telegramEditInfo:
+                case messageType.totpAddInfo:
                     {
-                        this.messageText = "Оповещение безопасности, на вашем аккаунте была изменена привязка Telegram";
+                        this.messageText = "Оповещение безопасности, на вашем аккаунте была добавлена двухфакторная авторизация.";
                         break;
                     }
+                case messageType.totpEditDeleteInfo:
+                    {
+                        this.messageText = "Оповещение безопасности, на вашем аккаунте была добавлена двухфакторная авторизация.";
+                        break;
+                    }
+                
             }
         }
 
