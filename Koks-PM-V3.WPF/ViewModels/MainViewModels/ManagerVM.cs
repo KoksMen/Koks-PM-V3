@@ -28,11 +28,17 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         private readonly MainPageNavigator _mainPageNavigator;
         private readonly ShowerPageNavigator _recordPageNavigator;
         private readonly ModalPageNavigator _modalPageNavigator;
+
         public BindableBase ShowerManagerSelectedPage => _recordPageNavigator.selectedShowerPage;
         public BindableBase SelectedModalPage => _modalPageNavigator.SelectedModalPage;
         public bool IsModalOpen => SelectedModalPage != null;
-        private void modalPageChanged() { RaisePropertiesChanged(nameof(SelectedModalPage)); RaisePropertiesChanged(nameof(IsModalOpen)); }
         private void ShowerPageChangedEvent() => RaisePropertiesChanged(nameof(ShowerManagerSelectedPage));
+
+        private void modalPageChanged() 
+        { 
+            RaisePropertiesChanged(nameof(SelectedModalPage)); 
+            RaisePropertiesChanged(nameof(IsModalOpen)); 
+        }
         #endregion
 
         #region AccountData
@@ -47,30 +53,55 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             get { return _Records; }
             set { _Records = value; RaisePropertiesChanged(nameof(Records)); }
         }
+
         public ICollectionView Categories => CollectionViewSource.GetDefaultView(_dataStore.Categories);
+
         public ICollectionView StandartCategories => CollectionViewSource.GetDefaultView(_StandartCategories);
+
         public List<Category> _StandartCategories = new List<Category>
         {
-            new Category(new Guid("11111111-1111-1111-1111-111111111111"), "Все элементы", Guid.Empty, DateTime.UtcNow.Date,DateTime.UtcNow.Date),
-            new Category(new Guid("22222222-2222-2222-2222-222222222222"), "Без категории", Guid.Empty,DateTime.UtcNow.Date,DateTime.UtcNow.Date),
-            new Category(new Guid("33333333-3333-3333-3333-333333333333"), "Избранное", Guid.Empty, DateTime.UtcNow.Date, DateTime.UtcNow.Date),
+            new Category(
+                categoryID: new Guid("11111111-1111-1111-1111-111111111111"), 
+                categoryName: "Все элементы", 
+                userID: Guid.Empty, 
+                modifyDate: DateTime.UtcNow.Date,
+                createDate: DateTime.UtcNow.Date),
+            new Category(
+                categoryID: new Guid("22222222-2222-2222-2222-222222222222"),
+                categoryName: "Без категории",
+                userID: Guid.Empty,
+                modifyDate: DateTime.UtcNow.Date,
+                createDate: DateTime.UtcNow.Date),
+            new Category(
+                categoryID: new Guid("33333333-3333-3333-3333-333333333333"),
+                categoryName: "Избранное",
+                userID: Guid.Empty,
+                modifyDate: DateTime.UtcNow.Date,
+                createDate: DateTime.UtcNow.Date),
         }; 
         #endregion
 
         public ManagerVM(DataStore dataStore, MainPageNavigator mainPageNavigator)
         {
             _dataStore = dataStore;
+
             _dataStore.noteUpdatedAdded += noteUpdateAddEvent;
             _dataStore.bankcardUpdatedAdded += bankCardUpdAddEvent;
             _dataStore.recordDelete += recordDeleteEvent;
             _dataStore.categoryUpdateAddDelete += categoryUpdAddDelEvent;
             _dataStore.userUpdate += userAccountUpdEvent;
 
-            Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+            Records = CollectionViewSource.GetDefaultView(
+                _dataStore.Notes.Cast<IRecord>()
+                .Concat(_dataStore.BankCards
+                .Cast<IRecord>())
+                .ToList());
 
             _mainPageNavigator = mainPageNavigator;
+
             _recordPageNavigator = new ShowerPageNavigator();
-            _recordPageNavigator.ShowerPageChanged += ShowerPageChangedEvent; ;
+            _recordPageNavigator.ShowerPageChanged += ShowerPageChangedEvent;
+
             _modalPageNavigator = new ModalPageNavigator();
             _modalPageNavigator.ModalPageChanged += modalPageChanged;
 
@@ -87,9 +118,11 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
                 RaisePropertiesChanged(nameof(AccountName));
                 RaisePropertiesChanged(nameof(AccountAvatar));
             }
-            catch (Exception)
-            {
-                System.Windows.MessageBox.Show($"Ошибка при вызове события изменения аккаунта.", "ManagerAccountEventError", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            catch (Exception) {
+                System.Windows.MessageBox.Show($"Ошибка при вызове события изменения аккаунта.", 
+                    "ManagerAccountEventError", 
+                    System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Error);
             }
         }
         private void categoryUpdAddDelEvent()
@@ -105,16 +138,22 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
 
                 RaisePropertiesChanged(nameof(FilterCategory));
             }
-            catch (Exception)
-            {
-                System.Windows.MessageBox.Show($"Ошибка при вызове события управления категории.", "ManagerCategoryEventError", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            catch (Exception) {
+                System.Windows.MessageBox.Show($"Ошибка при вызове события управления категории.", 
+                    "ManagerCategoryEventError", 
+                    System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Error);
             }
         }
         private void recordDeleteEvent()
         {
             try
             {
-                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+                Records = CollectionViewSource.GetDefaultView(
+                    _dataStore.Notes.Cast<IRecord>()
+                    .Concat(_dataStore.BankCards
+                    .Cast<IRecord>()).ToList());
+
                 Records.Filter = RecordFilter;
                 Records.Refresh();
                 RaisePropertiesChanged(nameof(Records));
@@ -125,16 +164,23 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
 
                 SelectedRecord = null;
             }
-            catch (Exception)
-            {
-                System.Windows.MessageBox.Show($"Ошибка при вызове события удаления записи.", "ManagerIRecordEventError", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            catch (Exception) {
+                System.Windows.MessageBox.Show($"Ошибка при вызове события удаления записи.", 
+                    "ManagerIRecordEventError", 
+                    System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Error);
             }
         }
         private void noteUpdateAddEvent(Guid noteID)
         {
             try
             {
-                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+                Records = CollectionViewSource.GetDefaultView(
+                    _dataStore.Notes.Cast<IRecord>()
+                    .Concat(_dataStore.BankCards
+                    .Cast<IRecord>())
+                    .ToList());
+
                 Records.Filter = RecordFilter;
                 Records.Refresh();
                 RaisePropertiesChanged(nameof(Records));
@@ -145,16 +191,23 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
 
                 SelectedRecord = _dataStore.Notes.Single(x => x.noteID == noteID);
             }
-            catch (Exception)
-            {
-                System.Windows.MessageBox.Show($"Ошибка при вызове события добавления/изменения заметки.", "ManagerNoteEventError", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            catch (Exception) {
+                System.Windows.MessageBox.Show($"Ошибка при вызове события добавления/изменения заметки.", 
+                    "ManagerNoteEventError", 
+                    System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Error);
             }
         }
         private void bankCardUpdAddEvent(Guid bankCardID)
         {
             try
             {
-                Records = CollectionViewSource.GetDefaultView(_dataStore.Notes.Cast<IRecord>().Concat(_dataStore.BankCards.Cast<IRecord>()).ToList());
+                Records = CollectionViewSource.GetDefaultView(
+                    _dataStore.Notes.Cast<IRecord>()
+                    .Concat(_dataStore.BankCards
+                    .Cast<IRecord>())
+                    .ToList());
+                
                 Records.Filter = RecordFilter;
                 Records.Refresh();
                 RaisePropertiesChanged(nameof(Records));
@@ -165,9 +218,11 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
 
                 SelectedRecord = _dataStore.BankCards.Single(x => x.cardID == bankCardID);
             }
-            catch (Exception)
-            {
-                System.Windows.MessageBox.Show($"Ошибка при вызове события добавления/изменения банковской карты.", "ManagerBankCardEventError", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            catch (Exception) {
+                System.Windows.MessageBox.Show($"Ошибка при вызове события добавления/изменения банковской карты.", 
+                    "ManagerBankCardEventError", 
+                    System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Error);
             }
         }
         #endregion
@@ -176,25 +231,27 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         private bool RecordFilter(object item)
         {
             var record = item as IRecord;
-            if (_FilterCategory != null)
+            if (_FilterCategory != null) 
             {
-                if (record.CategoryID == _FilterCategory.categoryID)
-                {
-                    return record.Title.Contains(_FilterText);
+                if (record.CategoryID == _FilterCategory.categoryID) {
+                    return isHaveFilterText(record);
                 }
             }
             if (_StandartCategory != null)
             {
-                if (_StandartCategory.categoryID == _StandartCategories[0].categoryID)
-                {
-                    return record.Title.Contains(_FilterText);
+                if (_StandartCategory.categoryID == _StandartCategories[0].categoryID) {
+                    return isHaveFilterText(record);
                 }
-                else if (record.CategoryID == _StandartCategory.categoryID)
-                {
-                    return record.Title.Contains(_FilterText);
+                else if (record.CategoryID == _StandartCategory.categoryID) {
+                    return isHaveFilterText(record);
                 }
             }
             return false;
+        }
+
+        private bool isHaveFilterText(IRecord record)
+        {
+            return record.Title.Contains(_FilterText) || record.Desctiption.Contains(_FilterText);
         }
         
         private IRecord _SelectedRecord;
@@ -251,13 +308,26 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         #endregion
 
         #region ManagerCommands
-        public ICommand ExitCommand => new RelayCommand(parameter => { _mainPageNavigator.SelectedMainPage = null; });
-        public ICommand OpenAddRecordCommand => new OpenAddNoteCommand(_recordPageNavigator, _dataStore, _StandartCategories, x => { if (SelectedRecord != null) SelectedRecord = null; });
+        public ICommand ExitCommand => new RelayCommand(parameter => { 
+            _mainPageNavigator.SelectedMainPage = null; 
+        });
+        
+        public ICommand OpenAddRecordCommand => new OpenAddNoteCommand(_recordPageNavigator, _dataStore, _StandartCategories, x => { 
+            if (SelectedRecord != null) {
+                SelectedRecord = null;
+            } 
+        });
+        
         public ICommand OpenAddCategoryCommand => new OpenAddCategoryPageCommand(_modalPageNavigator, _dataStore);
+        
         public ICommand OpenEditCategoryCommand => new OpenEditCategoryPageCommand(_modalPageNavigator, _dataStore, _FilterCategory);
+        
         public ICommand OpenAboutModalPage => new OpenAboutPageCommand(_modalPageNavigator);
+        
         public ICommand OpenAccountEditPage => new OpenEditAccountPageCommand(_dataStore, _modalPageNavigator);
+        
         public ICommand OpenAccountTelegramPage => new OpenTelegramPageCommand(_dataStore, _modalPageNavigator);
+        
         public ICommand OpenAccountTotpPage => new OpenTotpPageCommand(_dataStore, _modalPageNavigator);
         #endregion
 
@@ -268,28 +338,31 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
                 if (SelectedRecord != null && SelectedRecord is IRecord)
                 {
                     List<Category> senderCategoryModels = new List<Category>();
+
                     senderCategoryModels.AddRange(_StandartCategories);
                     senderCategoryModels.RemoveRange(0, 1);
                     senderCategoryModels.AddRange(_dataStore.Categories);
-                    if (SelectedRecord is Note)
-                    {
+
+                    if (SelectedRecord is Note) {
                         Note? item = SelectedRecord as Note;
+
                         _recordPageNavigator.selectedShowerPage = new ShowNoteVM(_recordPageNavigator, _dataStore, item, senderCategoryModels); 
                     }
-                    else if (SelectedRecord is BankCard) 
-                    {
+                    else if (SelectedRecord is BankCard)  {
                         BankCard? item = SelectedRecord as BankCard;
+
                         _recordPageNavigator.selectedShowerPage = new ShowBankCardVM(_recordPageNavigator, _dataStore, item, senderCategoryModels);
                     }
                 }
-                else if (SelectedRecord == null)
-                {
+                else if (SelectedRecord == null) {
                     _recordPageNavigator.selectedShowerPage = null;
                 }
             }
-            catch (Exception)
-            {
-                System.Windows.MessageBox.Show($"Ошибка при попытке отображения записи.", "ShowRecord_Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            catch (Exception) {
+                System.Windows.MessageBox.Show($"Ошибка при попытке отображения записи.", 
+                    "ShowRecord_Error", 
+                    System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Error);
             }
         }
     }
