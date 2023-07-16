@@ -24,14 +24,16 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class ShowNoteVM : BindableBase
     {
+        private ModalPageNavigator _modalPageNaviagator;
         private DispatcherTimer timer;
         private readonly ShowerPageNavigator _viewerNavigator;
         private readonly DataStore _dataStore;
         private readonly Note _note;
         private readonly List<Category> _categories;
 
-        public ShowNoteVM(ShowerPageNavigator viewerNavigator, DataStore dataStore, Note note, List<Category> senderCategories)
+        public ShowNoteVM(ModalPageNavigator modalPageNavigator, ShowerPageNavigator viewerNavigator, DataStore dataStore, Note note, List<Category> senderCategories)
         {
+            _modalPageNaviagator = modalPageNavigator;
             _viewerNavigator = viewerNavigator;
             _dataStore = dataStore;
             _note = note;
@@ -174,7 +176,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         }
 
         #region Commands
-        private ICommand _editCommand => new OpenEditNotePageCommand(_viewerNavigator, _dataStore, _categories, _note);
+        private ICommand _editCommand => new OpenEditNotePageCommand(_modalPageNaviagator, _viewerNavigator, _dataStore, _categories, _note);
         public ICommand EditCommand => new RelayCommand(parameter => 
         {
             StopTimer();

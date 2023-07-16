@@ -16,13 +16,15 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class EditBankCardVM : BindableBase
     {
+        private readonly ModalPageNavigator _modalPageNavigator;
         private readonly ShowerPageNavigator _showerPageNavigator;
         private readonly DataStore _dataStore;
         private readonly List<Category> _categories;
         private readonly BankCard _bankCard;
 
-        public EditBankCardVM(ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories, BankCard bankCard)
+        public EditBankCardVM(ModalPageNavigator modalPageNavigator, ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories, BankCard bankCard)
         {
+            _modalPageNavigator = modalPageNavigator;
             _showerPageNavigator = viewerNavigator;
             _dataStore = dataStore;
             _categories = senderCategories;
@@ -105,7 +107,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             _Category.categoryID, 
             _bankCard);
         
-        public ICommand CancelCommand => new CloseShowerPageCommand(_showerPageNavigator, _bankCard, _dataStore, _categories);
+        public ICommand CancelCommand => new CloseShowerPageCommand(_modalPageNavigator, _showerPageNavigator, _bankCard, _dataStore, _categories);
         
         public ICommand DeleteCommand => new DeleteBankCardCommand(_showerPageNavigator, _dataStore, _bankCard);
     }

@@ -17,12 +17,14 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class AddBankCardVM : BindableBase
     {
+        private readonly ModalPageNavigator _modalPageNavigator;
         private readonly ShowerPageNavigator _viewerNavigator;
         private readonly DataStore _dataStore;
         private readonly List<Category> _categories;
 
-        public AddBankCardVM(ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories)
+        public AddBankCardVM(ModalPageNavigator modalPageNavigator, ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories)
         {
+            _modalPageNavigator = modalPageNavigator;
             _viewerNavigator = viewerNavigator;
             _dataStore = dataStore;
             _categories = senderCategories;
@@ -66,7 +68,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             { 
                 if (value.Contains("Заметка"))
                 {
-                    _viewerNavigator.selectedShowerPage = new AddNoteVM(_viewerNavigator, _dataStore, _categories);
+                    _viewerNavigator.selectedShowerPage = new AddNoteVM(_modalPageNavigator, _viewerNavigator, _dataStore, _categories);
                 }
                 else if (value.Contains("Банковская карта"))
                 {
@@ -115,6 +117,6 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         public ICollection<Category> Categories => _categories;
 
         public ICommand SaveAddCommand => new SaveAddBankCardCommand(_viewerNavigator, _dataStore, _Category.categoryID, _Name, _Number, _CVV, _Holder, _Type, ExpiryDate);
-        public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator, null, null, null);
+        public ICommand CancelCommand => new CloseShowerPageCommand(_modalPageNavigator, _viewerNavigator, null, null, null);
     }
 }

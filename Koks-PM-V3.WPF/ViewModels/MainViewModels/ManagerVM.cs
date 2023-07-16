@@ -312,7 +312,7 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
             _mainPageNavigator.SelectedMainPage = null; 
         });
         
-        public ICommand OpenAddRecordCommand => new OpenAddNoteCommand(_recordPageNavigator, _dataStore, _StandartCategories, x => { 
+        public ICommand OpenAddRecordCommand => new OpenAddNoteCommand(_modalPageNavigator, _recordPageNavigator, _dataStore, _StandartCategories, x => { 
             if (SelectedRecord != null) {
                 SelectedRecord = null;
             } 
@@ -346,12 +346,12 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
                     if (SelectedRecord is Note) {
                         Note? item = SelectedRecord as Note;
 
-                        _recordPageNavigator.selectedShowerPage = new ShowNoteVM(_recordPageNavigator, _dataStore, item, senderCategoryModels); 
+                        _recordPageNavigator.selectedShowerPage = new ShowNoteVM(_modalPageNavigator, _recordPageNavigator, _dataStore, item, senderCategoryModels); 
                     }
                     else if (SelectedRecord is BankCard)  {
                         BankCard? item = SelectedRecord as BankCard;
 
-                        _recordPageNavigator.selectedShowerPage = new ShowBankCardVM(_recordPageNavigator, _dataStore, item, senderCategoryModels);
+                        _recordPageNavigator.selectedShowerPage = new ShowBankCardVM(_modalPageNavigator, _recordPageNavigator, _dataStore, item, senderCategoryModels);
                     }
                 }
                 else if (SelectedRecord == null) {
