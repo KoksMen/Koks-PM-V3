@@ -58,6 +58,9 @@
         <DataTemplate DataType="{x:Type viewModelsModal:EditUserVM}">
             <viewsModal:EditUserPage/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelsModal:PasswordGeneratorVM}">
+            <viewsModal:PasswordGeneratorPage/>
+        </DataTemplate>
 
         <services:LenghtTruncateConverter x:Key="LenghtConverter" />
     </UserControl.Resources>
