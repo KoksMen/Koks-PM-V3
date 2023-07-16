@@ -13,13 +13,15 @@ namespace Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenNotePageCommands
 {
     public class OpenEditNotePageCommand : ICommand
     {
+        private readonly ModalPageNavigator _modalPageNavigator;
         private readonly ShowerPageNavigator _showerPageNavigator;
         private readonly DataStore _dataStore;
         private readonly List<Category> _categoryModels;
         private readonly Note _noteModel;
 
-        public OpenEditNotePageCommand(ShowerPageNavigator showerPageNavigator, DataStore dataStore, List<Category> categoryModels, Note noteModel)
+        public OpenEditNotePageCommand(ModalPageNavigator modalPageNavigator, ShowerPageNavigator showerPageNavigator, DataStore dataStore, List<Category> categoryModels, Note noteModel)
         {
+            _modalPageNavigator = modalPageNavigator;
             _showerPageNavigator = showerPageNavigator;
             _dataStore = dataStore;
             _categoryModels = categoryModels;
@@ -37,7 +39,7 @@ namespace Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenNotePageCommands
         {
             try
             {
-                _showerPageNavigator.selectedShowerPage = new EditNoteVM(_showerPageNavigator, _dataStore, _categoryModels, _noteModel);
+                _showerPageNavigator.selectedShowerPage = new EditNoteVM(_modalPageNavigator, _showerPageNavigator, _dataStore, _categoryModels, _noteModel);
             }
             catch (Exception)
             {
