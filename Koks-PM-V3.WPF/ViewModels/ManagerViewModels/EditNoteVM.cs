@@ -1,8 +1,10 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.EntityFramework.Commands.DeleteCommands;
+using Koks_PM_V3.WPF.Commands;
 using Koks_PM_V3.WPF.Commands.ClosePageCommands;
 using Koks_PM_V3.WPF.Commands.ManagerCommands.NoteCommands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenModalPageCommand;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -16,13 +18,15 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class EditNoteVM : BindableBase
     {
+        private ModalPageNavigator _modalPageNaviagator;
         private readonly ShowerPageNavigator _showerPageNavigator;
         private readonly DataStore _dataStore;
         private readonly List<Category> _categories;
         private readonly Note _note;
 
-        public EditNoteVM(ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories, Note note)
+        public EditNoteVM(ModalPageNavigator modalPageNavigator, ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories, Note note)
         {
+            _modalPageNaviagator = modalPageNavigator;
             _showerPageNavigator = viewerNavigator;
             _dataStore = dataStore;
             _categories = senderCategories;
@@ -92,7 +96,15 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         public ICollection<Category> Categories => _categories;
 
         public ICommand SaveEditCommand => new SaveEditNoteCommand(_showerPageNavigator, _dataStore, _Name, _Login, _Password, _Category.categoryID, _URL, _Totp, _note);
-        public ICommand CancelCommand => new CloseShowerPageCommand(_showerPageNavigator, _note, _dataStore, _categories);
+        public ICommand CancelCommand => new CloseShowerPageCommand(_modalPageNaviagator, _showerPageNavigator, _note, _dataStore, _categories);
         public ICommand DeleteCommand => new DeleteNoteCommand(_showerPageNavigator, _dataStore, _note);
+
+        public ICommand openPasswordGeneratorCommand => new RelayCommand(parameter =>
+        {
+            PasswordGeneratorDataStore passwordGeneratorDataStore = new PasswordGeneratorDataStore();
+            passwordGeneratorDataStore.passwordUpdated += () => { Password = passwordGeneratorDataStore.generatedPassword; };
+            OpenPasswordGeneratorPageCommand openPasswordGeneratorPageCommand = new(_modalPageNaviagator, passwordGeneratorDataStore);
+            openPasswordGeneratorPageCommand.Execute(this);
+        }, parameter => true);
     }
 }

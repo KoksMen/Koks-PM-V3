@@ -14,13 +14,15 @@ namespace Koks_PM_V3.WPF.Commands.ClosePageCommands
 {
     public class CloseShowerPageCommand : ICommand
     {
+        private ModalPageNavigator _modalPageNaviagator;
         private readonly ShowerPageNavigator _showerPageNavigator;
         private readonly IRecord _recordModel;
         private readonly DataStore _dataStore;
         private readonly List<Category> _categories;
 
-        public CloseShowerPageCommand(ShowerPageNavigator showerPageNavigator, IRecord recordModel, DataStore dataStore, List<Category> categories)
+        public CloseShowerPageCommand(ModalPageNavigator modalPageNavigator, ShowerPageNavigator showerPageNavigator, IRecord recordModel, DataStore dataStore, List<Category> categories)
         {
+            _modalPageNaviagator = modalPageNavigator;
             _showerPageNavigator = showerPageNavigator;
             _recordModel = recordModel;
             _dataStore = dataStore;
@@ -44,11 +46,11 @@ namespace Koks_PM_V3.WPF.Commands.ClosePageCommands
                 }
                 else if (_recordModel is Note)
                 {
-                    _showerPageNavigator.selectedShowerPage = new ShowNoteVM(_showerPageNavigator, _dataStore, _recordModel as Note, _categories);
+                    _showerPageNavigator.selectedShowerPage = new ShowNoteVM(_modalPageNaviagator, _showerPageNavigator, _dataStore, _recordModel as Note, _categories);
                 }
                 else if (_recordModel is BankCard)
                 {
-                    _showerPageNavigator.selectedShowerPage = new ShowBankCardVM(_showerPageNavigator, _dataStore, _recordModel as BankCard, _categories);
+                    _showerPageNavigator.selectedShowerPage = new ShowBankCardVM(_modalPageNaviagator, _showerPageNavigator, _dataStore, _recordModel as BankCard, _categories);
                 }
             }
             catch (Exception)

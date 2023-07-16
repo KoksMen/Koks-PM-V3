@@ -17,15 +17,17 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class ShowBankCardVM : BindableBase
     {
+        private ModalPageNavigator _modalPageNaviagator;
         private readonly ShowerPageNavigator _viewerNavigator;
         private readonly DataStore _dataStore;
         private readonly BankCard _bankCard;
         private readonly List<Category> _categories;
 
-        public ShowBankCardVM(ShowerPageNavigator viewerNavigator, DataStore dataStore, BankCard bankCard, List<Category> senderCategories)
+        public ShowBankCardVM(ModalPageNavigator modalPageNavigator, ShowerPageNavigator viewerNavigator, DataStore dataStore, BankCard bankCard, List<Category> senderCategories)
         {
             try
             {
+                _modalPageNaviagator = modalPageNavigator;
                 _viewerNavigator = viewerNavigator;
                 _dataStore = dataStore;
                 _bankCard = bankCard;
@@ -97,7 +99,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             get { return _SelectedCategory; }
         }
 
-        public ICommand EditCommand => new OpenEditBankCardPageCommand(_viewerNavigator, _dataStore, _categories, _bankCard);
+        public ICommand EditCommand => new OpenEditBankCardPageCommand(_modalPageNaviagator, _viewerNavigator, _dataStore, _categories, _bankCard);
         public ICommand CopyName => new RelayCommand(parameter =>
         {
             Clipboard.SetText(Name);
