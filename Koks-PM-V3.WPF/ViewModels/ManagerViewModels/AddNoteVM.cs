@@ -1,8 +1,10 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
+using Koks_PM_V3.WPF.Commands;
 using Koks_PM_V3.WPF.Commands.ClosePageCommands;
 using Koks_PM_V3.WPF.Commands.ManagerCommands.NoteCommands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenBankCardPageCommands;
+using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenModalPageCommand;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
@@ -16,12 +18,14 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
 {
     public class AddNoteVM : BindableBase
     {
+        private ModalPageNavigator _modalPageNaviagator;
         private readonly ShowerPageNavigator _viewerNavigator;
         private readonly DataStore _dataStore;
         private readonly List<Category> _categories;
 
-        public AddNoteVM(ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories)
+        public AddNoteVM(ModalPageNavigator modalPageNavigator, ShowerPageNavigator viewerNavigator, DataStore dataStore, List<Category> senderCategories)
         {
+            _modalPageNaviagator = modalPageNavigator;
             _viewerNavigator = viewerNavigator;
             _dataStore = dataStore;
             _categories = senderCategories;
@@ -65,7 +69,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             {
                 if (value.Contains("Банковская карта"))
                 {
-                    _viewerNavigator.selectedShowerPage = new AddBankCardVM(_viewerNavigator, _dataStore, _categories);
+                    _viewerNavigator.selectedShowerPage = new AddBankCardVM(_modalPageNaviagator, _viewerNavigator, _dataStore, _categories);
                 }
                 else if (value.Contains("Заметка"))
                 {
@@ -94,6 +98,14 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
         public ICollection<Category> Categories => _categories;
 
         public ICommand SaveAddCommand => new SaveAddNoteCommand(_viewerNavigator, _dataStore, _Category.categoryID, _Name, _Login, _Password, _URL, _Totp);
-        public ICommand CancelCommand => new CloseShowerPageCommand(_viewerNavigator, null, null, null);
+        public ICommand CancelCommand => new CloseShowerPageCommand(_modalPageNaviagator, _viewerNavigator, null, null, null);
+
+        public ICommand openPasswordGeneratorCommand => new RelayCommand(parameter =>
+        {
+            PasswordGeneratorDataStore passwordGeneratorDataStore = new PasswordGeneratorDataStore();
+            passwordGeneratorDataStore.passwordUpdated += () => { Password = passwordGeneratorDataStore.generatedPassword; };
+            OpenPasswordGeneratorPageCommand openPasswordGeneratorPageCommand = new(_modalPageNaviagator, passwordGeneratorDataStore);
+            openPasswordGeneratorPageCommand.Execute(this);
+        }, parameter => true);
     }
 }
