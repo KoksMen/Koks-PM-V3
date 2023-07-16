@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="1.35*" />
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
 
@@ -54,7 +54,9 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Width="75" 
-                                       Height="75">
+                                       Height="75"
+                                       VerticalAlignment="Top"
+                                       >
                                 <Rectangle.Fill>
                                     <ImageBrush 
                                         ImageSource="\Images\KoksPM3.png"/>
@@ -75,6 +77,15 @@
                                            FontFamily="Century Gothic" 
                                            FontWeight="Bold" 
                                            Margin="0 5 0 0"/>
+                                <Viewbox Margin="0 5 0 0">
+                                    <StackPanel Orientation="Vertical" MaxWidth="250">
+                                        <TextBlock
+                                           TextWrapping="Wrap" 
+                                           FontFamily="Century Gothic" 
+                                           Text="Менежер паролей KoksPM-V3, повзволяет удобно и безопасно хранить данные от ваших аккаунтов и банковских карт, позволяет быстро и удобно получать к ним доступ. Все данные шифуются с помощью криптоалгоритма AES. "
+                                        />
+                                    </StackPanel>
+                                </Viewbox>
                             </StackPanel>
                         </StackPanel>
 
