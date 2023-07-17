@@ -24,5 +24,10 @@ namespace Koks_PM_V3.WPF.Views.ModalPages
         {
             InitializeComponent();
         }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ((Slider)sender).SelectionEnd = e.NewValue;
+        }
     }
 }
