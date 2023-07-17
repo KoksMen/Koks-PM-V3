@@ -51,7 +51,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
 		public bool isHaveUpperChars
         {
 			get { return _isHaveUpperChars; }
-			set { _isHaveUpperChars = value; RaisePropertiesChanged(nameof(isHaveUpperChars)); RaisePropertiesChanged(nameof(regeneratePasswordCommand)); }
+			set { _isHaveUpperChars = value; CheckCommand(); RaisePropertiesChanged(nameof(isHaveUpperChars)); RaisePropertiesChanged(nameof(regeneratePasswordCommand)); }
 		}
 
 		private bool _isHaveLowerChars = true;
@@ -59,7 +59,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
 		public bool isHaveLowerChars
         {
 			get { return _isHaveLowerChars; }
-			set { _isHaveLowerChars = value; RaisePropertiesChanged(nameof(isHaveLowerChars)); RaisePropertiesChanged(nameof(regeneratePasswordCommand)); }
+			set { _isHaveLowerChars = value; CheckCommand(); RaisePropertiesChanged(nameof(isHaveLowerChars)); RaisePropertiesChanged(nameof(regeneratePasswordCommand)); }
 		}
 
 		private bool _isHaveDigits = false;
@@ -67,17 +67,24 @@ namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
 		public bool isHaveDigits
         {
 			get { return _isHaveDigits; }
-			set { _isHaveDigits = value; RaisePropertiesChanged(nameof(isHaveDigits)); RaisePropertiesChanged(nameof(regeneratePasswordCommand)); }
+			set { _isHaveDigits = value; CheckCommand(); RaisePropertiesChanged(nameof(isHaveDigits)); RaisePropertiesChanged(nameof(regeneratePasswordCommand)); }
 		}
 
 		private bool _isHaveSpecialChars = false;
 
-
         public bool isHaveSpecialChars
         {
 			get { return _isHaveSpecialChars; }
-			set { _isHaveSpecialChars = value; }
+			set { _isHaveSpecialChars = value; CheckCommand(); RaisePropertiesChanged(nameof(isHaveSpecialChars)); RaisePropertiesChanged(nameof(regeneratePasswordCommand)); }
 		}
+
+		private void CheckCommand()
+		{
+            if (!isHaveLowerChars && !isHaveUpperChars && !isHaveDigits && !isHaveSpecialChars)
+            {
+                isHaveLowerChars = true;
+            }
+        }
 
 		public ICommand regeneratePasswordCommand => new RelayCommand(parameter =>
 		{
