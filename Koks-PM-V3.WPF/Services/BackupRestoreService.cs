@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Koks_PM_V3.WPF.Services
 {
@@ -28,6 +29,8 @@ namespace Koks_PM_V3.WPF.Services
 
             string json = JsonConvert.SerializeObject(records, Formatting.Indented);
             File.WriteAllText(filePath, json);
+
+            MessageBox.Show("Резервная копия успешно создана");
         }
 
         public void RestoreBackup(string filePath)
@@ -57,6 +60,8 @@ namespace Koks_PM_V3.WPF.Services
                     _dataStore?.AddBankCard(record as BankCard);
                 }
             });
+
+            MessageBox.Show("Данные успешно восстановлены из резервной копии");
         }
     }
 }
