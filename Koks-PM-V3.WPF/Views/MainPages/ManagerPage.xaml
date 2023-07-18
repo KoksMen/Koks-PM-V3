@@ -61,6 +61,9 @@
         <DataTemplate DataType="{x:Type viewModelsModal:PasswordGeneratorVM}">
             <viewsModal:PasswordGeneratorPage/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelsModal:BackupRestoreVM}">
+            <viewsModal:BackupRestorePage/>
+        </DataTemplate>
 
         <services:LenghtTruncateConverter x:Key="LenghtConverter" />
     </UserControl.Resources>
