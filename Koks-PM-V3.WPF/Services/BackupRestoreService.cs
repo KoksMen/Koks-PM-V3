@@ -54,10 +54,18 @@ namespace Koks_PM_V3.WPF.Services
             newRecords.ForEach(record =>
             {
                 if (record is Note) {
-                    _dataStore?.AddNote(record as Note);
+                    Note note = record as Note;
+                    note.userID = _dataStore.UserAccount.userID;
+                    note.noteID = Guid.NewGuid();
+                    note.categoryID = new Guid("22222222-2222-2222-2222-222222222222");
+                    _dataStore?.AddNote(note);
                 }
                 else if (record is BankCard) {
-                    _dataStore?.AddBankCard(record as BankCard);
+                    BankCard bankCard = record as BankCard;
+                    bankCard.userID = _dataStore.UserAccount.userID;
+                    bankCard.cardID = Guid.NewGuid();
+                    bankCard.categoryID = new Guid("22222222-2222-2222-2222-222222222222");
+                    _dataStore?.AddBankCard(bankCard);
                 }
             });
 
