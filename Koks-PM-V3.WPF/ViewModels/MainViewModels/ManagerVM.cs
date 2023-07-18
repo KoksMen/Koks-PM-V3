@@ -329,6 +329,8 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
         public ICommand OpenAccountTelegramPage => new OpenTelegramPageCommand(_dataStore, _modalPageNavigator);
         
         public ICommand OpenAccountTotpPage => new OpenTotpPageCommand(_dataStore, _modalPageNavigator);
+
+        public ICommand OpenBackupRestorePage => new OpenBackupRestorePageCommand(_dataStore, _modalPageNavigator);
         #endregion
 
         private void ShowRecord()
