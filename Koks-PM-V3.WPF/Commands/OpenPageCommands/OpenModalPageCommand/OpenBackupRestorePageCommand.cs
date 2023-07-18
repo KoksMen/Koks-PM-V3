@@ -1,6 +1,6 @@
 ﻿using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
-using Koks_PM_V3.WPF.ViewModels.ManagerViewModels;
+using Koks_PM_V3.WPF.ViewModels.ModalViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenModalPageCommand
 
         public void Execute(object? parameter)
         {
-            _modalPageNavigator.SelectedModalPage = new BackupRestoreVM(_dataStore);
+            _modalPageNavigator.SelectedModalPage = new BackupRestoreVM(_dataStore, _modalPageNavigator);
         }
     }
 }
