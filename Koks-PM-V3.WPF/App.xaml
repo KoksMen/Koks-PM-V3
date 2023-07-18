@@ -12,6 +12,8 @@
                 <ResourceDictionary Source="./Styles/ScrollBarStyle.xaml"/>
                 <ResourceDictionary Source="./Styles/ItemCategoryStyle.xaml"/>
                 <ResourceDictionary Source="./Styles/RecordItemStyle.xaml"/>
+                <ResourceDictionary Source="./Styles/SliderStyle.xaml"/>
+                <ResourceDictionary Source="./Styles/CheckBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>

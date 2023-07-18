@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Koks_PM_V3.WPF.Views.ModalPages
 {
     /// <summary>
-    /// Логика взаимодействия для PasswordGeneratorPage.xaml
+    /// Логика взаимодействия для BackupRestorePage.xaml
     /// </summary>
-    public partial class PasswordGeneratorPage : UserControl
+    public partial class BackupRestorePage : UserControl
     {
-        public PasswordGeneratorPage()
+        public BackupRestorePage()
         {
             InitializeComponent();
-        }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            ((Slider)sender).SelectionEnd = e.NewValue;
         }
     }
 }
