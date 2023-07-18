@@ -1,8 +1,10 @@
 ﻿using DevExpress.Mvvm;
 using Koks_PM_V3.Domain.Models;
 using Koks_PM_V3.WPF.Commands;
+using Koks_PM_V3.WPF.Commands.ClosePageCommands;
 using Koks_PM_V3.WPF.Services;
 using Koks_PM_V3.WPF.Stores.DataStores;
+using Koks_PM_V3.WPF.Stores.Navigators;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,15 +15,17 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
+namespace Koks_PM_V3.WPF.ViewModels.ModalViewModels
 {
     public class BackupRestoreVM : BindableBase
     {
         private readonly DataStore _dataStore;
+        private readonly ModalPageNavigator _modalPageNavigator;
 
-        public BackupRestoreVM(DataStore dataStore)
+        public BackupRestoreVM(DataStore dataStore, ModalPageNavigator modalPageNavigator)
         {
             _dataStore = dataStore;
+            _modalPageNavigator = modalPageNavigator;
         }
 
         public ICommand BackupCommand => new RelayCommand(parameter =>
@@ -53,5 +57,7 @@ namespace Koks_PM_V3.WPF.ViewModels.ManagerViewModels
             }
 
         });
+
+        public ICommand CloseCommand => new CloseModalPageCommand(_modalPageNavigator);
     }
 }
