@@ -6,6 +6,7 @@ using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenAccountPageCommands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenCategoryPageCommands;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenModalPageCommand;
 using Koks_PM_V3.WPF.Commands.OpenPageCommands.OpenNotePageCommands;
+using Koks_PM_V3.WPF.Services;
 using Koks_PM_V3.WPF.Stores.DataStores;
 using Koks_PM_V3.WPF.Stores.Navigators;
 using Koks_PM_V3.WPF.ViewModels.ManagerViewModels;
@@ -367,5 +368,21 @@ namespace Koks_PM_V3.WPF.ViewModels.MainViewModels
                     System.Windows.MessageBoxImage.Error);
             }
         }
+
+        public ICommand ThemeChanger => new RelayCommand(parameter =>
+        {
+            if (Properties.Settings.Default.Theme == "Light")
+            {
+                AppShemeService.ChangeTheme(new Uri("Themes/DarkTheme.xaml", UriKind.Relative));
+                Properties.Settings.Default.Theme = "Dark";
+                Properties.Settings.Default.Save();
+            }
+            else if (Properties.Settings.Default.Theme == "Dark")
+            {
+                AppShemeService.ChangeTheme(new Uri("Themes/LightTheme.xaml", UriKind.Relative));
+                Properties.Settings.Default.Theme = "Light";
+                Properties.Settings.Default.Save();
+            }
+        });
     }
 }
