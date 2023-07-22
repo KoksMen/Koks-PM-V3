@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="./Styles/RecordItemStyle.xaml"/>
                 <ResourceDictionary Source="./Styles/SliderStyle.xaml"/>
                 <ResourceDictionary Source="./Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="./Themes/LightTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
