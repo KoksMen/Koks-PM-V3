@@ -8,10 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
-        <Border Background="White">
+        <Border Background="{DynamicResource LoginPageStyle1}">
             <Grid>
 
-                <Border Background="Black" Opacity="0.7"/>
+                <Border Background="{DynamicResource LoginPageStyle2}" Opacity="0.7"/>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>

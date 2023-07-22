@@ -1,0 +1,72 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--=================Button Style=======================-->
+    <!-- button style (1) #323232-->
+    <SolidColorBrush Color="#323232" x:Key="ButtonStyle1"/>
+    <!-- button style (2) ffffff-->
+    <SolidColorBrush Color="#ffffff" x:Key="ButtonStyle2"/>
+    <!-- button style (3) #4d4949-->
+    <SolidColorBrush Color="#4d4949" x:Key="ButtonStyle3"/>
+    <!-- button style (4) #1a1a1a-->
+    <SolidColorBrush Color="#1a1a1a" x:Key="ButtonStyle4"/>
+    <!-- button style (5) #535353-->
+    <SolidColorBrush Color="#535353" x:Key="ButtonStyle5"/>
+
+    <!--=================ComboBox Style=======================-->
+    <!-- ComboBox style (1) #FF3F3F3F-->
+    <SolidColorBrush Color="#FF3F3F3F" x:Key="ComboBoxStyle1"/>
+    <!-- ComboBox style (2) #FF97A0A5-->
+    <SolidColorBrush Color="#FF97A0A5" x:Key="ComboBoxStyle2"/>
+    <!-- ComboBox style (3) #ffffff-->
+    <SolidColorBrush Color="#ffffff" x:Key="ComboBoxStyle3"/>
+    <!-- ComboBox style (4) #FF4F4F4F-->
+    <SolidColorBrush Color="#FF4F4F4F" x:Key="ComboBoxStyle4"/>
+    <!-- ComboBox style (5) #888888-->
+    <SolidColorBrush Color="#888888" x:Key="ComboBoxStyle5"/>
+
+    <!--=================ItemCategory Style=======================-->
+    <!-- ItemCategory style (1) #6d6d6d-->
+    <SolidColorBrush Color="#6d6d6d" x:Key="ItemCategoryStyle1"/>
+    <!-- ItemCategory style (2) ffffff-->
+    <SolidColorBrush Color="#ffffff" x:Key="ItemCategoryStyle2"/>
+    <!-- ItemCategory style (2) 000000-->
+    <SolidColorBrush Color="#000000" x:Key="ItemCategoryStyle3"/>
+
+    <!--=================ItemNote Style=======================-->
+    <!-- ItemNote style (1) ffffff-->
+    <SolidColorBrush Color="#ffffff" x:Key="ItemNoteStyle1"/>
+    <!-- ItemNote style (2) 000000-->
+    <SolidColorBrush Color="#000000" x:Key="ItemNoteStyle2"/>
+    <!-- ItemNote style (3) 808080-->
+    <SolidColorBrush Color="#808080" x:Key="ItemNoteStyle3"/>
+    <!-- ItemNote style (4) 2A2A2A-->
+    <SolidColorBrush Color="#2A2A2A" x:Key="ItemNoteStyle4"/>
+    <!-- ItemNote style (5) 313131-->
+    <SolidColorBrush Color="#313131" x:Key="ItemNoteStyle5"/>
+
+    <!--=================LoginPage Style=======================-->
+    <!-- LoginPage style (1) ffffff-->
+    <SolidColorBrush Color="#ffffff" x:Key="LoginPageStyle1"/>
+    <!-- LoginPage style (2) 000000-->
+    <SolidColorBrush Color="#000000" x:Key="LoginPageStyle2"/>
+
+    <!--=================ManagerPage Style=======================-->
+    <!-- ManagerPage style (1) #444444-->
+    <SolidColorBrush Color="#444444" x:Key="ManagerPageStyle1"/>
+    <!-- ManagerPageStyle style (2) ffffff-->
+    <SolidColorBrush Color="#ffffff" x:Key="ManagerPageStyle2"/>
+    <!-- ManagerPageStyle style (3) 000000-->
+    <SolidColorBrush Color="#000000" x:Key="ManagerPageStyle3"/>
+    <!-- ManagerPageStyle style (4) #323232-->
+    <SolidColorBrush Color="#323232" x:Key="ManagerPageStyle4"/>
+    <!-- ManagerPageStyle style (5) #535353-->
+    <SolidColorBrush Color="#535353" x:Key="ManagerPageStyle5"/>
+
+    <!--=================RegisterPage Style=======================-->
+    <!-- RegisterPage style (1) ffffff-->
+    <SolidColorBrush Color="#ffffff" x:Key="RegisterPageStyle1"/>
+    <!-- RegisterPage style (2) 000000-->
+    <SolidColorBrush Color="#000000" x:Key="RegisterPageStyle2"/>
+
+</ResourceDictionary>

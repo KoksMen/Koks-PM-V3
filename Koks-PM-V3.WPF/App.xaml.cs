@@ -71,6 +71,15 @@ namespace Koks_PM_V3.WPF
                     context.CategoryDtos.Load();
                 }
 
+                if (Koks_PM_V3.WPF.Properties.Settings.Default.Theme == "Dark")
+                {
+                    AppShemeService.ChangeTheme(new Uri("Themes/DarkTheme.xaml", UriKind.Relative));
+                }
+                else if (Koks_PM_V3.WPF.Properties.Settings.Default.Theme == "Light")
+                {
+                    AppShemeService.ChangeTheme(new Uri("Themes/LightTheme.xaml", UriKind.Relative));
+                }
+
                 MainVM _mainVM = new MainVM(_pageNavigator, _dataStoreFactory, _storageDbContextFactory);
                 MainWindow _MainWindow = new MainWindow() { DataContext = _mainVM };
                 _MainWindow.Show();

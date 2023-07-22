@@ -69,7 +69,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <Border Background="#444444">
+        <Border Background="{DynamicResource ManagerPageStyle1}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.15*" 
@@ -89,7 +89,7 @@
                 <Border Grid.Column="0" 
                         Grid.Row="0" 
                         Grid.ColumnSpan="4" 
-                        Background="#000000"/>
+                        Background="{DynamicResource ManagerPageStyle3}"/>
 
                 <Grid Grid.ColumnSpan="4">
                     <Grid.ColumnDefinitions>
@@ -97,14 +97,21 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="0.6*" />
                     </Grid.ColumnDefinitions>
-                    <Button Margin="10 0 10 0" 
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="10 0 10 0" 
                                 Padding="4 0" 
                                 Command="{Binding OpenBackupRestorePage}" 
                                 Style="{StaticResource accbutton}">
-                        <StackPanel Orientation="Horizontal">
-                            <iconPacks1:PackIconMaterial Kind="FileRestore" />
-                        </StackPanel>
-                    </Button>
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks1:PackIconMaterial Kind="FileRestore" />
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="5 0 0 0" Padding="4 0" Command="{Binding ThemeChanger}" Style="{StaticResource accbutton}">
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks1:PackIconFontAwesome Kind="AdjustSolid" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                     <TextBox Grid.Column="1"  
                              Margin="0 10 0 10" 
                              Text="{Binding FilterText, 
@@ -116,10 +123,10 @@
                         <Grid Margin="10 0 10 0">
                             <Ellipse Width="30" 
                                      Height="30" 
-                                     Fill="#ffffff"/>
+                                     Fill="{DynamicResource ManagerPageStyle2}"/>
                             <Ellipse Width="28" 
                                      Height="28" 
-                                     Fill="#000000"/>
+                                     Fill="{DynamicResource ManagerPageStyle3}"/>
                             <Ellipse Width="30" 
                                      Height="30">
                                 <Ellipse.Fill>
@@ -134,7 +141,7 @@
                             Converter={StaticResource LenghtConverter}, 
                             ConverterParameter=14}" 
                                    VerticalAlignment="Center" 
-                                   Foreground="#ffffff"/>
+                                   Foreground="{DynamicResource ManagerPageStyle2}"/>
                         <Button Margin="5 0 0 0" 
                                 Padding="4 0" 
                                 Command="{Binding OpenAccountTelegramPage}" 
@@ -195,15 +202,15 @@
                             IsSynchronizedWithCurrentItem="True"
                             SelectionMode="Single"
                             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                            Background="#323232"
+                            Background="{DynamicResource ManagerPageStyle4}"
                             Padding="0 5"
                         />
                     <TextBlock Text="Категории"
                                FontSize="24" 
                                FontWeight="DemiBold" 
                                Grid.Row="1" 
-                               Background="#323232" 
-                               Foreground="#ffffff" 
+                               Background="{DynamicResource ManagerPageStyle4}" 
+                               Foreground="{DynamicResource ManagerPageStyle2}" 
                                Padding="5 0 0 0"/>
                     <ListView
                             Grid.Row="2"
@@ -215,7 +222,7 @@
                             IsSynchronizedWithCurrentItem="True"
                             SelectionMode="Single"
                             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                            Background="#323232"
+                            Background="{DynamicResource ManagerPageStyle4}"
                             Padding="0 5"
                         />
                 </Grid>
@@ -230,7 +237,7 @@
                     IsSynchronizedWithCurrentItem="True"
                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                     ScrollViewer.VerticalScrollBarVisibility="Visible"
-                    Background="#535353"
+                    Background="{DynamicResource ManagerPageStyle5}"
                     />
 
                 <StackPanel Orientation="Horizontal" 
