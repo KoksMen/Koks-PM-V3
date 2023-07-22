@@ -10,14 +10,14 @@
 
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#2A2A2A"/>
+                <Setter Property="Background" Value="{DynamicResource ItemNoteStyle4}"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#313131"/>
+                <Setter Property="Background" Value="{DynamicResource ItemNoteStyle5}"/>
             </Trigger>
         </Style.Triggers>
 
-        <Setter Property="Background" Value="#000000"/>
+        <Setter Property="Background" Value="{DynamicResource ItemNoteStyle2}"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -35,11 +35,11 @@
 
                             <StackPanel Orientation="Vertical" Margin="10,5,0,0">
                                 <TextBlock Text="{Binding Title, Converter={StaticResource LenghtConverter}, ConverterParameter=35}"
-                                           Foreground="#ffffff"
+                                           Foreground="{DynamicResource ItemNoteStyle1}"
                                            FontSize="15"
                                            />
                                 <TextBlock Text="{Binding Desctiption, Converter={StaticResource LenghtConverter}, ConverterParameter=35}"
-                                           Foreground="#808080"
+                                           Foreground="{DynamicResource ItemNoteStyle3}"
                                            FontSize="13"
                                            />
                             </StackPanel>

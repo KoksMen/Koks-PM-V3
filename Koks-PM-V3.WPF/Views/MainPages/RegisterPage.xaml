@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
     <Grid>
-        <Border Background="White">
+        <Border Background="{DynamicResource LoginPageStyle1}">
             <Grid>
-                <Border Background="Black" Opacity="0.7"/>
+                <Border Background="{DynamicResource LoginPageStyle2}" Opacity="0.7"/>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
