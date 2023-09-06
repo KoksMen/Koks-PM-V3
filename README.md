@@ -22,6 +22,7 @@
 - [x] 20. Логгирование
 - [x] 21. Резервные копии заметок
 - [ ] 22. Сохранение авторизации при выходе из приложения
+- [ ] 23. Клиент-серверное приложение
 
 (список будет пополняться или убавляться в зависимости от планов разработки)
 
@@ -35,16 +36,15 @@
 |4.| Async/Await |
 |5.| Task/Thread |
 |6.| Dependency Injection |
-|8.| SOLID |
-|9.| DevExpressMVVM |
-|10.| SymmetricEncryptor |
-|11.| KoksTotp2FA |
-|12.| KoksTelegramBot |
-|13.| LenghtTruncateConverter |
-|14.| HashingModule |
-|15.| WPF |
-|16.| SimpleModal WPF |
-|17.| MahApps Metro Icon Pack |
+|7.| DevExpressMVVM |
+|8.| SymmetricEncryptor |
+|9.| KoksTotp2FA |
+|10.| KoksTelegramBot |
+|11.| LenghtTruncateConverter |
+|12.| HashingModule |
+|13.| WPF |
+|14.| SimpleModal WPF |
+|15.| MahApps Metro Icon Pack |
 
 
 > ### Обозначение тегов коммитов:
