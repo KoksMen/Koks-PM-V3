@@ -35,21 +35,16 @@
 |4.| Async/Await |
 |5.| Task/Thread |
 |6.| Dependency Injection |
-|7.| Depemdency Injection Containers |
 |8.| SOLID |
-|9.| xUnit |
-|10.| Moq |
-|11.| Extension methods |
-|12.| log4net/SeriLog/или другой |
-|13.| DevExpressMVVM |
-|14.| SymmetricEncryptor |
-|15.| KoksTotp2FA |
-|16.| KoksTelegramBot |
-|17.| LenghtTruncateConverter |
-|18.| HashingModule |
-|19.| WPF |
-|20.| SimpleModal WPF |
-|21.| MahApps Metro Icon Pack |
+|9.| DevExpressMVVM |
+|10.| SymmetricEncryptor |
+|11.| KoksTotp2FA |
+|12.| KoksTelegramBot |
+|13.| LenghtTruncateConverter |
+|14.| HashingModule |
+|15.| WPF |
+|16.| SimpleModal WPF |
+|17.| MahApps Metro Icon Pack |
 
 
 > ### Обозначение тегов коммитов:
